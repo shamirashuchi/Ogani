@@ -16,7 +16,10 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{asset('/')}}assets/css/style.css">
     <!-- End layout styles -->
+
+
     <link rel="shortcut icon" href="{{asset('/')}}assets/images/favicon.ico" />
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-XXXXX" crossorigin="anonymous" />--}}
 </head>
 <body>
 <div class="container-scroller">
@@ -203,8 +206,8 @@
                     </a>
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{route("dashboard")}}">Add Category</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/typography.html">Manage Category</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route("category.create")}}">Add Category</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('category.index')}}">Manage Category</a></li>
                         </ul>
                     </div>
                 </li>
@@ -291,7 +294,7 @@
             </ul>
         </nav>
         <!-- partial -->
-        <div class="main-panel">
+        <div class="main-panel site-btn">
                @yield('body')
             <!-- partial -->
         </div>
@@ -316,5 +319,6 @@
 <script src="{{asset('/')}}assets/js/dashboard.js"></script>
 <script src="{{asset('/')}}assets/js/todolist.js"></script>
 <!-- End custom js for this page -->
+<script src="https://kit.fontawesome.com/e1ea402ddb.js" crossorigin="anonymous"></script>
 </body>
 </html>
