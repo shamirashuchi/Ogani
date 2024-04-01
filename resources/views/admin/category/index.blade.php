@@ -11,7 +11,7 @@
                     <h3 class="card-title text-white fs-1">All Category Information</h3>
                 </div>
                 <div class="card-body">
-                    <p class="text-success text-center">{{session('message')}}</p>
+                    <p class="text-white text-center">{{session('message')}}</p>
                     <div class="table-responsive bg-white">
                         <table class="table table-bordered text-nowrap border-bottom" id="basic-datatable">
                             <thead>
