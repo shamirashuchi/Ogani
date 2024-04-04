@@ -19,6 +19,7 @@ class BrandController extends Controller
         return view('admin.brand.add');
     }
 
+
     public function store(Request $request)
     {
         Brand::newBrand($request);

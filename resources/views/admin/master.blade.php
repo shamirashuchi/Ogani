@@ -15,6 +15,7 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{asset('/')}}assets/css/style.css">
+
     <!-- End layout styles -->
 
 
@@ -198,33 +199,21 @@
                         <i class="mdi mdi-home menu-icon"></i>
                     </a>
                 </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic">--}}
-{{--                        <span  class="menu-title">Category Module</span>--}}
-{{--                        <i class="menu-arrow"></i>--}}
-{{--                        <i class="mdi mdi-shape menu-icon"></i>--}}
-{{--                        <i class="mdi mdi-crosshairs-gps menu-icon"></i>--}}
-{{--                    </a>--}}
-{{--                    <div class="collapse" id="ui-basic1">--}}
-{{--                        <ul class="nav flex-column sub-menu">--}}
-{{--                            <li class="nav-item"> <a class="nav-link" href="{{route("category.create")}}">Add Category</a></li>--}}
-{{--                            <li class="nav-item"> <a class="nav-link" href="{{route('category.index')}}">Manage Category</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-                        <span class="menu-title">Sample Pages</span>
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic">
+                        <span  class="menu-title">Category Module</span>
                         <i class="menu-arrow"></i>
-                        <i class="mdi mdi-medical-bag menu-icon"></i>
+                        <i class="mdi mdi-shape menu-icon"></i>
+{{--                        <i class="mdi mdi-crosshairs-gps menu-icon"></i>--}}
                     </a>
-                    <div class="collapse" id="general-pages">
+                    <div class="collapse" id="ui-basic1">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a  class="nav-link" href="{{route("category.create")}}"> Blank Page </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{route('category.index')}}"> Login </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route("category.create")}}">Add Category</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('category.index')}}">Manage Category</a></li>
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
                         <span class="menu-title">Sub Category Module</span>
@@ -246,7 +235,7 @@
                     </a>
                     <div class="collapse" id="gen">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="">Add Brand</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route('brand.create')}}">Add Brand</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{route('brand.index')}}">Manage Brand</a></li>
                         </ul>
                     </div>
@@ -260,8 +249,8 @@
                 </a>
                 <div class="collapse" id="ui-basic4">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/buttons.html">Buttons</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/typography.html">Typography</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('unit.create')}}">Add Unit</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route('unit.index')}}">Manage Unit</a></li>
                     </ul>
                 </div>
             </li>
@@ -273,38 +262,38 @@
                 </a>
                 <div class="collapse" id="ui-basic5">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/buttons.html">Buttons</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/typography.html">Typography</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route("product.create")}}">Add Product</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{route("product.index")}}">Manage Product</a></li>
                     </ul>
                 </div>
             </li>
-                <li class="nav-item">
-                    <a class="nav-link menu-icon" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic">
-                        <span class="menu-title">Order Module</span>
-                        <i class="menu-arrow"></i>
-                        <i class="mdi mdi-border-bottom menu-icon"></i>
-                    </a>
-                    <div class="collapse" id="ui-basic6">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/buttons.html">Buttons</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/typography.html">Typography</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic7">
-                        <span class="menu-title">User Module</span>
-                        <i class="menu-arrow"></i>
-                        <i class="mdi mdi-account-circle menu-icon"></i>
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link menu-icon" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic">--}}
+{{--                        <span class="menu-title">Order Module</span>--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                        <i class="mdi mdi-border-bottom menu-icon"></i>--}}
+{{--                    </a>--}}
+{{--                    <div class="collapse" id="ui-basic6">--}}
+{{--                        <ul class="nav flex-column sub-menu">--}}
+{{--                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/buttons.html">Buttons</a></li>--}}
+{{--                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/typography.html">Typography</a></li>--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic7">--}}
+{{--                        <span class="menu-title">User Module</span>--}}
+{{--                        <i class="menu-arrow"></i>--}}
+{{--                        <i class="mdi mdi-account-circle menu-icon"></i>--}}
 
-                    </a>
-                    <div class="collapse" id="ui-basic7">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/buttons.html">Buttons</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/typography.html">Typography</a></li>
-                        </ul>
-                    </div>
-                </li>
+{{--                    </a>--}}
+{{--                    <div class="collapse" id="ui-basic7">--}}
+{{--                        <ul class="nav flex-column sub-menu">--}}
+{{--                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/buttons.html">Buttons</a></li>--}}
+{{--                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/typography.html">Typography</a></li>--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                </li>--}}
             </ul>
         </nav>
         <!-- partial -->
@@ -341,4 +330,25 @@
 <!-- End custom js for this page -->
 <script src="https://kit.fontawesome.com/e1ea402ddb.js" crossorigin="anonymous"></script>
 </body>
+
+<script>
+    function getSubCategory(categoryId){
+        $.ajax({
+            type: "GET",
+            url: "{{route('get-sub-category-by-category-id')}}",
+            data: {category_id: categoryId},
+            DataType: "JSON",
+            success: function (response){
+                var option = '';
+                option += '<option value=""> -- Select Category Name -- </option>';
+                $.each(response,function (key, value){
+                    option += '<option value="'+value.id+'">' +value.name+'</option>';
+                });
+                $('#subCategoryId').empty();
+                $('#subCategoryId').append(option);
+            }
+        });
+    }
+</script>
+
 </html>

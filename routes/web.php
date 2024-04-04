@@ -8,7 +8,10 @@ use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UnitController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ProductController;
+
 Route::get('/',[OganiController::class,'index'])->name('home');
 Route::get('/product-category',[OganiController::class,'category'])->name('product-category');
 Route::get('/product-detail',[OganiController::class,'product'])->name('product-detail');
@@ -41,4 +44,20 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/brand/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
     Route::post('/brand/update/{id}', [BrandController::class, 'update'])->name('brand.update');
     Route::get('/brand/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
+
+    Route::get('/unit/manage', [UnitController::class, 'index'])->name('unit.index');
+    Route::get('/unit/create', [UnitController::class, 'create'])->name('unit.create');
+    Route::post('/unit/store', [UnitController::class, 'store'])->name('unit.store');
+    Route::get('/unit/edit/{id}', [UnitController::class, 'edit'])->name('unit.edit');
+    Route::post('/unit/update/{id}', [UnitController::class, 'update'])->name('unit.update');
+    Route::get('/unit/delete/{id}', [UnitController::class, 'delete'])->name('unit.delete');
+
+    Route::get('/product/manage', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::get('/get-sub-category-by-category-id', [ProductController::class, 'getSubCategoryByCategory'])->name('get-sub-category-by-category-id');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::get('/product/detail/{id}', [ProductController::class, 'detail'])->name('product.detail');
+    Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 });

@@ -2,26 +2,13 @@
 @section('title', 'Edit Sub-Category')
 
 @section('body')
-    <!-- PAGE-HEADER -->
-    <div class="page-header">
-        <div>
-            <h1 class="page-title">sub-category</h1>
-        </div>
-        <div class="ms-auto pageheader-btn">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0);">Sub-Category</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Edit Sub-Category</li>
-            </ol>
-        </div>
-    </div>
-    <!-- PAGE-HEADER END -->
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header border-bottom">
+            <div class="card  mt-5 site-btn">
+                <div class="card-header border-bottom mx-auto">
                     <h3 class="card-title">Edit sub-category Form</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-white">
                     <p class="text-muted">{{session('message')}}</p>
                     <form class="form-horizontal" action="{{route('sub-category.update', ['id' => $subCateogory->id])}}" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -51,7 +38,7 @@
                         <div class="row mb-4">
                             <label for="email" class="col-md-3 form-label">Sub-Category Image</label>
                             <div class="col-md-9">
-                                <input class="form-control" id="email" type="file" name="image"/>
+                                <input class="form-control bg-white" id="email" type="file" name="image"/>
                                 <img src="{{asset($subCateogory->image)}}" alt="" height="100" width="100"/>
                             </div>
                         </div>
@@ -62,7 +49,9 @@
                                 <label><input type="radio" name="status" {{$subCateogory->status == 0 ? 'checked' : ''}} value="0"> Unpublished</label>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Update Sub-Category Info</button>
+                        <div class="row">
+                        <button class="btn bg-white text-success mx-auto col-md-4" type="submit">Update Sub-Category Info</button>
+                        </div>
                     </form>
                 </div>
             </div>
