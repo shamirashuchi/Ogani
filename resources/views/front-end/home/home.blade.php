@@ -15,17 +15,26 @@
                             <span>All departments</span>
                         </div>
                         <ul>
-                            <li><a href="{{route('product-category')}}">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            @foreach($categories as $category)
+                            <li class="dropdown">
+                                <a href="{{route('product-category', ['id' => $category->id])}}"  data-toggle="dropdown">{{$category->name}}
+                                </a>
+                                @if(count($category->subCategory) > 0)
+
+                                    <ul class="inner-sub-category  dropdown-menu">
+                                        @foreach($category->subCategory as $subCategory)
+                                            <li><a href="{{route('product-sub-category', ['id' => $subCategory->id])}}">
+                                                   <div class="sub">
+                                                       <img  class="mr-0 rounded" src="{{$subCategory->image}}" alt="" srcset=""/>
+                                                       <span>{{ $subCategory->name }}</span>
+                                                   </div>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -69,31 +78,14 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
+                    @foreach($categories as $category)
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{asset('/')}}front-end-assets/img/categories/cat-1.jpg">
-                            <h5><a href="#">Fresh Fruit</a></h5>
+                        <div class="categories__item set-bg" style="background-color: #F3F6FA;">
+                            <img class="w-75 mx-auto pt-4" src="{{$category->image}}" alt="Delicious Fried Chicken Plate">
+                            <h5><a href="#">{{$category->name}}</a></h5>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{asset('/')}}front-end-assets/img/categories/cat-2.jpg">
-                            <h5><a href="#">Dried Fruit</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{asset('/')}}front-end-assets/img/categories/cat-3.jpg">
-                            <h5><a href="#">Vegetables</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{asset('/')}}front-end-assets/img/categories/cat-4.jpg">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{asset('/')}}front-end-assets/img/categories/cat-5.jpg">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

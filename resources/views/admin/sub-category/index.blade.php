@@ -30,7 +30,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{isset($subCateogory->category->name) ? $subCateogory->category->name : ' '}}</td>
                                     <td>{{$subCateogory->name}}</td>
-                                    <td>{{$subCateogory->description}}</td>
+                                    <td style="white-space: wrap;">{{$subCateogory->description}}</td>
                                     <td><img src="{{asset($subCateogory->image)}}" alt="" height="50" width="60"/></td>
                                     <td>{{$subCateogory->status}}</td>
                                     <td>

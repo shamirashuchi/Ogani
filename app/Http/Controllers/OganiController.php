@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class OganiController extends Controller
 {
     public function index(){
-        return view('front-end.home.home');
+        return view('front-end.home.home', [
+            'categories' => Category::all()
+        ]);
     }
 
     public function category(){

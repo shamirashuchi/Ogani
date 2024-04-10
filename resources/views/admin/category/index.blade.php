@@ -29,7 +29,7 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$category->name}}</td>
-                                <td>{{$category->description}}</td>
+                                <td style="white-space: wrap;">{{$category->description}}</td>
                                 <td><img src="{{asset($category->image)}}" alt="" height="50" width="60"/></td>
                                 <td>{{$category->status}}</td>
                                 <td>

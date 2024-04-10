@@ -261,8 +261,23 @@
 <script src="{{asset('/')}}front-end-assets/assets/js/tiny-slider.js"></script>
 <script src="{{asset('/')}}front-end-assets/assets/js/glightbox.min.js"></script>
 <script src="{{asset('/')}}front-end-assets/assets/js/main.js"></script>
+<script src="https://kit.fontawesome.com/e1ea402ddb.js" crossorigin="anonymous"></script>
 
+<script>
+    // Get the elements
+    const innerSubCategoryLink = document.querySelector('.inner-sub-category');
+    const dropdownLink = document.querySelector('.dropdown a');
 
+    // Add event listener for hover on innerSubCategoryLink
+    innerSubCategoryLink.addEventListener('mouseover', () => {
+        dropdownLink.classList.add('hovered');
+    });
+
+    // Add event listener for hover out on innerSubCategoryLink
+    innerSubCategoryLink.addEventListener('mouseout', () => {
+        dropdownLink.classList.remove('hovered');
+    });
+</script>
 
 </body>
 

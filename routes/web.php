@@ -13,8 +13,9 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 
 Route::get('/',[OganiController::class,'index'])->name('home');
-Route::get('/product-category',[OganiController::class,'category'])->name('product-category');
-Route::get('/product-detail',[OganiController::class,'product'])->name('product-detail');
+Route::get('/product-category/{id}',[OganiController::class,'category'])->name('product-category');
+Route::get('/product-sub-category/{id}',[OganiController::class,'subCategory'])->name('product-sub-category');
+Route::get('/product-detail/{id}',[OganiController::class,'product'])->name('product-detail');
 Route::get('/cart/show',[CartController::class,'index'])->name('cart.show');
 Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout');
 Route::get('/customer/login',[CustomerAuthController::class,'login'])->name('customer.login');

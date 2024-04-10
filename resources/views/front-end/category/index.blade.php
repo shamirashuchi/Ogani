@@ -118,7 +118,7 @@
                                     <div class="latest-prdouct__slider__item">
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="{{asset('/')}}front-end-assets/img/latest-product/lp-1.jpg" alt="">
+                                                <img src="{{asset('/')}}front-end-assets/img/cateories/delicious-fried-chicken-plate.jpg" alt="">
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Crab Pool Security</h6>

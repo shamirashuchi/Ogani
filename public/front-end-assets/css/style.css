@@ -756,10 +756,83 @@ ol {
 /*---------------------
   Categories
 -----------------------*/
+.dropdown {
+    position: relative;
+}
+
+/*.dropdown  a{*/
+/*    padding-left: 60px;*/
+/*}*/
+
+
+.dropdown  a:hover{
+    background-color: #f0f0f0;
+    margin-left: -40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.dropdown  a.hovered{
+    background-color: #f0f0f0;
+    margin-left: -40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.dropdown:hover .inner-sub-category {
+    display: grid;
+}
+
+.inner-sub-category {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 220px;
+    grid-template-columns: repeat(1, 220px); /* Adjusted for three columns */
+    grid-gap: 10px;
+    background-color: white; /* Adjust as needed */
+    padding: 10px; /* Adjust as needed */
+    border: 1px solid #ccc; /* Adjust as needed */
+}
+
+/*.inner-sub-category li {*/
+/*    list-style: none;*/
+/*}*/
+
+/*.inner-sub-category li a {*/
+/*    text-decoration: none;*/
+/*}*/
+
+.sub{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+
+.inner-sub-category li img {
+    width: 30px; /* Adjust width as needed */
+    height: 30px; /* Adjust height as needed */
+    /*margin-left: -20px;*/
+}
+
+/* Optional: Add hover styles for dropdown items */
+.inner-sub-category li a:hover {
+    background-color: #f0f0f0; /* Adjust as needed */
+    margin-right: -10px;
+}
+
 
 .categories__item {
-	height: 270px;
+	height: 300px;
 	position: relative;
+}
+
+.categories__item  img{
+    height: 200px;
 }
 
 .categories__item h5 {
