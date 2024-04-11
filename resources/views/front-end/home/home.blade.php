@@ -12,29 +12,29 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>All categories</span>
                         </div>
                         <ul>
-                            @foreach($categories as $category)
-                            <li class="dropdown">
-                                <a href="{{route('product-category', ['id' => $category->id])}}"  data-toggle="dropdown">{{$category->name}}
-                                </a>
-                                @if(count($category->subCategory) > 0)
+{{--                            @foreach($categories as $category)--}}
+{{--                            <li class="dropdown">--}}
+{{--                                <a href="{{route('product-category', ['id' => $category->id])}}"  data-toggle="dropdown">{{$category->name}}--}}
+{{--                                </a>--}}
+{{--                                @if(count($category->subCategory) > 0)--}}
 
-                                    <ul class="inner-sub-category  dropdown-menu">
-                                        @foreach($category->subCategory as $subCategory)
-                                            <li><a href="{{route('product-sub-category', ['id' => $subCategory->id])}}">
-                                                   <div class="sub">
-                                                       <img  class="mr-0 rounded" src="{{$subCategory->image}}" alt="" srcset=""/>
-                                                       <span>{{ $subCategory->name }}</span>
-                                                   </div>
-                                                </a>
-                                            </li>
-                                        @endforeach
+{{--                                    <ul class="inner-sub-category  dropdown-menu">--}}
+{{--                                        @foreach($category->subCategory as $subCategory)--}}
+{{--                                            <li><a href="{{route('product-sub-category', ['id' => $subCategory->id])}}">--}}
+{{--                                                   <div class="sub">--}}
+{{--                                                       <img  class="mr-0 rounded" src="{{$subCategory->image}}" alt="" srcset=""/>--}}
+{{--                                                       <span>{{ $subCategory->name }}</span>--}}
+{{--                                                   </div>--}}
+{{--                                                </a>--}}
+{{--                                            </li>--}}
+{{--                                        @endforeach--}}
                                     </ul>
-                                @endif
-                            </li>
-                            @endforeach
+{{--                                @endif--}}
+{{--                            </li>--}}
+{{--                            @endforeach--}}
                         </ul>
                     </div>
                 </div>
@@ -78,14 +78,14 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
-                    @foreach($categories as $category)
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" style="background-color: #F3F6FA;">
-                            <img class="w-75 mx-auto pt-4" src="{{$category->image}}" alt="Delicious Fried Chicken Plate">
-                            <h5><a href="#">{{$category->name}}</a></h5>
-                        </div>
-                    </div>
-                    @endforeach
+{{--                    @foreach($categories as $category)--}}
+{{--                    <div class="col-lg-3">--}}
+{{--                        <div class="categories__item set-bg" style="background-color: #F3F6FA;">--}}
+{{--                            <img class="w-75 mx-auto pt-4" src="{{$category->image}}" alt="Delicious Fried Chicken Plate">--}}
+{{--                            <h5><a href="#">{{$category->name}}</a></h5>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    @endforeach--}}
                 </div>
             </div>
         </div>

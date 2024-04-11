@@ -5,16 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use function Laravel\Prompts\select;
-
+use Carbon\Carbon;
 class Category extends Model
 {
     use HasFactory;
 
     private static $category, $image, $imageUrl;
+    public $timestamps = false;
 
+    public $updated_at = null;
     public static function newCategory($request)
     {
-        self::saveBasicInfo(new Category(), $request, getFileUrl($request->file('image'), 'upload/category-images/'));
+        $category = new Category();
+        $category->custom_created_at = Carbon::now('Asia/Dhaka');
+        self::saveBasicInfo($category, $request, getFileUrl($request->file('image'), 'upload/category-images/'));
+        $category->save();
     }
 
     public static function updateCategory($request, $id)
@@ -29,7 +34,9 @@ class Category extends Model
         {
             self::$imageUrl = self::$category->image;
         }
+        self::$category->custom_updated_at = Carbon::now('Asia/Dhaka');
         self::saveBasicInfo(self::$category, $request, self::$imageUrl);
+        self::$category->save();
     }
 
     public static function deleteCategory($id)
@@ -45,7 +52,7 @@ class Category extends Model
         $category->description    = $request->description;
         $category->image          = $imageUrl;
         $category->status         = $request->status;
-        $category->save();
+        return $category;
     }
 
     public function subCategory()
