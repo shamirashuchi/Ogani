@@ -15,26 +15,26 @@
                             <span>All categories</span>
                         </div>
                         <ul>
-{{--                            @foreach($categories as $category)--}}
-{{--                            <li class="dropdown">--}}
-{{--                                <a href="{{route('product-category', ['id' => $category->id])}}"  data-toggle="dropdown">{{$category->name}}--}}
-{{--                                </a>--}}
-{{--                                @if(count($category->subCategory) > 0)--}}
+                            @foreach($categories as $category)
+                            <li class="dropdown">
+                                <a href="{{route('product-category', ['id' => $category->id])}}"  data-toggle="dropdown">{{$category->name}}
+                                </a>
+                                @if(count($category->subCategory) > 0)
 
-{{--                                    <ul class="inner-sub-category  dropdown-menu">--}}
-{{--                                        @foreach($category->subCategory as $subCategory)--}}
-{{--                                            <li><a href="{{route('product-sub-category', ['id' => $subCategory->id])}}">--}}
-{{--                                                   <div class="sub">--}}
-{{--                                                       <img  class="mr-0 rounded" src="{{$subCategory->image}}" alt="" srcset=""/>--}}
-{{--                                                       <span>{{ $subCategory->name }}</span>--}}
-{{--                                                   </div>--}}
-{{--                                                </a>--}}
-{{--                                            </li>--}}
-{{--                                        @endforeach--}}
+                                    <ul class="inner-sub-category  dropdown-menu">
+                                        @foreach($category->subCategory as $subCategory)
+                                            <li><a href="{{route('product-sub-category', ['id' => $subCategory->id])}}">
+                                                   <div class="sub">
+                                                       <img  class="mr-0 rounded" src="{{$subCategory->image}}" alt="" srcset=""/>
+                                                       <span>{{ $subCategory->name }}</span>
+                                                   </div>
+                                                </a>
+                                            </li>
+                                        @endforeach
                                     </ul>
-{{--                                @endif--}}
-{{--                            </li>--}}
-{{--                            @endforeach--}}
+                                @endif
+                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

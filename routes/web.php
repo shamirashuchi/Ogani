@@ -11,6 +11,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 
 Route::get('/',[OganiController::class,'index'])->name('home');
 Route::get('/product-category/{id}',[OganiController::class,'category'])->name('product-category');
@@ -20,6 +21,7 @@ Route::get('/cart/show',[CartController::class,'index'])->name('cart.show');
 Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout');
 Route::get('/customer/login',[CustomerAuthController::class,'login'])->name('customer.login');
 Route::get('/customer/register',[CustomerAuthController::class,'register'])->name('customer.register');
+
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
@@ -61,4 +63,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/product/detail/{id}', [ProductController::class, 'detail'])->name('product.detail');
     Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+
+    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+    Route::get('/user/manage', [UserController::class, 'index'])->name('user.index');
+    Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::post('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 });

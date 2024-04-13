@@ -47,7 +47,7 @@
                 <li class="nav-item nav-profile dropdown">
                     <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="nav-profile-img">
-                            <img src="{{asset('/')}}assets/images/faces/face1.jpg" alt="image">
+                            <img src="{{asset(Auth::user()->profile_photo_path)}}" alt="image">
                             <span class="availability-status online"></span>
                         </div>
                         <div class="nav-profile-text">
@@ -182,7 +182,7 @@
                 <li class="nav-item nav-profile">
                     <a href="#" class="nav-link">
                         <div class="nav-profile-image">
-                            <img src="{{asset('/')}}assets/images/faces/face1.jpg" alt="profile">
+                            <img src="{{asset(Auth::user()->profile_photo_path)}}" alt="image">
                             <span class="login-status online"></span>
                             <!--change to offline or busy as needed-->
                         </div>
@@ -267,6 +267,19 @@
                     </ul>
                 </div>
             </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic0" aria-expanded="false" aria-controls="ui-basic0">
+                        <span class="menu-title">User Module</span>
+                        <i class="menu-arrow"></i>
+                        <i class="mdi mdi-border-all menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic0">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{route("user.create")}}">Add User</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route("user.index")}}">Manage User</a></li>
+                        </ul>
+                    </div>
+                </li>
 {{--                <li class="nav-item">--}}
 {{--                    <a class="nav-link menu-icon" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic">--}}
 {{--                        <span class="menu-title">Order Module</span>--}}

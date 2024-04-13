@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use function Laravel\Prompts\select;
 use Carbon\Carbon;
 class Category extends Model
@@ -49,6 +50,7 @@ class Category extends Model
     private static function saveBasicInfo($category, $request, $imageUrl)
     {
         $category->name           = $request->name;
+        $category->user_id        =Auth::user()->id;
         $category->description    = $request->description;
         $category->image          = $imageUrl;
         $category->status         = $request->status;
@@ -59,4 +61,6 @@ class Category extends Model
     {
         return $this->hasMany(SubCategory::class);
     }
+
+
 }

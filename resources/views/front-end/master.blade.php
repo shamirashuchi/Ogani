@@ -267,17 +267,56 @@
     // Get the elements
     const innerSubCategoryLink = document.querySelector('.inner-sub-category');
     const dropdownLink = document.querySelector('.dropdown a');
-
+    dropdownLink.addEventListener('mouseover', () => {
+        dropdownLink.classList.add('hovered');
+    });
     // Add event listener for hover on innerSubCategoryLink
     innerSubCategoryLink.addEventListener('mouseover', () => {
         dropdownLink.classList.add('hovered');
     });
+innerSubCategoryLink.addEventListener('click', event => {
+event.preventDefault(); // Prevent the default link behavior
+event.stopPropagation(); // Prevent the event from bubbling up to the parent elements
+
+// Optionally, you can add logic here to handle the click event
+});
 
     // Add event listener for hover out on innerSubCategoryLink
     innerSubCategoryLink.addEventListener('mouseout', () => {
         dropdownLink.classList.remove('hovered');
     });
+
+    dropdownLink.addEventListener('mouseout', () => {
+        dropdownLink.classList.remove('hovered');
+    });
 </script>
+{{--<script>--}}
+{{--    // Get the elements--}}
+{{--    const innerSubCategoryLinks = document.querySelectorAll('.inner-sub-category');--}}
+{{--    const dropdownLinks = document.querySelectorAll('.dropdown a');--}}
+
+{{--    // Add event listener for hover on innerSubCategoryLinks--}}
+{{--    innerSubCategoryLinks.forEach(innerSubCategoryLink => {--}}
+{{--        innerSubCategoryLink.addEventListener('mouseover', () => {--}}
+{{--                dropdownLink.classList.add('hovered');--}}
+{{--        });--}}
+
+{{--        // Add event listener for click on innerSubCategoryLinks--}}
+{{--        innerSubCategoryLink.addEventListener('click', event => {--}}
+{{--            event.preventDefault(); // Prevent the default link behavior--}}
+{{--            event.stopPropagation(); // Prevent the event from bubbling up to the parent elements--}}
+
+{{--            // Optionally, you can add logic here to handle the click event--}}
+{{--        });--}}
+{{--    });--}}
+
+{{--    // Add event listener for hover out on innerSubCategoryLinks--}}
+{{--    innerSubCategoryLinks.forEach(innerSubCategoryLink => {--}}
+{{--        innerSubCategoryLink.addEventListener('mouseout', () => {--}}
+{{--                dropdownLink.classList.remove('hovered');--}}
+{{--            });--}}
+{{--    });--}}
+{{--</script>--}}
 
 </body>
 
