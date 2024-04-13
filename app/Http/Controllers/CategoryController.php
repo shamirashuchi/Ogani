@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\UpdateCategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -28,6 +29,17 @@ class CategoryController extends Controller
         return view('admin.category.edit', ['category' => Category::find($id)]);
     }
 
+
+    public function verifybeforeedit(Request $request, $id)
+    {
+        UpdateCategory::newCategory($request, $id);
+        return redirect('/category/manage')->with('message', 'Category info update request go  successfully.');
+    }
+
+    public function updateshow()
+    {
+        return view('admin.category.show', ['updatecategories' => UpdateCategory::all()]);
+    }
 
     public function update(Request $request, $id)
     {

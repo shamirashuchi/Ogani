@@ -23,6 +23,13 @@ Route::get('/customer/login',[CustomerAuthController::class,'login'])->name('cus
 Route::get('/customer/register',[CustomerAuthController::class,'register'])->name('customer.register');
 
 
+Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+Route::get('/user/manage', [UserController::class, 'index'])->name('user.index');
+Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+Route::post('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -31,7 +38,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::post('/category/beforeupdate/{id}', [CategoryController::class, 'verifybeforeedit'])->name('category.beforeupdate');
     Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::get('/category/updateshow', [CategoryController::class, 'updateshow'])->name('category.updateshow');
     Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
     Route::get('/sub-category/manage', [SubCategoryController::class, 'index'])->name('sub-category.index');
@@ -64,10 +73,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 
-    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
-    Route::get('/user/manage', [UserController::class, 'index'])->name('user.index');
-    Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
-    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-    Route::post('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
-    Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+
+
+
 });

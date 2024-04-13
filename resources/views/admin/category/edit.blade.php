@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body text-white">
                     <p class="text-muted">{{session('message')}}</p>
-                    <form class="form-horizontal" action="{{route('category.update', ['id' => $category->id])}}" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal" action="{{route('category.beforeupdate', ['id' => $category->id])}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-4">
                             <label for="firstName" class="col-md-3 form-label">Category Name</label>
