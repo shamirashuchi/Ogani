@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class UpdateCategory extends Model
 {
     use HasFactory;
-    private static $category, $image, $imageUrl;
+    private static $category, $image, $imageUrl,$updateCategoryinfo;
     public $timestamps = false;
 
     public $updated_at = null;
@@ -31,6 +31,26 @@ class UpdateCategory extends Model
         self::saveBasicInfo($category, $request,self::$imageUrl ,$id);
         $category->save();
     }
+
+    public static function updateCategorystart($id)
+    {
+
+
+        $updateCategoryinfo     = UpdateCategory::find($id);
+        $category     = Category::find($updateCategoryinfo->category_id);
+        $category->user_id  = $updateCategoryinfo->user_id;
+        $category->name  = $updateCategoryinfo->name;
+        $category->description  = $updateCategoryinfo->description;
+        $category->image  = $updateCategoryinfo->image;
+        $category->status  = $updateCategoryinfo->status;
+        $category->custom_updated_at = Carbon::now('Asia/Dhaka');
+        $updateCategoryinfo->flag = 1;
+        $updateCategoryinfo->action = "Accepted";
+        $updateCategoryinfo->save();
+        $category->save();
+    }
+
+
     private static function saveBasicInfo($category, $request, $imageUrl,$id)
     {
         $category->name           = $request->name;

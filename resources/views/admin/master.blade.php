@@ -210,7 +210,9 @@
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="{{route("category.create")}}">Add Category</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{route('category.index')}}">Manage Category</a></li>
+                            @if(Auth::user()->role == "Admin")
                             <li class="nav-item"> <a class="nav-link" href="{{route('category.updateshow')}}">show Category</a></li>
+                            @endif
                         </ul>
                     </div>
                 </li>

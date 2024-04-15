@@ -41,6 +41,13 @@ class CategoryController extends Controller
         return view('admin.category.show', ['updatecategories' => UpdateCategory::all()]);
     }
 
+
+    public function updatestart($id)
+    {
+        UpdateCategory::updateCategorystart($id);
+        return redirect('/category/updateshow')->with('message', 'Category info update successfully.');
+    }
+
     public function update(Request $request, $id)
     {
         Category::updateCategory($request, $id);

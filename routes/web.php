@@ -40,6 +40,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/category/beforeupdate/{id}', [CategoryController::class, 'verifybeforeedit'])->name('category.beforeupdate');
     Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::get('/category/updatestart/{id}', [CategoryController::class, 'updatestart'])->name('category.updatestart');
     Route::get('/category/updateshow', [CategoryController::class, 'updateshow'])->name('category.updateshow');
     Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
