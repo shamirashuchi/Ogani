@@ -38,7 +38,7 @@ class CategoryController extends Controller
 
     public function updateshow()
     {
-        return view('admin.category.show', ['updatecategories' => UpdateCategory::all()]);
+        return view('admin.category.show', ['updatecategories' => UpdateCategory::where('flag', 0)->get()]);
     }
 
 
@@ -46,6 +46,17 @@ class CategoryController extends Controller
     {
         UpdateCategory::updateCategorystart($id);
         return redirect('/category/updateshow')->with('message', 'Category info update successfully.');
+    }
+
+    public function cancel($id)
+    {
+        UpdateCategory::cancelCategorystart($id);
+        return redirect('/category/updateshow')->with('message', 'Category info cancel successfully.');
+    }
+
+    public function requesteddata()
+    {
+        return view('admin.category.showdata', ['updatecategories' => UpdateCategory::where('user_id', auth()->id())->get()]);
     }
 
     public function update(Request $request, $id)
@@ -58,5 +69,11 @@ class CategoryController extends Controller
     {
         Category::deleteCategory($id);
         return redirect('/category/manage')->with('message', 'Category info delete successfully.');
+    }
+
+    public function deletebyuser($id)
+    {
+        UpdateCategory::deleteCategorydata($id);
+        return redirect('/category/request')->with('message', 'updateCategory info delete successfully.');
     }
 }

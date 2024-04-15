@@ -47,6 +47,8 @@ class Category extends Model
         self::$category->delete();
     }
 
+
+
     private static function saveBasicInfo($category, $request, $imageUrl)
     {
         $category->name           = $request->name;

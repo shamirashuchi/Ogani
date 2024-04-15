@@ -34,8 +34,6 @@ class UpdateCategory extends Model
 
     public static function updateCategorystart($id)
     {
-
-
         $updateCategoryinfo     = UpdateCategory::find($id);
         $category     = Category::find($updateCategoryinfo->category_id);
         $category->user_id  = $updateCategoryinfo->user_id;
@@ -50,6 +48,20 @@ class UpdateCategory extends Model
         $category->save();
     }
 
+    public static function cancelCategorystart($id)
+    {
+        $updateCategoryinfo     = UpdateCategory::find($id);
+        $updateCategoryinfo->flag = 1;
+        $updateCategoryinfo->action = "Canceled";
+        $updateCategoryinfo->save();
+    }
+
+    public static function deleteCategorydata($id)
+    {
+        self::$category = UpdateCategory::find($id);
+//        deleteFile(self::$category->image);
+        self::$category->delete();
+    }
 
     private static function saveBasicInfo($category, $request, $imageUrl,$id)
     {

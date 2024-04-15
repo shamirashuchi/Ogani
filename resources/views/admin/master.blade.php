@@ -213,6 +213,9 @@
                             @if(Auth::user()->role == "Admin")
                             <li class="nav-item"> <a class="nav-link" href="{{route('category.updateshow')}}">show Category</a></li>
                             @endif
+                            @if(Auth::user()->role == "Manager")
+                                <li class="nav-item"> <a class="nav-link" href="{{route('category.request')}}">Requested  Category</a></li>
+                            @endif
                         </ul>
                     </div>
                 </li>

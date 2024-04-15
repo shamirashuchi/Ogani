@@ -39,11 +39,8 @@
                                     <td style="white-space: wrap;">{{$category->action}}</td>
                                     <td>{{$category->status}}</td>
                                     <td>
-                                        <a href="{{route('category.updatestart', ['id' => $category->id])}}" class="btn site-btn btn-sm rounded-0 text-white">
-                                            Accept
-                                        </a>
-                                        <a href="{{route('category.cancel', ['id' => $category->id])}}"  class="btn btn-danger btn-sm rounded-0">
-                                            Cancel
+                                        <a href="{{route('category.deletebyuser', ['id' => $category->id])}}"  class="btn btn-danger btn-sm rounded-0">
+                                            Delete
                                         </a>
                                     </td>
                                 </tr>
@@ -57,4 +54,3 @@
     </div>
     <!-- End Row -->
 @endsection
-
