@@ -17,7 +17,8 @@
                         <ul>
                             @foreach($categories as $category)
                             <li class="dropdown">
-                                <a href="{{route('product-category', ['id' => $category->id])}}"  data-toggle="dropdown">{{$category->name}}
+{{--                                data-toggle="dropdown"--}}
+                                <a href="{{route('product-category', ['id' => $category->id])}}">{{$category->name}}
                                 </a>
                                 @if(count($category->subCategory) > 0)
 
@@ -78,14 +79,14 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
-{{--                    @foreach($categories as $category)--}}
-{{--                    <div class="col-lg-3">--}}
-{{--                        <div class="categories__item set-bg" style="background-color: #F3F6FA;">--}}
-{{--                            <img class="w-75 mx-auto pt-4" src="{{$category->image}}" alt="Delicious Fried Chicken Plate">--}}
-{{--                            <h5><a href="#">{{$category->name}}</a></h5>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    @endforeach--}}
+                    @foreach($categories as $category)
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" style="background-color: #F3F6FA;">
+                            <img class="w-75 mx-auto pt-4" src="{{$category->image}}" alt="Delicious Fried Chicken Plate">
+                            <h5><a href="#">{{$category->name}}</a></h5>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

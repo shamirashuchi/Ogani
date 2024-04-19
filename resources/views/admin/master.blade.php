@@ -281,7 +281,11 @@
                     </a>
                     <div class="collapse" id="ui-basic0">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{route("user.create")}}">Add User</a></li>
+                            @isset($categoryCount)
+                            <li class="nav-item"> <a class="nav-link" href="{{route("user.create")}}">{{ $categoryCount }}Add User</a></li>
+                            @else
+                                <li class="nav-item"> <a class="nav-link" href="{{route("user.create")}}">Add User</a></li>
+                            @endisset
                             <li class="nav-item"> <a class="nav-link" href="{{route("user.index")}}">Manage User</a></li>
                         </ul>
                     </div>

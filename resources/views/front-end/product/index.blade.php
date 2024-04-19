@@ -83,18 +83,31 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
-                            <img class="product__details__pic__item--large"
-                                 src="{{asset('/')}}front-end-assets/img/product/details/product-details-1.jpg" alt="">
+{{--                            <img class="product__details__pic__item--large"--}}
+                            <div class="categories__item product__item__pic flex flex-column align-center" style="background-color: #F3F6FA;">
+                                <img class="w-100  pt-4 " src="{{ asset($product->image) }}" alt="Delicious Fried Chicken Plate">
+{{--                                <ul class="product__item__pic__hover">--}}
+{{--                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--}}
+{{--                                </ul>--}}
+                            </div>
+{{--                                 src="{{asset('/')}}front-end-assets/img/product/details/product-details-1.jpg" alt="">--}}
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
-                            <img data-imgbigurl="img/product/details/product-details-2.jpg"
-                                 src="{{asset('/')}}front-end-assets/img/product/details/thumb-1.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-3.jpg"
-                                 src="{{asset('/')}}front-end-assets/img/product/details/thumb-2.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-5.jpg"
-                                 src="{{asset('/')}}front-end-assets/img/product/details/thumb-3.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-4.jpg"
-                                 src="{{asset('/')}}front-end-assets/img/product/details/thumb-4.jpg" alt="">
+                            @foreach($product->otherImage as $otherImage)
+                                <div class="flex flex-column align-center justify-center" style="background-color: #F3F6FA;height: 120px;width:120px">
+                                <img class="mx-auto pt-4" style=" height: 100px;width: 100px;" src="{{asset($otherImage->image)}}" alt="">
+                                </div>
+                            @endforeach
+{{--                            <img data-imgbigurl="img/product/details/product-details-2.jpg"--}}
+{{--                                 src="{{asset('/')}}front-end-assets/img/product/details/thumb-1.jpg" alt="">--}}
+{{--                            <img data-imgbigurl="img/product/details/product-details-3.jpg"--}}
+{{--                                 src="{{asset('/')}}front-end-assets/img/product/details/thumb-2.jpg" alt="">--}}
+{{--                            <img data-imgbigurl="img/product/details/product-details-5.jpg"--}}
+{{--                                 src="{{asset('/')}}front-end-assets/img/product/details/thumb-3.jpg" alt="">--}}
+{{--                            <img data-imgbigurl="img/product/details/product-details-4.jpg"--}}
+{{--                                 src="{{asset('/')}}front-end-assets/img/product/details/thumb-4.jpg" alt="">--}}
                         </div>
                     </div>
                 </div>

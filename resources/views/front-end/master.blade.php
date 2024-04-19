@@ -48,7 +48,7 @@
             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
             <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
         </ul>
-        <div class="header__cart__price">item: <span>$150.00</span></div>
+        <div class="header__cart__price">item: <span>{{$subcategoryCount}}</span></div>
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__language">
@@ -165,7 +165,7 @@
                         <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                         <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                     </ul>
-                    <div class="header__cart__price">item: <span>$150.00</span></div>
+                    <div class="header__cart__price">item: <span>{{$subcategoryCount}}{{$brandCount}}</span></div>
                 </div>
             </div>
         </div>
@@ -249,6 +249,7 @@
 
 <!-- Js Plugins -->
 <script src="{{asset('/')}}front-end-assets/js/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
 <script src="{{asset('/')}}front-end-assets/js/bootstrap.min.js"></script>
 <script src="{{asset('/')}}front-end-assets/js/jquery.nice-select.min.js"></script>
 <script src="{{asset('/')}}front-end-assets/js/jquery-ui.min.js"></script>
@@ -257,39 +258,40 @@
 <script src="{{asset('/')}}front-end-assets/js/owl.carousel.min.js"></script>
 <script src="{{asset('/')}}front-end-assets/js/main.js"></script>
 {{--js--}}
-<script data-cfasync="false" src="{{asset('/')}}front-end-assets/../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="{{asset('/')}}front-end-assets/assets/js/bootstrap.min.js"></script>
+{{--<script data-cfasync="false" src="{{asset('/')}}front-end-assets/../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>--}}
+{{--<script src="{{asset('/')}}front-end-assets/assets/js/bootstrap.min.js"></script>--}}
 <script src="{{asset('/')}}front-end-assets/assets/js/tiny-slider.js"></script>
 <script src="{{asset('/')}}front-end-assets/assets/js/glightbox.min.js"></script>
-<script src="{{asset('/')}}front-end-assets/assets/js/main.js"></script>
+{{--<script src="{{asset('/')}}front-end-assets/assets/js/main.js"></script>--}}
 <script src="https://kit.fontawesome.com/e1ea402ddb.js" crossorigin="anonymous"></script>
 
-<script>
-    // Get the elements
-    const innerSubCategoryLink = document.querySelector('.inner-sub-category');
-    const dropdownLink = document.querySelector('.dropdown a');
-    dropdownLink.addEventListener('mouseover', () => {
-        dropdownLink.classList.add('hovered');
-    });
-    // Add event listener for hover on innerSubCategoryLink
-    innerSubCategoryLink.addEventListener('mouseover', () => {
-        dropdownLink.classList.add('hovered');
-    });
-innerSubCategoryLink.addEventListener('click', event => {
-event.preventDefault(); // Prevent the default link behavior
-event.stopPropagation(); // Prevent the event from bubbling up to the parent elements
+{{--<script>--}}
+{{--    // Get the elements--}}
+{{--    const innerSubCategoryLink = document.querySelector('.inner-sub-category');--}}
+{{--    const dropdownLink = document.querySelector('.dropdown a');--}}
+{{--    dropdownLink.addEventListener('mouseover', () => {--}}
+{{--        dropdownLink.classList.add('hovered');--}}
+{{--    });--}}
+{{--    // Add event listener for hover on innerSubCategoryLink--}}
+{{--    innerSubCategoryLink.addEventListener('mouseover', () => {--}}
+{{--        dropdownLink.classList.add('hovered');--}}
+{{--    });--}}
+{{--// innerSubCategoryLink.addEventListener('click', event => {--}}
+{{--// event.preventDefault(); // Prevent the default link behavior--}}
+{{--// event.stopPropagation(); // Prevent the event from bubbling up to the parent elements--}}
 
-// Optionally, you can add logic here to handle the click event
-});
+{{--// Optionally, you can add logic here to handle the click event--}}
+{{--});--}}
 
-    // Add event listener for hover out on innerSubCategoryLink
-    innerSubCategoryLink.addEventListener('mouseout', () => {
-        dropdownLink.classList.remove('hovered');
-    });
+{{--    // Add event listener for hover out on innerSubCategoryLink--}}
+{{--    innerSubCategoryLink.addEventListener('mouseout', () => {--}}
+{{--        dropdownLink.classList.remove('hovered');--}}
+{{--    });--}}
 
-    dropdownLink.addEventListener('mouseout', () => {
-        dropdownLink.classList.remove('hovered');
-    });
-</script>
+{{--    dropdownLink.addEventListener('mouseout', () => {--}}
+{{--        dropdownLink.classList.remove('hovered');--}}
+{{--    });--}}
+{{--// </script>--}}
 {{--<script>--}}
 {{--    // Get the elements--}}
 {{--    const innerSubCategoryLinks = document.querySelectorAll('.inner-sub-category');--}}
