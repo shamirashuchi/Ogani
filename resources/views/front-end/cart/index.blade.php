@@ -79,6 +79,7 @@
     <!-- Shoping Cart Section Begin -->
     <section class="shoping-cart spad">
         <div class="container">
+            <p class="text-center text-success">{{session('message')}}</p>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__table">
@@ -86,6 +87,7 @@
                             <thead>
                             <tr>
                                 <th class="shoping__product">Products</th>
+                                <th>Name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
@@ -93,72 +95,40 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($cart_products as $cart_product)
                             <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="{{asset('/')}}front-end-assets/img/cart/cart-1.jpg" alt="">
+                                <td class="shoping__cart__price">
+                                    <img src="{{asset($cart_product->options->image)}}" class="w-25" alt="">
+                                </td>
+                                <td>
                                     <h5>Vegetable’s Package</h5>
                                 </td>
                                 <td class="shoping__cart__price">
                                     $55.00
                                 </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
+                                <form action="{{route('cart.update', ['row_id' => $cart_product->rowId])}}" method="POST">
+                                    @csrf
+                                    <td class="shoping__cart__item">
+                                    <div class="quantity row">
+                                        <div class="pro-qty col-lg-12">
+                                                <input  type="number" name="qty" value="{{$cart_product->qty}}">
+                                                <button type="submit" class="primary-btn cart-btn cart-btn-right">Update</button>
                                         </div>
                                     </div>
                                 </td>
+                                </form>
                                 <td class="shoping__cart__total">
-                                    $110.00
+                                    @if(isset($cart_product->options['user_id']))
+                                        User ID: {{ $cart_product->options['user_id'] }}
+                                    @else
+                                        User ID Not Found
+                                    @endif
                                 </td>
                                 <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
+                                    <a class="remove-item" href="{{route('cart.delete', ['row_id' => $cart_product->rowId])}}" onclick="return confirm('Are you sure to delete this item..')"><span class="icon_close"></span></a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="{{asset('/')}}front-end-assets/img/cart/cart-2.jpg" alt="">
-                                    <h5>Fresh Garden Vegetable</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    $39.00
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    $39.99
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="{{asset('/')}}front-end-assets/img/cart/cart-3.jpg" alt="">
-                                    <h5>Organic Bananas</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    $69.00
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    $69.99
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
-                                </td>
-                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -168,8 +138,9 @@
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
                         <a href="{{route('home')}}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            Upadate Cart</a>
+
+{{--                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>--}}
+{{--                            Update Cart</a>--}}
                     </div>
                 </div>
                 <div class="col-lg-6">

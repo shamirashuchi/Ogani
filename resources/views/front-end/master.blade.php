@@ -68,7 +68,7 @@
         <ul>
             <li class="active"><a href="./index.html">Home</a></li>
             <li><a href="./shop-grid.html">Shop</a></li>
-            <li><a href="#">Pages</a>
+            <li><a href="#">Dasshboard</a>
                 <ul class="header__menu__dropdown">
                     <li><a href="./shop-details.html">Shop Details</a></li>
                     <li><a href="./shoping-cart.html">Shoping Cart</a></li>
@@ -145,8 +145,9 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="./index.html">Home</a></li>
-                        <li><a href="./shop-grid.html">Shop</a></li>
-                        <li><a href="#">Pages</a>
+                        <li><a href="{{route('customer.logout')}}">Logout</a></li>
+
+                        <li><a href="{{route('customer.dashboard')}}">Dashboard</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href="./shop-details.html">Shop Details</a></li>
                                 <li><a href="./shoping-cart.html">Shoping Cart</a></li>

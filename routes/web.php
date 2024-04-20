@@ -13,15 +13,32 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 
+
+
 Route::get('/',[OganiController::class,'index'])->name('home');
 Route::get('/product-category/{id}',[OganiController::class,'category'])->name('product-category');
 Route::get('/product-sub-category/{id}',[OganiController::class,'subCategory'])->name('product-sub-category');
 Route::get('/product-detail/{id}',[OganiController::class,'product'])->name('product-detail');
-Route::get('/cart/show',[CartController::class,'index'])->name('cart.show');
+
 Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout');
 Route::get('/customer/login',[CustomerAuthController::class,'login'])->name('customer.login');
 Route::get('/customer/register',[CustomerAuthController::class,'register'])->name('customer.register');
 
+
+
+Route::get('/customer/login',[CustomerAuthController::class,'login'])->name('customer.login');
+Route::post('/customer/login',[CustomerAuthController::class,'loginCheck'])->name('customer.login');
+Route::get('/customer/register',[CustomerAuthController::class,'register'])->name('customer.register');
+Route::post('/customer/register',[CustomerAuthController::class,'newCustomer'])->name('customer.register');
+
+Route::middleware(['customer'])->group(function (){
+    Route::get('/customer-dashboard',[CustomerAuthController::class,'dashboard'])->name('customer.dashboard');
+    Route::get('/customer/logout',[CustomerAuthController::class,'logout'])->name('customer.logout');
+    Route::get('/cart/show',[CartController::class,'index'])->name('cart.show');
+    Route::post('/cart/add',[CartController::class,'addCart'])->name('cart.add');
+    Route::post('/cart/update/{row_id}',[CartController::class,'update'])->name('cart.update');
+    Route::get('/cart/delete/{row_id}',[CartController::class,'delete'])->name('cart.delete');
+});
 
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::get('/user/manage', [UserController::class, 'index'])->name('user.index');
@@ -77,7 +94,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 
-
-
-
+    Route::get('/manage/order', [OrderController::class, 'index'])->name('manage.order');
+    Route::get('/order/detail/{id}', [OrderController::class, 'orderDetail'])->name('order.detail');
+    Route::get('/order/invoice/{id}', [OrderController::class, 'orderInvoice'])->name('order.invoice');
+    Route::get('/order/edit/{id}', [OrderController::class, 'orderEdit'])->name('order.edit');
+    Route::post('/order/update', [OrderController::class, 'orderUpdate'])->name('order.update');
 });
