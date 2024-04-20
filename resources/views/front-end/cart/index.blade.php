@@ -95,16 +95,17 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @php($sum=0)
                             @foreach($cart_products as $cart_product)
                             <tr>
                                 <td class="shoping__cart__price">
                                     <img src="{{asset($cart_product->options->image)}}" class="w-25" alt="">
                                 </td>
                                 <td>
-                                    <h5>Vegetable’s Package</h5>
+                                    <h5>{{$cart_product->name}}</h5>
                                 </td>
                                 <td class="shoping__cart__price">
-                                    $55.00
+                                    {{$cart_product->price}}
                                 </td>
                                 <form action="{{route('cart.update', ['row_id' => $cart_product->rowId])}}" method="POST">
                                     @csrf
@@ -118,16 +119,13 @@
                                 </td>
                                 </form>
                                 <td class="shoping__cart__total">
-                                    @if(isset($cart_product->options['user_id']))
-                                        User ID: {{ $cart_product->options['user_id'] }}
-                                    @else
-                                        User ID Not Found
-                                    @endif
+                                    {{round($cart_product->subtotal)}}
                                 </td>
                                 <td class="shoping__cart__item__close">
                                     <a class="remove-item" href="{{route('cart.delete', ['row_id' => $cart_product->rowId])}}" onclick="return confirm('Are you sure to delete this item..')"><span class="icon_close"></span></a>
                                 </td>
                             </tr>
+                            @php($sum = $sum + $cart_product->subtotal)
                             @endforeach
                             </tbody>
                         </table>
@@ -158,15 +156,20 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>$454.98</span></li>
-                        </ul>
+                                <li>Cart Subtotal<span>{{$sum}}</span></li>
+                                <li>Tax Total<span>{{$tax = round($sum*0.15)}}</span></li>
+                                <li>Shipping Cost<span>{{$shipping = 100}}</span></li>
+                                <li class="last">You Payable<span>{{ $sum + $tax + $shipping}}</span></li>
+                            </ul>
                         <a href="{{route('checkout')}}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <?php
+    Session::put('sum',$sum);
+    ?>
     <!-- Shoping Cart Section End -->
 
 @endsection

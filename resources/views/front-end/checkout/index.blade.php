@@ -24,6 +24,8 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Checkout Section Begin -->
+    <form action="{{ route('new.order') }}" method="post">
+        @csrf
     <section class="checkout spad">
         <div class="container">
             <div class="row">
@@ -40,14 +42,12 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Fist Name<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Last Name<span>*</span></p>
-                                        <input type="text">
+                                        <p>Full Name<span>*</span></p>
+                                        @if(isset($customer->name))
+                                            <input type="text" value="{{$customer->name}}" readonly name="name" placeholder="Full Name"/>
+                                        @else
+                                            <input type="text" name="name" required placeholder="Full Name"/>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -56,9 +56,12 @@
                                 <input type="text">
                             </div>
                             <div class="checkout__input">
-                                <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
-                                <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
+                                <p>Delivery Address<span>*</span></p>
+                                @if(isset($customer->delivery_address))
+                                    <textarea class="pt-2" name="delivery_address" placeholder="Delivery Address">{{$customer->address}}</textarea>
+                                @else
+                                    <textarea class="pt-2" name="delivery_address" placeholder="Delivery Address"> </textarea>
+                                @endif
                             </div>
                             <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
@@ -76,13 +79,21 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Phone<span>*</span></p>
-                                        <input type="text">
+                                        @if(isset($customer->mobile))
+                                            <input type="number" value="{{$customer->mobile}}" readonly name="mobile" placeholder="Phone Number"/>
+                                        @else
+                                            <input type="number" name="mobile" required placeholder="Phone Number"/>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text">
+                                        @if(isset($customer->email))
+                                            <input type="email" value="{{$customer->email}}" readonly name="email" placeholder="Email Address"/>
+                                        @else
+                                            <input type="email" name="email" required placeholder="Email Address"/>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -111,18 +122,41 @@
                                 <input type="text"
                                        placeholder="Notes about your order, e.g. special notes for delivery.">
                             </div>
+                            <div class="col-md-12">
+                                <label class="me-2 single-form form-default"> Payment Method</label>
+                                <div class="pt-2">
+                                    <lebel class="me-3"><input type="radio" checked name="payment_method" value="Cash"/><span class="ms-2">Cash on Delivery</span></lebel>
+                                    <lebel><input type="radio" name="payment_method" value="Online"/> <span class="ms-2">Online</span></lebel>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4>Your Order</h4>
                                 <div class="checkout__order__products">Products <span>Total</span></div>
-                                <ul>
-                                    <li>Vegetable’s Package <span>$75.99</span></li>
-                                    <li>Fresh Vegetable <span>$151.99</span></li>
-                                    <li>Organic Bananas <span>$53.99</span></li>
-                                </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-                                <div class="checkout__order__total">Total <span>$750.99</span></div>
+                                @foreach($cart_products as $cartProduct)
+                                <div class="total-price">
+                                    <p class="value">
+                                        {{$cartProduct->name}} -
+                                        ({{$cartProduct->price}} * {{$cartProduct->qty}}) :
+                                    </p>
+                                    <p class="price">{{ round($cartProduct->subtotal) }}</p>
+                                </div>
+                                @endforeach
+{{--                                <ul>--}}
+{{--                                    <li>Vegetable’s Package <span>$75.99</span></li>--}}
+{{--                                    <li>Fresh Vegetable <span>$151.99</span></li>--}}
+{{--                                    <li>Organic Bananas <span>$53.99</span></li>--}}
+{{--                                </ul>--}}
+                                <div class="checkout__order__subtotal">Subtotal <span>{{ $sum =Session::get('sum') }}</span></div>
+                                <input type="hidden" value="{{ $sum }}" name="sub_total">
+                                <div class="checkout__order__total">Tax total:<span>{{ $tax = round($sum*0.15) }}</span></div>
+                                <input type="hidden" value="{{ $tax }}" name="tax_total">
+                                <div class="checkout__order__total">shipping:<span>{{$shipping = 100}}</span></div>
+                                <input type="hidden" value="{{ $shipping }}" name="shipping_total">
+                                <div class="checkout__order__total">Payable amount:<span>{{ $orderTotal=$sum+$tax+$shipping }}</span></div>
+                                <input type="hidden" value="{{ $orderTotal }}" name="order_total">
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Create an account?
@@ -156,5 +190,5 @@
     </section>
     <!-- Checkout Section End -->
 
-
+    </form>
 @endsection

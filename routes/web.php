@@ -21,8 +21,10 @@ Route::get('/product-sub-category/{id}',[OganiController::class,'subCategory'])-
 Route::get('/product-detail/{id}',[OganiController::class,'product'])->name('product-detail');
 
 Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout');
-Route::get('/customer/login',[CustomerAuthController::class,'login'])->name('customer.login');
-Route::get('/customer/register',[CustomerAuthController::class,'register'])->name('customer.register');
+Route::post('/new/order',[CheckoutController::class,'newOrder'])->name('new.order');
+Route::get('/complete-order',[CheckoutController::class,'completeOrder'])->name('complete-order');
+//Route::get('/customer/login',[CustomerAuthController::class,'login'])->name('customer.login');
+//Route::get('/customer/register',[CustomerAuthController::class,'register'])->name('customer.register');
 
 
 
