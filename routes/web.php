@@ -101,4 +101,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/order/invoice/{id}', [OrderController::class, 'orderInvoice'])->name('order.invoice');
     Route::get('/order/edit/{id}', [OrderController::class, 'orderEdit'])->name('order.edit');
     Route::post('/order/update', [OrderController::class, 'orderUpdate'])->name('order.update');
+//
+//    MAIL_MAILER=log
+//MAIL_HOST=127.0.0.1
+//MAIL_PORT=2525
+//MAIL_USERNAME=null
+//MAIL_PASSWORD=null
+//MAIL_ENCRYPTION=null
+//MAIL_FROM_ADDRESS="hello@example.com"
+//MAIL_FROM_NAME="${APP_NAME}"
 });
