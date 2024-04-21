@@ -12,7 +12,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\SslCommerzPaymentController;
 
 
 Route::get('/',[OganiController::class,'index'])->name('home');
@@ -26,6 +26,19 @@ Route::get('/complete-order',[CheckoutController::class,'completeOrder'])->name(
 //Route::get('/customer/login',[CustomerAuthController::class,'login'])->name('customer.login');
 //Route::get('/customer/register',[CustomerAuthController::class,'register'])->name('customer.register');
 
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
 
 
 Route::get('/customer/login',[CustomerAuthController::class,'login'])->name('customer.login');

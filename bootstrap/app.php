@@ -16,6 +16,15 @@ return Application::configure(basePath: dirname(__DIR__))
         'customer' => CustomerMiddleware::class
     ]);
     })
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->validateCsrfTokens(except: [
+            '/success',
+            '/cancel',
+            '/fail',
+            '/ipn',
+            '/pay-via-ajax',
+        ]);
+})
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
