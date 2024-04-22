@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Order;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -18,8 +19,8 @@ class OrderController extends Controller
     public function orderInvoice($id){
         $pdf = Pdf::loadView('admin.order.invoice',
             ['order'=>Order:: find($id)]);
-//        return $pdf->download('invoice.pdf');
-        return $pdf->stream();
+        return $pdf->download('invoice.pdf');
+//        return $pdf->stream();
     }
 
     public function orderEdit($id){
@@ -31,6 +32,11 @@ class OrderController extends Controller
     {
         Order::updateOrder($request);
         return redirect('/manage/order')->with('message','order info update successfully');
+    }
+    public function delete($id)
+    {
+        Order::deleteOrder($id);
+        return redirect('/manage/order')->with('message', 'Order info delete successfully.');
     }
 
 }

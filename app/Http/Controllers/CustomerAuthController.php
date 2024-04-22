@@ -71,6 +71,7 @@ class CustomerAuthController extends Controller
     public function dashboard()
     {
         return view('front-end.customer.dashboard',[
+//            'orders'=>Order::all()
             'orders'=>Order::where('customer_id',Session::get('customer_id'))->latest()->get()
         ]);
     }

@@ -72,4 +72,11 @@ class Order extends Model
         self::$order->save();
     }
 
+    public static function deleteOrder($id)
+    {
+        self::$order = Order::find($id);
+        deleteFile(self::$order->image);
+        self::$order->delete();
+    }
+
 }

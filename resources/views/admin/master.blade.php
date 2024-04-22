@@ -290,6 +290,44 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic6">
+                        <span class="menu-title">Order Module</span>
+                        <i class="menu-arrow"></i>
+                        <i class="mdi mdi-border-all menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic6">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{route("manage.order")}}">Manage Order</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic7">
+                        <span class="menu-title">Customer Module</span>
+                        <i class="menu-arrow"></i>
+                        <i class="mdi mdi-border-all menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic7">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{route("manage.customer")}}">Manage Customer</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic8" aria-expanded="false" aria-controls="ui-basic8">
+                        <span class="menu-title">Courier Module</span>
+                        <i class="menu-arrow"></i>
+                        <i class="mdi mdi-border-all menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic8">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{route("courier.create")}}">Add Courier</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route("courier.index")}}">Manage Courier</a></li>
+                        </ul>
+                    </div>
+                </li>
+
 {{--                <li class="nav-item">--}}
 {{--                    <a class="nav-link menu-icon" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic">--}}
 {{--                        <span class="menu-title">Order Module</span>--}}

@@ -12,8 +12,10 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SslCommerzPaymentController;
-
+use App\Http\Controllers\CourierController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/',[OganiController::class,'index'])->name('home');
 Route::get('/product-category/{id}',[OganiController::class,'category'])->name('product-category');
@@ -114,6 +116,17 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/order/invoice/{id}', [OrderController::class, 'orderInvoice'])->name('order.invoice');
     Route::get('/order/edit/{id}', [OrderController::class, 'orderEdit'])->name('order.edit');
     Route::post('/order/update', [OrderController::class, 'orderUpdate'])->name('order.update');
+    Route::get('/order/delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
+
+    Route::get('/manage/customer', [CustomerController::class, 'index'])->name('manage.customer');
+//    Route::get('/customer/detail/{id}', [OrderController::class, 'orderDetail'])->name('order.detail');
+//    Route::get('/customer/invoice/{id}', [OrderController::class, 'orderInvoice'])->name('order.invoice');
+//    Route::get('/customer/edit/{id}', [OrderController::class, 'orderEdit'])->name('order.edit');
+//    Route::post('/customer/update', [OrderController::class, 'orderUpdate'])->name('order.update');
+//    Route::get('/customer/delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
+
+
+    Route::resource('courier', CourierController::class);
 //
 //    MAIL_MAILER=log
 //MAIL_HOST=127.0.0.1
