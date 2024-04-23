@@ -30,12 +30,12 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         User::updateUser($request, $id);
-        return redirect('/unit/manage')->with('message', 'Unit info update successfully.');
+        return redirect('/user/manage')->with('message', 'User info update successfully.');
     }
 
     public function delete($id)
     {
         User::deleteUser($id);
-        return redirect('/unit/manage')->with('message', 'Unit info delete successfully.');
+        return redirect('/user/manage')->with('message', 'User info delete successfully.');
     }
 }

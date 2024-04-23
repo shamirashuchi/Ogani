@@ -38,7 +38,8 @@ class CategoryController extends Controller
 
     public function updateshow()
     {
-        return view('admin.category.show', ['updatecategories' => UpdateCategory::where('flag', 0)->get()]);
+        UpdateCategory::updateCategoryflag();
+        return view('admin.category.show', ['updatecategories' => UpdateCategory::where('flag', 1)->get()]);
     }
 
 

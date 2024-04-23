@@ -113,8 +113,9 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-                        <i class="mdi mdi-bell-outline"></i>
-                        <span class="count-symbol bg-danger"></span>
+                        <i class="mdi mdi-bell-outline position-relative ">
+                        <span class="position-absolute font-weight-bold bg-danger text-white " style="top:-2px; right: -10px;  width:100%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">2</span>
+                        </i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                         <h6 class="p-3 mb-0">Notifications</h6>
@@ -211,10 +212,20 @@
                             <li class="nav-item"> <a class="nav-link" href="{{route("category.create")}}">Add Category</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{route('category.index')}}">Manage Category</a></li>
                             @if(Auth::user()->role == "Admin")
-                            <li class="nav-item"> <a class="nav-link" href="{{route('category.updateshow')}}">show Category</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link position-relative " href="{{route('category.updateshow')}}">Requested Category
+                                    @isset($updatecategoryCount)
+                                        @if($updatecategoryCount > 0)
+                                    <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updatecategoryCount}}</span>
+                                        @endif
+                                    @else
+                                       <span></span>
+                                    @endisset
+                                </a>
+                            </li>
                             @endif
                             @if(Auth::user()->role == "Manager")
-                                <li class="nav-item"> <a class="nav-link" href="{{route('category.request')}}">Requested  Category</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{route('category.request')}}">Requested  Category manager</a></li>
                             @endif
                         </ul>
                     </div>

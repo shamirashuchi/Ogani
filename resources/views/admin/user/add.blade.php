@@ -34,7 +34,16 @@
                         <div class="row mb-4">
                             <label for="" class="col-md-3 form-label">User role</label>
                             <div class="col-md-9">
-                                <input class="form-control" id="" required placeholder="User Name" type="text" name="role"/>
+                                <select class="form-select" id="role" required name="role">
+                                    <option value="">Select User Role</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Category Manager">Category Manager</option>
+                                    <option value="Brand Manager">Brand Manager</option>
+                                    <option value="Unit Manager">Unit Manager</option>
+                                    <option value="Product Manager">Product Manager</option>
+                                    <option value="Employee">Employee</option>
+                                    <!-- Add more options if needed -->
+                                </select>
                             </div>
                         </div>
                         <div class="row mb-4">

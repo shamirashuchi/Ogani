@@ -73,12 +73,12 @@ class User extends Authenticatable
         self::$user     = User::find($id);
         if (self::$image    = $request->file('image'))
         {
-            deleteFile(self::$user->image);
+            deleteFile(self::$user->profile_photo_path);
             self::$imageUrl = getFileUrl(self::$image, 'upload/user-images/');
         }
         else
         {
-            self::$imageUrl = self::$user->image;
+            self::$imageUrl = self::$user->profile_photo_path;
         }
         self::saveBasicInfo(self::$user, $request, self::$imageUrl);
     }

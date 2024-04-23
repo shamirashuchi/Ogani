@@ -32,6 +32,15 @@ class UpdateCategory extends Model
         $category->save();
     }
 
+    public static function updateCategoryflag()
+    {
+        $updateCategories = UpdateCategory::where('flag', 0)->get();
+        foreach ($updateCategories as $category) {
+            $category->flag = 1;
+            $category->save();
+        }
+    }
+
     public static function updateCategorystart($id)
     {
         $updateCategoryinfo     = UpdateCategory::find($id);
@@ -42,7 +51,7 @@ class UpdateCategory extends Model
         $category->image  = $updateCategoryinfo->image;
         $category->status  = $updateCategoryinfo->status;
         $category->custom_updated_at = Carbon::now('Asia/Dhaka');
-        $updateCategoryinfo->flag = 1;
+        $updateCategoryinfo->flag = 2;
         $updateCategoryinfo->action = "Accepted";
         $updateCategoryinfo->save();
         $category->save();
@@ -51,7 +60,7 @@ class UpdateCategory extends Model
     public static function cancelCategorystart($id)
     {
         $updateCategoryinfo     = UpdateCategory::find($id);
-        $updateCategoryinfo->flag = 1;
+        $updateCategoryinfo->flag = 3;
         $updateCategoryinfo->action = "Canceled";
         $updateCategoryinfo->save();
     }
