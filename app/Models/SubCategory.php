@@ -27,17 +27,36 @@ class SubCategory extends Model
 
     public static function updateSubCategory($request, $id)
     {
-        self::$subCategory = SubCategory::find($id);
-        if (self::$image = $request->file('image'))
-        {
-            self::deleteImageFormFolder(self::$subCategory->image);
-            self::$imageUrl = self::getImageUrl($request->file('image'));
+
+        $field = $request->input('field');
+        $oldValue = $request->input('old_value');
+        $newValue = $request->input('new_value');
+        $categoryId = $request->input('category_id');
+        $subCategory = SubCategory::find($id);
+
+        // Check if the field to be updated is 'name'
+        if ($request->has('field') && $request->input('field') === 'name') {
+            // Update the name field with the new value
+            $subCategory->name = $request->input('new_value');
         }
-        else
-        {
-            self::$imageUrl = self::$subCategory->image;
+
+        // Check if the field to be updated is 'description'
+        if ($request->has('field') && $request->input('field') === 'description') {
+            // Update the description field with the new value
+            $subCategory->description = $request->input('new_value');
         }
-        self::saveBasicInfo(self::$subCategory, $request, self::$imageUrl);
+//        self::$subCategory = SubCategory::find($id);
+//        if (self::$image = $request->file('image'))
+//        {
+//            self::deleteImageFormFolder(self::$subCategory->image);
+//            self::$imageUrl = self::getImageUrl($request->file('image'));
+//        }
+//        else
+//        {
+//            self::$imageUrl = self::$subCategory->image;
+//        }
+//        self::saveBasicInfo(self::$subCategory, $request, self::$imageUrl);
+        $subCategory->save();
     }
 
     public static function deleteSubCategory($id)

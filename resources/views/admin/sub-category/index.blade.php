@@ -5,6 +5,12 @@
     <!-- Row -->
     <div class="row row-sm">
         <div class="col-lg-12">
+            {{-- Display success message if available --}}
+            @if(request()->has('mes'))
+                <div class="alert alert-success" role="alert">
+                    {{ request()->get('mes') }}
+                </div>
+            @endif
             <div class="card site-btn">
                 <div class="card-header border-bottom mx-auto">
                     <h3 class="card-title text-white fs-1">All Sub-category Information</h3>
@@ -50,5 +56,6 @@
             </div>
         </div>
     </div>
+
     <!-- End Row -->
 @endsection

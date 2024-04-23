@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use App\Models\UpsateSubCategory;
 
 class SubCategoryController extends Controller
 {
@@ -38,8 +39,10 @@ class SubCategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        SubCategory::updateSubCategory($request, $id);
-        return redirect('/sub-category/manage')->with('message', 'Sub Category info update successfully.');
+
+        UpsateSubCategory::updateSubCategory($request, $id);
+//        SubCategory::updateSubCategory($request, $id);
+//        return redirect('/sub-category/manage')->with('message', 'Sub Category info update successfully.');
     }
 
     public function delete($id)
