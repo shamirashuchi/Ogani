@@ -14,77 +14,110 @@ class UpdateCategory extends Model
     public $timestamps = false;
 
     public $updated_at = null;
-    public static function newCategory($request,$id)
+    public static function newCategory($request, $id)
     {
-        $category = new UpdateCategory();
+        $category =  new UpdateCategory();
+        $category->user_id = Auth::user()->id;
+        $category->field = $request->input('field');
+        $category->old_value = $request->input('old_value');
+//        if($request->input('field') !== "image") {
+//            console.log(1);
+//            $imageUrl = getFileUrl($request->input('new_value'), 'upload/update_category-images/');
+//            console.log($imageUrl);
+//            $category->new_value = $imageUrl;
+//            $category->save();
+//        }
+//        else{
+//            $category->new_value = $request->input('new_value');
+//        }
+        if ($request->hasFile('new_value') && $request->file('new_value')->isValid()) {
+            $file = $request->file('new_value');
+            $fileName = $file->getClientOriginalName(); // Get the original file name
+            $filePath = $file->storeAs($fileName,'upload/update_category-images'); // Store the file
+
+            // Assuming getFileUrl() returns the URL of the stored file
+            $imageUrl = getFileUrl($filePath);
+            $category->new_value = $imageUrl;
+        } else {
+            // Handle case where no file is uploaded
+            // For example, set a default value or log an error
+            $category->new_value = $request->input('new_value');
+        }
+        $category->category_id = $request->input('category_id');
         $category->custom_created_at = Carbon::now('Asia/Dhaka');
-        self::$category     = Category::find($id);
-        if (self::$image    = $request->file('image'))
-        {
-//            deleteFile(self::$category->image);
-            self::$imageUrl = getFileUrl(self::$image, 'upload/category-images/');
-        }
-        else
-        {
-            self::$imageUrl = self::$category->image;
-        }
-        self::saveBasicInfo($category, $request,self::$imageUrl ,$id);
         $category->save();
     }
-
-    public static function updateCategoryflag()
-    {
-        $updateCategories = UpdateCategory::where('flag', 0)->get();
-        foreach ($updateCategories as $category) {
-            $category->flag = 1;
-            $category->save();
-        }
-    }
-
-    public static function updateCategorystart($id)
-    {
-        $updateCategoryinfo     = UpdateCategory::find($id);
-        $category     = Category::find($updateCategoryinfo->category_id);
-        $category->user_id  = $updateCategoryinfo->user_id;
-        $category->name  = $updateCategoryinfo->name;
-        $category->description  = $updateCategoryinfo->description;
-        $category->image  = $updateCategoryinfo->image;
-        $category->status  = $updateCategoryinfo->status;
-        $category->custom_updated_at = Carbon::now('Asia/Dhaka');
-        $updateCategoryinfo->flag = 2;
-        $updateCategoryinfo->action = "Accepted";
-        $updateCategoryinfo->save();
-        $category->save();
-    }
-
-    public static function cancelCategorystart($id)
-    {
-        $updateCategoryinfo     = UpdateCategory::find($id);
-        $updateCategoryinfo->flag = 3;
-        $updateCategoryinfo->action = "Canceled";
-        $updateCategoryinfo->save();
-    }
-
-    public static function deleteCategorydata($id)
-    {
-        self::$category = UpdateCategory::find($id);
-//        deleteFile(self::$category->image);
-        self::$category->delete();
-    }
-
-    private static function saveBasicInfo($category, $request, $imageUrl,$id)
-    {
-        $category->name           = $request->name;
-        $category->user_id        =Auth::user()->id;
-        $category->category_id    =$id;
-        $category->description    = $request->description;
-        $category->image          = $imageUrl;
-        $category->status         = $request->status;
-        return $category;
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
+//    public static function newCategory($request,$id)
+//    {
+//        $category = new UpdateCategory();
+//        $category->custom_created_at = Carbon::now('Asia/Dhaka');
+//        self::$category     = Category::find($id);
+//        if (self::$image    = $request->file('image'))
+//        {
+////            deleteFile(self::$category->image);
+//            self::$imageUrl = getFileUrl(self::$image, 'upload/category-images/');
+//        }
+//        else
+//        {
+//            self::$imageUrl = self::$category->image;
+//        }
+//        self::saveBasicInfo($category, $request,self::$imageUrl ,$id);
+//        $category->save();
+//    }
+//
+//    public static function updateCategoryflag()
+//    {
+//        $updateCategories = UpdateCategory::where('flag', 0)->get();
+//        foreach ($updateCategories as $category) {
+//            $category->flag = 1;
+//            $category->save();
+//        }
+//    }
+//
+//    public static function updateCategorystart($id)
+//    {
+//        $updateCategoryinfo     = UpdateCategory::find($id);
+//        $category     = Category::find($updateCategoryinfo->category_id);
+//        $category->user_id  = $updateCategoryinfo->user_id;
+//        $category->name  = $updateCategoryinfo->name;
+//        $category->description  = $updateCategoryinfo->description;
+//        $category->image  = $updateCategoryinfo->image;
+//        $category->status  = $updateCategoryinfo->status;
+//        $category->custom_updated_at = Carbon::now('Asia/Dhaka');
+//        $updateCategoryinfo->flag = 2;
+//        $updateCategoryinfo->action = "Accepted";
+//        $updateCategoryinfo->save();
+//        $category->save();
+//    }
+//
+//    public static function cancelCategorystart($id)
+//    {
+//        $updateCategoryinfo     = UpdateCategory::find($id);
+//        $updateCategoryinfo->flag = 3;
+//        $updateCategoryinfo->action = "Canceled";
+//        $updateCategoryinfo->save();
+//    }
+//
+//    public static function deleteCategorydata($id)
+//    {
+//        self::$category = UpdateCategory::find($id);
+////        deleteFile(self::$category->image);
+//        self::$category->delete();
+//    }
+//
+//    private static function saveBasicInfo($category, $request, $imageUrl,$id)
+//    {
+//        $category->name           = $request->name;
+//        $category->user_id        =Auth::user()->id;
+//        $category->category_id    =$id;
+//        $category->description    = $request->description;
+//        $category->image          = $imageUrl;
+//        $category->status         = $request->status;
+//        return $category;
+//    }
+//
+//    public function category()
+//    {
+//        return $this->belongsTo(Category::class);
+//    }
 }

@@ -63,73 +63,73 @@
 
 
 
-    <script>
-        console.log('Script executed');
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM content loaded');
-// Your code here
-            document.getElementById('updateSubCategoryButton').addEventListener('click', function() {
-  console.log("clicked");
-        // document.getElementById('subCategoryName').addEventListener('change', function() {
-        //     console.log("changed");
-            var subCategoryNameOldValue = '{{$subCateogory->name}}';
-            var subCategoryNameNewValue = document.getElementById('subCategoryName').value;
-                if (subCategoryNameOldValue !== subCategoryNameNewValue) {
-                    logSubCategoryChange('name', subCategoryNameOldValue, subCategoryNameNewValue, {{$subCateogory->id}});
-                }
-            console.log(subCategoryNameOldValue); // Check if this message appears in the console
-                var subCategoryDescriptionOldValue = '{{$subCateogory->description}}';
-                var subCategoryDescriptionNewValue = document.getElementById('subCategoryDescription').value;
-                if (subCategoryDescriptionOldValue !== subCategoryDescriptionNewValue) {
-                    logSubCategoryChange('description', subCategoryDescriptionOldValue, subCategoryDescriptionNewValue, {{$subCateogory->id}});
-                }
-            // Here you can proceed with your logic to capture and log the changes
+{{--    <script>--}}
+{{--        console.log('Script executed');--}}
+{{--        document.addEventListener('DOMContentLoaded', function() {--}}
+{{--            console.log('DOM content loaded');--}}
+{{--// Your code here--}}
+{{--            document.getElementById('updateSubCategoryButton').addEventListener('click', function() {--}}
+{{--  console.log("clicked");--}}
+{{--        // document.getElementById('subCategoryName').addEventListener('change', function() {--}}
+{{--        //     console.log("changed");--}}
+{{--            var subCategoryNameOldValue = '{{$subCateogory->name}}';--}}
+{{--            var subCategoryNameNewValue = document.getElementById('subCategoryName').value;--}}
+{{--                if (subCategoryNameOldValue !== subCategoryNameNewValue) {--}}
+{{--                    logSubCategoryChange('name', subCategoryNameOldValue, subCategoryNameNewValue, {{$subCateogory->id}});--}}
+{{--                }--}}
+{{--            console.log(subCategoryNameOldValue); // Check if this message appears in the console--}}
+{{--                var subCategoryDescriptionOldValue = '{{$subCateogory->description}}';--}}
+{{--                var subCategoryDescriptionNewValue = document.getElementById('subCategoryDescription').value;--}}
+{{--                if (subCategoryDescriptionOldValue !== subCategoryDescriptionNewValue) {--}}
+{{--                    logSubCategoryChange('description', subCategoryDescriptionOldValue, subCategoryDescriptionNewValue, {{$subCateogory->id}});--}}
+{{--                }--}}
+{{--            // Here you can proceed with your logic to capture and log the changes--}}
 
-        {{--document.getElementById('subCategoryName').addEventListener('change', function(event) {--}}
-        {{--    console.log(1);--}}
-        {{--    var subCategoryNameOldValue = '{{$subCateogory->name}}';--}}
-        {{--    var subCategoryNameNewValue = this.value;--}}
-        {{--    logSubCategoryChange('name', subCategoryNameOldValue, subCategoryNameNewValue, {{$subCateogory->id}});--}}
-            {{--var subCategoryDescriptionOldValue = '{{$subCateogory->description}}';--}}
-            {{--var subCategoryDescriptionNewValue = document.getElementById('subCategoryDescription').value;--}}
+{{--        --}}{{--document.getElementById('subCategoryName').addEventListener('change', function(event) {--}}
+{{--        --}}{{--    console.log(1);--}}
+{{--        --}}{{--    var subCategoryNameOldValue = '{{$subCateogory->name}}';--}}
+{{--        --}}{{--    var subCategoryNameNewValue = this.value;--}}
+{{--        --}}{{--    logSubCategoryChange('name', subCategoryNameOldValue, subCategoryNameNewValue, {{$subCateogory->id}});--}}
+{{--            --}}{{--var subCategoryDescriptionOldValue = '{{$subCateogory->description}}';--}}
+{{--            --}}{{--var subCategoryDescriptionNewValue = document.getElementById('subCategoryDescription').value;--}}
 
-            {{--// You can add similar code to capture old and new values for other fields--}}
+{{--            --}}{{--// You can add similar code to capture old and new values for other fields--}}
 
-            {{--// Check if any changes have been made--}}
-            {{--if (subCategoryNameOldValue !== subCategoryNameNewValue) {--}}
-            {{--    logSubCategoryChange('name', subCategoryNameOldValue, subCategoryNameNewValue, {{$subCateogory->id}});--}}
-            {{--}--}}
-            {{--if (subCategoryDescriptionOldValue !== subCategoryDescriptionNewValue) {--}}
-            {{--    logSubCategoryChange('description', subCategoryDescriptionOldValue, subCategoryDescriptionNewValue, {{$subCateogory->id}});--}}
-            {{--}--}}
+{{--            --}}{{--// Check if any changes have been made--}}
+{{--            --}}{{--if (subCategoryNameOldValue !== subCategoryNameNewValue) {--}}
+{{--            --}}{{--    logSubCategoryChange('name', subCategoryNameOldValue, subCategoryNameNewValue, {{$subCateogory->id}});--}}
+{{--            --}}{{--}--}}
+{{--            --}}{{--if (subCategoryDescriptionOldValue !== subCategoryDescriptionNewValue) {--}}
+{{--            --}}{{--    logSubCategoryChange('description', subCategoryDescriptionOldValue, subCategoryDescriptionNewValue, {{$subCateogory->id}});--}}
+{{--            --}}{{--}--}}
 
-            // You can add similar conditions for other fields
-        });
-        });
+{{--            // You can add similar conditions for other fields--}}
+{{--        });--}}
+{{--        });--}}
 
 
-        function logSubCategoryChange(field, oldValue, newValue, categoryId) {
-            // Send AJAX request
-            $.ajax({
-                url: '{{ route('sub-category.update', ['id' => $subCateogory->id]) }}',
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    field: field,
-                    old_value: oldValue,
-                    new_value: newValue,
-                    category_id: categoryId
-                },
-                success: function(response) {
-                    // Handle success
-                    window.location.href = '/sub-category/manage?mes=Sub%20Category%20info%20updated%20successfully';
-                },
-                error: function(xhr, status, error) {
-                    // Handle error
-                    console.error('Error logging change');
-                }
-            });
-        }
-    </script>
+{{--        function logSubCategoryChange(field, oldValue, newValue, categoryId) {--}}
+{{--            // Send AJAX request--}}
+{{--            $.ajax({--}}
+{{--                url: '{{ route('sub-category.update', ['id' => $subCateogory->id]) }}',--}}
+{{--                method: 'POST',--}}
+{{--                data: {--}}
+{{--                    _token: '{{ csrf_token() }}',--}}
+{{--                    field: field,--}}
+{{--                    old_value: oldValue,--}}
+{{--                    new_value: newValue,--}}
+{{--                    category_id: categoryId--}}
+{{--                },--}}
+{{--                success: function(response) {--}}
+{{--                    // Handle success--}}
+{{--                    window.location.href = '/sub-category/manage?mes=Sub%20Category%20info%20updated%20successfully';--}}
+{{--                },--}}
+{{--                error: function(xhr, status, error) {--}}
+{{--                    // Handle error--}}
+{{--                    console.error('Error logging change');--}}
+{{--                }--}}
+{{--            });--}}
+{{--        }--}}
+{{--    </script>--}}
 
 

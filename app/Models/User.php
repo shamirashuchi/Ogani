@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +18,9 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    public $timestamps = false;
 
+    public $updated_at = null;
     /**
      * The attributes that are mass assignable.
      *
@@ -65,7 +68,10 @@ class User extends Authenticatable
 
     public static function newUser($request)
     {
-        self::saveBasicInfo(new User(), $request, getFileUrl($request->file('image'), 'upload/user-images/'));
+        $user = new User();
+        $user->custom_created_at = Carbon::now('Asia/Dhaka');
+        self::saveBasicInfo($user, $request, getFileUrl($request->file('image'), 'upload/user-images/'));
+        $user->save();
     }
 
     public static function updateUser($request, $id)
@@ -80,7 +86,14 @@ class User extends Authenticatable
         {
             self::$imageUrl = self::$user->profile_photo_path;
         }
-        self::saveBasicInfo(self::$user, $request, self::$imageUrl);
+        self::$user->custom_updated_at = Carbon::now('Asia/Dhaka');
+        self::$user->name                 = $request->name;
+        self::$user->email                = $request->email;
+        self::$user->password             = $request->password;
+        self::$user->role                = $request->role;
+        self::$user->profile_photo_path   = self::$imageUrl;
+        self::$user->save();
+//        self::saveBasicInfo(self::$user, $request, self::$imageUrl);
     }
 
     public static function deleteUser($id)
@@ -97,7 +110,7 @@ class User extends Authenticatable
         $user->password             = bcrypt($request->password);
         $user->role                = $request->role;
         $user->profile_photo_path   = $imageUrl;
-        $user->save();
+        return $user;
     }
 
 

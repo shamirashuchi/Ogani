@@ -1,13 +1,14 @@
 @extends('admin.master')
-@section('title', 'Manage User')
+@section('title', 'Manage Category')
 
 @section('body')
+
     <!-- Row -->
     <div class="row row-sm">
-        <div class="col-lg-12  mx-auto">
+        <div class="col-lg-10 mx-auto">
             <div class="card  mt-5 site-btn">
                 <div class="card-header border-bottom mx-auto">
-                    <h3 class="card-title text-white fs-1">All Courier Information</h3>
+                    <h3 class="card-title text-white fs-1">All Category Information</h3>
                 </div>
                 <div class="card-body">
                     <p class="text-white text-center">{{session('message')}}</p>
@@ -16,32 +17,31 @@
                             <thead>
                             <tr>
                                 <th class="wd-15p border-bottom-0">SL NO</th>
+                                <th class="wd-15p border-bottom-0">User_id</th>
                                 <th class="wd-15p border-bottom-0">Name</th>
-                                <th class="wd-20p border-bottom-0">Email</th>
-                                <th class="wd-20p border-bottom-0">Mobile</th>
+                                <th class="wd-15p border-bottom-0">Flag</th>
+                                <th class="wd-20p border-bottom-0">Description</th>
                                 <th class="wd-15p border-bottom-0">Image</th>
+                                <th class="wd-15p border-bottom-0">Action</th>
+                                <th class="wd-10p border-bottom-0">Status</th>
                                 <th class="wd-25p border-bottom-0">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($couriers as $courier)
+                            @foreach($categories as $category)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$courier->name}}</td>
-                                    <td>{{$courier->email}}</td>
-                                    <td>{{$courier->mobile}}</td>
-                                    <td><img src="{{asset($courier->logo)}}" alt="" height="50" width="60"/></td>
+                                    <td>{{$category->user_id}}</td>
+                                    <td>{{$category->name}}</td>
+                                    <td>{{$category->flag}}</td>
+                                    <td style="white-space: wrap;">{{$category->description}}</td>
+                                    <td><img src="{{asset($category->image)}}" alt="" height="50" width="60"/></td>
+                                    <td style="white-space: wrap;">{{$category->action}}</td>
+                                    <td>{{$category->status}}</td>
                                     <td>
-                                        <a href="{{route('courier.edit', $courier->id)}}" class="btn btn-success btn-sm rounded-0">
-                                            <i class="fa fa-edit"></i>
+                                        <a href="{{route('category.delete', ['id' => $category->id])}}" class="btn bg-danger btn-sm rounded-0 text-white">
+                                            Delete
                                         </a>
-                                        <form action="{{route('courier.destroy', $courier->id)}}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" onclick="return confirm('Are you sure to delete this..');" class="btn btn-danger btn-sm rounded-0">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

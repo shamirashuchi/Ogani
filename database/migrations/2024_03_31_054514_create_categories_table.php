@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('image')->nullable();
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('flag')->default(0);
+            $table->string('action')->default('Requested');
             $table->datetime('custom_created_at')->nullable();
             $table->datetime('custom_updated_at')->nullable();
         });

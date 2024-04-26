@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('category_id');
-            $table->string('name')->nullable();
-            $table->text('description')->nullable();
-            $table->text('image')->nullable();
-            $table->tinyInteger('status')->default(1);
+            $table->string('field');
+            $table->text('old_value')->nullable();
+            $table->text('new_value')->nullable();
             $table->tinyInteger('flag')->default(0);
             $table->string('action')->default('Requested');
             $table->datetime('custom_created_at')->nullable();

@@ -38,7 +38,7 @@ class OganiController extends Controller
     {
         $this->products = Product::where('status', 1)->orderBy('id', 'desc')->take(8)->get();
         return view('front-end.home.home', [
-            'categories' => Category::all(),
+            'categories' => Category::where('flag', 2)->get(),
             'products' => $this->products
         ]);
     }

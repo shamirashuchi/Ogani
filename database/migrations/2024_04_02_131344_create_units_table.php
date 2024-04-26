@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->string('name');
             $table->string('code');
             $table->text('description')->nullable();
             $table->tinyInteger('status')->nullable(1);
-            $table->timestamps();
+            $table->tinyInteger('flag')->default(0);
+            $table->string('action')->default('Requested');
+            $table->datetime('custom_created_at')->nullable();
+            $table->datetime('custom_updated_at')->nullable();
         });
     }
 

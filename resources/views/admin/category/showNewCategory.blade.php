@@ -8,7 +8,7 @@
         <div class="col-lg-10 mx-auto">
             <div class="card  mt-5 site-btn">
                 <div class="card-header border-bottom mx-auto">
-                    <h3 class="card-title text-white fs-1">All Category Information</h3>
+                    <h3 class="card-title text-white fs-1">All requested Category Information</h3>
                 </div>
                 <div class="card-body">
                     <p class="text-white text-center">{{session('message')}}</p>
@@ -28,17 +28,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($updatecategories as $category)
+                            @foreach($categories as $category)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$category->user_id}}</td>
-                                    <td>{{$category->field}}</td>
+                                    <td>{{$category->name}}</td>
                                     <td>{{$category->flag}}</td>
-                                    <td style="white-space: wrap;">{{$category->old_value}}</td>
-                                    <td><img src="{{asset($category->old_value)}}" alt="" height="50" width="60"/></td>
-                                    <td><img src="{{asset($category->new_value)}}" alt="" height="50" width="60"/></td>
-{{--                                    <td style="white-space: wrap;">{{$category->action}}</td>--}}
-{{--                                    <td>{{$category->status}}</td>--}}
+                                    <td style="white-space: wrap;">{{$category->description}}</td>
+                                    <td><img src="{{asset($category->image)}}" alt="" height="50" width="60"/></td>
+                                    <td style="white-space: wrap;">{{$category->action}}</td>
+                                    <td>{{$category->status}}</td>
                                     <td>
                                         <a href="{{route('category.accept', ['id' => $category->id])}}" class="btn site-btn btn-sm rounded-0 text-white">
                                             Accept
@@ -58,4 +57,3 @@
     </div>
     <!-- End Row -->
 @endsection
-

@@ -2,30 +2,17 @@
 @section('title', 'Manage Order')
 
 @section('body')
-    <!-- PAGE-HEADER -->
-    <div class="page-header">
-        <div>
-            <h1 class="page-title">Order</h1>
-        </div>
-        <div class="ms-auto pageheader-btn">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0);">Order</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Manage Order</li>
-            </ol>
-        </div>
-    </div>
-    <!-- PAGE-HEADER END -->
 
     <!-- Row -->
     <div class="row row-sm">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header border-bottom">
-                    <h3 class="card-title">All Order Information</h3>
+        <div class="col-lg-12 mx-auto">
+            <div class="card  mt-5 site-btn">
+                <div class="card-header border-bottom mx-auto">
+                    <h3 class="card-title text-white fs-1">All Order Information</h3>
                 </div>
                 <div class="card-body">
-                    <p class="text-success text-center">{{session('message')}}</p>
-                    <div class="table-responsive">
+                    <p class="text-white text-center">{{session('message')}}</p>
+                    <div class="table-responsive bg-white">
                         <table class="table table-bordered text-nowrap border-bottom" id="basic-datatable">
                             <thead>
                                 <tr>

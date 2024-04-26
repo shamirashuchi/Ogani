@@ -209,24 +209,53 @@
                     </a>
                     <div class="collapse" id="ui-basic1">
                         <ul class="nav flex-column sub-menu">
+                            @isset(Auth::user()->role)
+                                @if(Auth::user()->role == "Category Manager")
                             <li class="nav-item"> <a class="nav-link" href="{{route("category.create")}}">Add Category</a></li>
+                                @endif
+                            @else
+                                <span></span>
+                            @endisset
                             <li class="nav-item"> <a class="nav-link" href="{{route('category.index')}}">Manage Category</a></li>
-                            @if(Auth::user()->role == "Admin")
-                            <li class="nav-item">
-                                <a class="nav-link position-relative " href="{{route('category.updateshow')}}">Requested Category
-                                    @isset($updatecategoryCount)
-                                        @if($updatecategoryCount > 0)
-                                    <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updatecategoryCount}}</span>
-                                        @endif
-                                    @else
-                                       <span></span>
-                                    @endisset
-                                </a>
-                            </li>
+                                @isset(Auth::user()->role)
+                                    @if(Auth::user()->role == "Admin")
+                                <li class="nav-item"> <a class="nav-link" href="{{route('category.newrequest')}}">Requested Category</a></li>
+                                    @endif
+                                @else
+                                    <span></span>
+                                @endisset
+                                @isset(Auth::user()->role)
+                                    @if(Auth::user()->role == "Category Manager")
+                                        <li class="nav-item"> <a class="nav-link" href="{{route('category.newcreatedrequest')}}">Requested Category</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="{{route('category.new')}}">Requested updateCategory</a></li>
+                                    @endif
+                                @else
+                                    <span></span>
+                                @endisset
+{{--                            @isset(Auth::user()->role)--}}
+{{--                            @if(Auth::user()->role == "Admin")--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link position-relative " href="{{route('category.updateshow')}}">Updated Category--}}
+{{--                                    @isset($updatecategoryCount)--}}
+{{--                                        @if($updatecategoryCount > 0)--}}
+{{--                                    <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updatecategoryCount}}</span>--}}
+{{--                                        @endif--}}
+{{--                                    @else--}}
+{{--                                       <span></span>--}}
+{{--                                    @endisset--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            @endif--}}
+{{--                                @else--}}
+{{--                                    <span></span>--}}
+{{--                                @endisset--}}
+                            @isset(Auth::user()->role)
+                            @if(Auth::user()->role == "Category Manager")
+{{--                                <li class="nav-item"> <a class="nav-link" href="{{route('category.request')}}">Updated  Category</a></li>--}}
                             @endif
-                            @if(Auth::user()->role == "Manager")
-                                <li class="nav-item"> <a class="nav-link" href="{{route('category.request')}}">Requested  Category manager</a></li>
-                            @endif
+                            @else
+                                <span></span>
+                            @endisset
                         </ul>
                     </div>
                 </li>
@@ -239,8 +268,16 @@
                     </a>
                     <div class="collapse" id="ui-basic2">
                         <ul class="nav flex-column sub-menu">
+                            @isset(Auth::user()->role)
+                            @if(Auth::user()->role == "Category Manager")
                             <li class="nav-item"> <a href="{{route('sub-category.create')}}" class="nav-link" >Add Sub Category</a></li>
+                            @endif
+                                @if(Auth::user()->role == "Category Manager"  ||  Auth::user()->role == "Admin")
                             <li class="nav-item"> <a class="nav-link" href="{{route('sub-category.index')}}">Manage Sub Category</a></li>
+                                @endif
+                            @else
+                                <span></span>
+                            @endisset
                         </ul>
                     </div>
                 </li>
@@ -288,7 +325,7 @@
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic0" aria-expanded="false" aria-controls="ui-basic0">
                         <span class="menu-title">User Module</span>
                         <i class="menu-arrow"></i>
-                        <i class="mdi mdi-border-all menu-icon"></i>
+                        <i class="mdi mdi-account-circle menu-icon"></i>
                     </a>
                     <div class="collapse" id="ui-basic0">
                         <ul class="nav flex-column sub-menu">
@@ -305,7 +342,7 @@
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic6">
                         <span class="menu-title">Order Module</span>
                         <i class="menu-arrow"></i>
-                        <i class="mdi mdi-border-all menu-icon"></i>
+                        <i class="mdi mdi-cart menu-icon"></i>
                     </a>
                     <div class="collapse" id="ui-basic6">
                         <ul class="nav flex-column sub-menu">
@@ -317,7 +354,7 @@
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic7">
                         <span class="menu-title">Customer Module</span>
                         <i class="menu-arrow"></i>
-                        <i class="mdi mdi-border-all menu-icon"></i>
+                        <i class="mdi mdi-account menu-icon"></i>
                     </a>
                     <div class="collapse" id="ui-basic7">
                         <ul class="nav flex-column sub-menu">
@@ -329,7 +366,7 @@
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic8" aria-expanded="false" aria-controls="ui-basic8">
                         <span class="menu-title">Courier Module</span>
                         <i class="menu-arrow"></i>
-                        <i class="mdi mdi-border-all menu-icon"></i>
+                        <i class="mdi mdi-bus menu-icon"></i>
                     </a>
                     <div class="collapse" id="ui-basic8">
                         <ul class="nav flex-column sub-menu">
@@ -338,34 +375,6 @@
                         </ul>
                     </div>
                 </li>
-
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link menu-icon" data-bs-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic">--}}
-{{--                        <span class="menu-title">Order Module</span>--}}
-{{--                        <i class="menu-arrow"></i>--}}
-{{--                        <i class="mdi mdi-border-bottom menu-icon"></i>--}}
-{{--                    </a>--}}
-{{--                    <div class="collapse" id="ui-basic6">--}}
-{{--                        <ul class="nav flex-column sub-menu">--}}
-{{--                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/buttons.html">Buttons</a></li>--}}
-{{--                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/typography.html">Typography</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic7">--}}
-{{--                        <span class="menu-title">User Module</span>--}}
-{{--                        <i class="menu-arrow"></i>--}}
-{{--                        <i class="mdi mdi-account-circle menu-icon"></i>--}}
-
-{{--                    </a>--}}
-{{--                    <div class="collapse" id="ui-basic7">--}}
-{{--                        <ul class="nav flex-column sub-menu">--}}
-{{--                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/buttons.html">Buttons</a></li>--}}
-{{--                            <li class="nav-item"> <a class="nav-link" href="{{asset('/')}}assets/pages/ui-features/typography.html">Typography</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
             </ul>
         </nav>
         <!-- partial -->
