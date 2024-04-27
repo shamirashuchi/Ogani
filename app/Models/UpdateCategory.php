@@ -20,29 +20,17 @@ class UpdateCategory extends Model
         $category->user_id = Auth::user()->id;
         $category->field = $request->input('field');
         $category->old_value = $request->input('old_value');
-//        if($request->input('field') !== "image") {
-//            console.log(1);
-//            $imageUrl = getFileUrl($request->input('new_value'), 'upload/update_category-images/');
-//            console.log($imageUrl);
-//            $category->new_value = $imageUrl;
-//            $category->save();
-//        }
-//        else{
-//            $category->new_value = $request->input('new_value');
-//        }
-        if ($request->hasFile('new_value') && $request->file('new_value')->isValid()) {
-            $file = $request->file('new_value');
-            $fileName = $file->getClientOriginalName(); // Get the original file name
-            $filePath = $file->storeAs($fileName,'upload/update_category-images'); // Store the file
 
-            // Assuming getFileUrl() returns the URL of the stored file
-            $imageUrl = getFileUrl($filePath);
-            $category->new_value = $imageUrl;
+        if ($request->hasFile('new_value')) {
+            $file = $request->file('new_value');
+            $fileName = rand(10000, 500000) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('/upload/directory/'), $fileName);
+            $fileUrl = '/upload/directory/' . $fileName;
+            $category->new_value = $fileUrl;
         } else {
-            // Handle case where no file is uploaded
-            // For example, set a default value or log an error
             $category->new_value = $request->input('new_value');
         }
+
         $category->category_id = $request->input('category_id');
         $category->custom_created_at = Carbon::now('Asia/Dhaka');
         $category->save();

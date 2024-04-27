@@ -57,35 +57,62 @@
             console.log("clicked");
             // document.getElementById('subCategoryName').addEventListener('change', function() {
             //     console.log("changed");
+            var formData = new FormData(); // Create FormData object
+            var statusFormData = new FormData();
+            var token = '{{ csrf_token() }}';
+            formData.append('_token', token);
+            statusFormData.append('_token', token);
             var CategoryNameOldValue = '{{$category->name}}';
             var CategoryNameNewValue = document.getElementById('CategoryName').value;
             if (CategoryNameOldValue !== CategoryNameNewValue) {
                 console.log(CategoryNameOldValue);
                 console.log(CategoryNameNewValue);
                 console.log({{$category->id}});
-                logCategoryChange('name', CategoryNameOldValue, CategoryNameNewValue, {{$category->id}});
+                formData.append('field', "name");
+                formData.append('old_value', CategoryNameOldValue);
+                formData.append('new_value', CategoryNameNewValue);
+                var CategoryId = '{{ $category->id }}';
+                formData.append('category_id', CategoryId);
+                logCategoryChange(formData);
             }
             console.log(CategoryNameOldValue); // Check if this message appears in the console
             var CategoryDescriptionOldValue = '{{$category->description}}';
             var CategoryDescriptionNewValue = document.getElementById('CategoryDescription').value;
             if (CategoryDescriptionOldValue !== CategoryDescriptionNewValue) {
-                logCategoryChange('description', CategoryDescriptionOldValue, CategoryDescriptionNewValue, {{$category->id}});
+                formData.append('field', "description");
+                formData.append('old_value', CategoryDescriptionOldValue);
+                formData.append('new_value', CategoryDescriptionNewValue);
+                var CategoryId = '{{ $category->id }}';
+                formData.append('category_id', CategoryId);
+                logCategoryChange(formData);
             }
 
             var CategoryImageOldValue = '{{$category->image}}';
-            var CategoryImageNewValue = document.getElementById('CategoryImage').value;
-            console.log(CategoryImageNewValue);
+            var CategoryImageNewValue = document.getElementById('CategoryImage').files[0];
             if (CategoryImageNewValue) {
-                logCategoryChange('image', CategoryImageOldValue, CategoryImageNewValue, {{$category->id}});
+                formData.append('field', "image");
+                formData.append('old_value', CategoryImageOldValue);
+                formData.append('new_value', CategoryImageNewValue);
+                var CategoryId = '{{ $category->id }}';
+                formData.append('category_id', CategoryId);
+                logCategoryChange(formData);
             }
 
 
-            var PublicationStatusOldValue = {{$category->status}};
+            var PublicationStatusOldValue = '{{$category->status}}';
             var PublicationStatusNewValue = document.querySelector('input[name="status"]:checked');
-
-            if (PublicationStatusNewValue !== null && PublicationStatusOldValue !== parseInt(PublicationStatusNewValue.value)) {
+console.log(PublicationStatusOldValue);
+console.log(parseInt(PublicationStatusNewValue.value));
+            // PublicationStatusOldValue ===
+            if (PublicationStatusNewValue !== null && parseInt(PublicationStatusNewValue.value)  === 0) {
                 // If a new value is selected and it's different from the old value
-                logCategoryChange('status', PublicationStatusOldValue, parseInt(PublicationStatusNewValue.value), {{$category->id}});
+                statusFormData.append('field', "status");
+                statusFormData.append('old_value', PublicationStatusOldValue);
+                statusFormData.append('new_value', parseInt(PublicationStatusNewValue.value).toString());
+                var CategoryId = '{{ $category->id }}';
+                statusFormData.append('category_id', CategoryId);
+                logCategoryChange(statusFormData);
+                {{--logCategoryChange('status', PublicationStatusOldValue, parseInt(PublicationStatusNewValue.value), {{$category->id}});--}}
             }
 
 
@@ -94,18 +121,14 @@
     });
 
 
-    function logCategoryChange(field, oldValue, newValue, categoryId) {
+    function logCategoryChange(formData) {
         // Send AJAX request
         $.ajax({
             url: '{{ route('category.update', ['id' => $category->id]) }}',
             method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                field: field,
-                old_value: oldValue,
-                new_value: newValue,
-                category_id: categoryId
-            },
+            data: formData,
+            contentType: false, // Don't set contentType
+            processData: false, // Don't process data
             success: function(response) {
                 // Handle success
                 window.location.href = '/category/manage?mes=Category%20info%20updated%20successfully';
@@ -117,4 +140,8 @@
         });
     }
 </script>
+
+
+
+
 
