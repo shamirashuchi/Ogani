@@ -61,3 +61,12 @@
     </div>
     <!-- End Row -->
 @endsection
+<script>
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get('mes');
+        if (message) {
+            alert(message);
+        }
+    };
+</script>

@@ -18,13 +18,12 @@
                             <tr>
                                 <th class="wd-15p border-bottom-0">SL NO</th>
                                 <th class="wd-15p border-bottom-0">User_id</th>
-                                <th class="wd-15p border-bottom-0">Name</th>
                                 <th class="wd-15p border-bottom-0">Flag</th>
-                                <th class="wd-20p border-bottom-0">Description</th>
-                                <th class="wd-15p border-bottom-0">Image</th>
+                                <th class="wd-15p border-bottom-0">Field</th>
+                                <th class="wd-20p border-bottom-0">OldValue</th>
+                                <th class="wd-15p border-bottom-0">NewValue</th>
+                                <th class="wd-15p border-bottom-0">Status</th>
                                 <th class="wd-15p border-bottom-0">Action</th>
-                                <th class="wd-10p border-bottom-0">Status</th>
-                                <th class="wd-25p border-bottom-0">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -32,14 +31,25 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$category->user_id}}</td>
-                                    <td>{{$category->name}}</td>
                                     <td>{{$category->flag}}</td>
-                                    <td style="white-space: wrap;">{{$category->description}}</td>
-                                    <td><img src="{{asset($category->image)}}" alt="" height="50" width="60"/></td>
-                                    <td style="white-space: wrap;">{{$category->action}}</td>
-                                    <td>{{$category->status}}</td>
+                                    <td>{{$category->field}}</td>
                                     <td>
-                                        <a href="{{route('category.deletebyuser', ['id' => $category->id])}}"  class="btn btn-danger btn-sm rounded-0">
+                                    @if($category->field === 'image')
+                                        <img src="{{asset($category->old_value)}}" alt="" height="50" width="60"/>
+                                    @else
+                                        {{$category->old_value}}
+                                    @endif
+                                    </td>
+                                    <td>
+                                        @if($category->field === 'image')
+                                            <img src="{{asset($category->new_value)}}" alt="" height="50" width="60"/>
+                                        @else
+                                            {{$category->new_value}}
+                                        @endif
+                                    </td>
+                                    <td>{{$category->action}}</td>
+                                    <td>
+                                        <a href="{{route('category.deletebyuser', ['id' => $category->id])}}" class="btn bg-danger btn-sm rounded-0 text-white">
                                             Delete
                                         </a>
                                     </td>

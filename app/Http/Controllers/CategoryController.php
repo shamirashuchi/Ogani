@@ -21,21 +21,24 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         Category::newCategory($request);
-        return back()->with('message', 'Category info created request go  successfully.');
+        return redirect('/category/newcreatedrequest')->with('message', 'Category info created request go  successfully.');
     }
+
     public function newcreatedrequest()
     {
-        return view('admin.category.newcreatedrequest', ['categories' => Category::whereNotIn('flag', [2])->get()]);
+        return view('admin.category.newcreatedrequest', ['categories' => Category::all()]);
     }
+
     public function newrequest()
     {
         Category::updateNewCategory();
         return view('admin.category.showNewCategory', ['categories' => Category::where('flag', 1)->get()]);
     }
+
     public function accept($id)
     {
         Category::acceptCategory($id);
-        return redirect('/category/newrequest')->with('message', 'Category info create successfully.');
+        return redirect('/category/manage')->with('message', 'Category info create successfully.');
     }
 
     public function cancel($id)
@@ -43,16 +46,24 @@ class CategoryController extends Controller
         Category::cancelCategory($id);
         return redirect('/category/newrequest')->with('message', 'Category info cancel successfully.');
     }
-        public function delete($id)
+
+    public function deleterequest($id)
     {
         Category::deleteCategory($id);
         return redirect('/category/newcreatedrequest')->with('message', 'Category requested  info delete successfully.');
+    }
+
+    public function delete($id)
+    {
+        Category::deleteCategory($id);
+        return redirect('/category/manage')->with('message', 'Category  info delete successfully.');
     }
 
     public function edit($id)
     {
         return view('admin.category.edit', ['category' => Category::find($id)]);
     }
+
     public function update(Request $request, $id)
     {
 
@@ -60,57 +71,33 @@ class CategoryController extends Controller
 //        SubCategory::updateSubCategory($request, $id);
         return redirect('/category/manage')->with('message', 'Sub Category info update successfully.');
     }
-    public function newdo()
+
+    public function newupdaterequest()
     {
-        return view('admin.category.show', ['updatecategories' => UpdateCategory::where('flag', 0)->get()]);
+        return view('admin.category.showdata', ['updatecategories' => UpdateCategory::all()]);
     }
-//
-//
-//    public function verifybeforeedit(Request $request, $id)
-//    {
-//        UpdateCategory::newCategory($request, $id);
-//        return redirect('/category/manage')->with('message', 'Category info update request go  successfully.');
-//    }
-//
-//    public function updateshow()
-//    {
-//        UpdateCategory::updateCategoryflag();
-//        return view('admin.category.show', ['updatecategories' => UpdateCategory::where('flag', 1)->get()]);
-//    }
-//
-//
-//    public function updatestart($id)
-//    {
-//        UpdateCategory::updateCategorystart($id);
-//        return redirect('/category/updateshow')->with('message', 'Category info update successfully.');
-//    }
-//
-//    public function cancel($id)
-//    {
-//        UpdateCategory::cancelCategorystart($id);
-//        return redirect('/category/updateshow')->with('message', 'Category info cancel successfully.');
-//    }
-//
-//    public function requesteddata()
-//    {
-//        return view('admin.category.showdata', ['updatecategories' => UpdateCategory::where('user_id', auth()->id())->get()]);
-//    }
-//
-//    public function update(Request $request, $id)
-//    {
-//        Category::updateCategory($request, $id);
-//        return redirect('/category/manage')->with('message', 'Category info update successfully.');
-//    }
-//
-//    public function delete($id)
-//    {
-//        Category::deleteCategory($id);
-//        return redirect('/category/manage')->with('message', 'Category info delete successfully.');
-//    }
-//
-//    public function deletebyuser($id)
-//    {
-//        UpdateCategory::deleteCategorydata($id);
-//        return redirect('/category/request')->with('message', 'updateCategory info delete successfully.');
-//    }
+
+    public function updaterequest()
+    {
+        UpdateCategory::updateCategoryflag();
+        return view('admin.category.show', ['updatecategories' => UpdateCategory::where('flag', 1)->get()]);
+    }
+
+    public function acceptbyadmin($id)
+    {
+        UpdateCategory::acceptCategory($id);
+        return redirect('/category/manage')->with('message', 'Category info updated successfully.');
+    }
+
+    public function cancelbyadmin($id)
+    {
+        UpdateCategory::cancelCategory($id);
+        return redirect('/category/updatedRequest')->with('message', 'Category updated info canceled successfully.');
+    }
+
+    public function deletebyuser($id)
+    {
+        UpdateCategory::deleteCategorydata($id);
+        return redirect('/category/newUpdatedRequest')->with('message', 'updateCategory info delete successfully.');
+    }
 }

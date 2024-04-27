@@ -76,18 +76,16 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/category/newrequest', [CategoryController::class, 'newrequest'])->name('category.newrequest');
     Route::get('/category/accept/{id}', [CategoryController::class, 'accept'])->name('category.accept');
     Route::get('/category/cancel/{id}', [CategoryController::class, 'cancel'])->name('category.cancel');
+    Route::get('/category/deleterequest/{id}', [CategoryController::class, 'deleterequest'])->name('category.deleterequest');
     Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
-    Route::get('/category/new', [CategoryController::class, 'newdo'])->name('category.new');
-//    Route::post('/category/beforeupdate/{id}', [CategoryController::class, 'verifybeforeedit'])->name('category.beforeupdate');
-//    Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
-//    Route::get('/category/cancel/{id}', [CategoryController::class, 'cancel'])->name('category.cancel');
-//    Route::get('/category/updatestart/{id}', [CategoryController::class, 'updatestart'])->name('category.updatestart');
-//    Route::get('/category/updateshow', [CategoryController::class, 'updateshow'])->name('category.updateshow');
-//    Route::get('/category/request', [CategoryController::class, 'requesteddata'])->name('category.request');
+    Route::get('/category/newUpdatedRequest', [CategoryController::class, 'newupdaterequest'])->name('category.newUpdatedRequest');
+    Route::get('/category/updatedRequest', [CategoryController::class, 'updaterequest'])->name('category.updatedRequest');
+    Route::get('/category/acceptbyadmin/{id}', [CategoryController::class, 'acceptbyadmin'])->name('category.acceptbyadmin');
+    Route::get('/category/cancelbyadmin/{id}', [CategoryController::class, 'cancelbyadmin'])->name('category.cancelbyadmin');
+    Route::get('/category/deletebyuser/{id}', [CategoryController::class, 'deletebyuser'])->name('category.deletebyuser');
 
-//    Route::get('/category/deletebyuser/{id}', [CategoryController::class, 'deletebyuser'])->name('category.deletebyuser');
 
     Route::get('/sub-category/manage', [SubCategoryController::class, 'index'])->name('sub-category.index');
     Route::get('/sub-category/create', [SubCategoryController::class, 'create'])->name('sub-category.create');

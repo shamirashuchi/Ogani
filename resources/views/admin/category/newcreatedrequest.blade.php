@@ -39,7 +39,7 @@
                                     <td style="white-space: wrap;">{{$category->action}}</td>
                                     <td>{{$category->status}}</td>
                                     <td>
-                                        <a href="{{route('category.delete', ['id' => $category->id])}}" class="btn bg-danger btn-sm rounded-0 text-white">
+                                        <a href="{{route('category.deleterequest', ['id' => $category->id])}}" class="btn bg-danger btn-sm rounded-0 text-white">
                                             Delete
                                         </a>
                                     </td>

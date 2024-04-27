@@ -220,6 +220,7 @@
                                 @isset(Auth::user()->role)
                                     @if(Auth::user()->role == "Admin")
                                 <li class="nav-item"> <a class="nav-link" href="{{route('category.newrequest')}}">Requested Category</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="{{route('category.updatedRequest')}}">Requested updateCategory</a></li>
                                     @endif
                                 @else
                                     <span></span>
@@ -227,7 +228,7 @@
                                 @isset(Auth::user()->role)
                                     @if(Auth::user()->role == "Category Manager")
                                         <li class="nav-item"> <a class="nav-link" href="{{route('category.newcreatedrequest')}}">Requested Category</a></li>
-                                        <li class="nav-item"> <a class="nav-link" href="{{route('category.new')}}">Requested updateCategory</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="{{route('category.newUpdatedRequest')}}">Requested updateCategory</a></li>
                                     @endif
                                 @else
                                     <span></span>

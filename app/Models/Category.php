@@ -27,6 +27,7 @@ class Category extends Model
     {
         $categories = Category::where('flag', 0)->get();
         foreach ($categories as $category) {
+            $category->action = "Seen";
             $category->flag = 1;
             $category->save();
         }
@@ -55,29 +56,6 @@ class Category extends Model
         self::$category->delete();
     }
 
-//    public static function updateCategory($request, $id)
-//    {
-//        self::$category     = Category::find($id);
-//        if (self::$image    = $request->file('image'))
-//        {
-//            deleteFile(self::$category->image);
-//            self::$imageUrl = getFileUrl(self::$image, 'upload/category-images/');
-//        }
-//        else
-//        {
-//            self::$imageUrl = self::$category->image;
-//        }
-//        self::$category->custom_updated_at = Carbon::now('Asia/Dhaka');
-//        self::saveBasicInfo(self::$category, $request, self::$imageUrl);
-//        self::$category->save();
-//    }
-//
-//    public static function deleteCategory($id)
-//    {
-//        self::$category = Category::find($id);
-//        deleteFile(self::$category->image);
-//        self::$category->delete();
-//    }
 
 
 
