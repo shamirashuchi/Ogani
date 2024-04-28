@@ -24,11 +24,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer('admin.master', function ($view) {
-            $categoryCount = Category::count();
+            $sum = 0;
+            $Categories = Category::where('flag', 0)->get();
+            $categoryCount = $Categories->count();
             $updateCategories = UpdateCategory::where('flag', 0)->get();
             $updateCategoryCount =  $updateCategories->count();
+            $total=$categoryCount + $updateCategoryCount;
             $view->with(['categoryCount' => $categoryCount,
                 'updatecategoryCount'=> $updateCategoryCount,
+                'total' => $total,
                 ]);
         });
         view()->composer('front-end.master', function ($view) {

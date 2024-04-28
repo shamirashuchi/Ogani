@@ -87,26 +87,64 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/category/deletebyuser/{id}', [CategoryController::class, 'deletebyuser'])->name('category.deletebyuser');
 
 
-    Route::get('/sub-category/manage', [SubCategoryController::class, 'index'])->name('sub-category.index');
-    Route::get('/sub-category/create', [SubCategoryController::class, 'create'])->name('sub-category.create');
-    Route::post('/sub-category/store', [SubCategoryController::class, 'store'])->name('sub-category.store');
-    Route::get('/sub-category/edit/{id}', [SubCategoryController::class, 'edit'])->name('sub-category.edit');
-//    Route::post('/sub-category/update/{id}', [SubCategoryController::class, 'update'])->name('sub-category.update');
-//    Route::get('/sub-category/delete/{id}', [SubCategoryController::class, 'delete'])->name('sub-category.delete');
 
-    Route::get('/brand/manage', [BrandController::class, 'index'])->name('brand.index');
+    Route::get('/sub-category/create', [SubCategoryController::class, 'create'])->name('sub-category.create');
+    Route::get('/sub-category/manage', [SubCategoryController::class, 'index'])->name('sub-category.index');
+    Route::post('/sub-category/store', [SubCategoryController::class, 'store'])->name('sub-category.store');
+    Route::get('/sub-category/newcreatedrequest', [SubCategoryController::class, 'newcreatedrequest'])->name('sub-category.newcreatedrequest');
+    Route::get('/sub-category/newrequest', [SubCategoryController::class, 'newrequest'])->name('sub-category.newrequest');
+    Route::get('/sub-category/accept/{id}', [SubCategoryController::class, 'accept'])->name('sub-category.accept');
+    Route::get('/sub-category/cancel/{id}', [SubCategoryController::class, 'cancel'])->name('sub-category.cancel');
+    Route::get('/sub-category/deleterequest/{id}', [SubCategoryController::class, 'deleterequest'])->name('sub-category.deleterequest');
+    Route::get('/sub-category/delete/{id}', [SubCategoryController::class, 'delete'])->name('sub-category.delete');
+    Route::get('/sub-category/edit/{id}', [SubCategoryController::class, 'edit'])->name('sub-category.edit');
+    Route::post('/sub-category/update/{id}', [SubCategoryController::class, 'update'])->name('sub-category.update');
+    Route::get('/sub-category/newUpdatedRequest', [SubCategoryController::class, 'newupdaterequest'])->name('sub-category.newUpdatedRequest');
+    Route::get('/sub-category/updatedRequest', [SubCategoryController::class, 'updaterequest'])->name('sub-category.updatedRequest');
+    Route::get('/sub-category/acceptbyadmin/{id}', [SubCategoryController::class, 'acceptbyadmin'])->name('sub-category.acceptbyadmin');
+    Route::get('/sub-category/cancelbyadmin/{id}', [SubCategoryController::class, 'cancelbyadmin'])->name('sub-category.cancelbyadmin');
+    Route::get('/sub-category/deletebyuser/{id}', [SubCategoryController::class, 'deletebyuser'])->name('sub-category.deletebyuser');
+
+
     Route::get('/brand/create', [BrandController::class, 'create'])->name('brand.create');
+    Route::get('/brand/manage', [BrandController::class, 'index'])->name('brand.index');
     Route::post('/brand/store', [BrandController::class, 'store'])->name('brand.store');
+    Route::get('/brand/newcreatedrequest', [BrandController::class, 'newcreatedrequest'])->name('brand.newcreatedrequest');
+    Route::get('/brand/newrequest', [BrandController::class, 'newrequest'])->name('brand.newrequest');
+    Route::get('/brand/accept/{id}', [BrandController::class, 'accept'])->name('brand.accept');
+    Route::get('/brand/cancel/{id}', [BrandController::class, 'cancel'])->name('brand.cancel');
+    Route::get('/brand/deleterequest/{id}', [BrandController::class, 'deleterequest'])->name('brand.deleterequest');
+    Route::get('/brand/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
     Route::get('/brand/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
     Route::post('/brand/update/{id}', [BrandController::class, 'update'])->name('brand.update');
-    Route::get('/brand/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
+    Route::get('/brand/newUpdatedRequest', [BrandController::class, 'newupdaterequest'])->name('brand.newUpdatedRequest');
+    Route::get('/brand/updatedRequest', [BrandController::class, 'updaterequest'])->name('brand.updatedRequest');
+    Route::get('/brand/acceptbyadmin/{id}', [BrandController::class, 'acceptbyadmin'])->name('brand.acceptbyadmin');
+    Route::get('/brand/cancelbyadmin/{id}', [BrandController::class, 'cancelbyadmin'])->name('brand.cancelbyadmin');
+    Route::get('/brand/deletebyuser/{id}', [BrandController::class, 'deletebyuser'])->name('brand.deletebyuser');
 
-    Route::get('/unit/manage', [UnitController::class, 'index'])->name('unit.index');
+
     Route::get('/unit/create', [UnitController::class, 'create'])->name('unit.create');
+    Route::get('/unit/manage', [UnitController::class, 'index'])->name('unit.index');
     Route::post('/unit/store', [UnitController::class, 'store'])->name('unit.store');
+    Route::get('/unit/newcreatedrequest', [UnitController::class, 'newcreatedrequest'])->name('unit.newcreatedrequest');
+    Route::get('/unit/newrequest', [UnitController::class, 'newrequest'])->name('unit.newrequest');
+    Route::get('/unit/accept/{id}', [UnitController::class, 'accept'])->name('unit.accept');
+    Route::get('/unit/cancel/{id}', [UnitController::class, 'cancel'])->name('unit.cancel');
+    Route::get('/unit/deleterequest/{id}', [UnitController::class, 'deleterequest'])->name('unit.deleterequest');
+    Route::get('/unit/delete/{id}', [UnitController::class, 'delete'])->name('unit.delete');
     Route::get('/unit/edit/{id}', [UnitController::class, 'edit'])->name('unit.edit');
     Route::post('/unit/update/{id}', [UnitController::class, 'update'])->name('unit.update');
-    Route::get('/unit/delete/{id}', [UnitController::class, 'delete'])->name('unit.delete');
+    Route::get('/unit/newUpdatedRequest', [UnitController::class, 'newupdaterequest'])->name('unit.newUpdatedRequest');
+    Route::get('/unit/updatedRequest', [UnitController::class, 'updaterequest'])->name('unit.updatedRequest');
+    Route::get('/unit/acceptbyadmin/{id}', [UnitController::class, 'acceptbyadmin'])->name('unit.acceptbyadmin');
+    Route::get('/unit/cancelbyadmin/{id}', [UnitController::class, 'cancelbyadmin'])->name('unit.cancelbyadmin');
+    Route::get('/unit/deletebyuser/{id}', [UnitController::class, 'deletebyuser'])->name('unit.deletebyuser');
+
+
+
+
+
 
     Route::get('/product/manage', [ProductController::class, 'index'])->name('product.index');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');

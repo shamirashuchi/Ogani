@@ -200,6 +200,11 @@
                         <i class="mdi mdi-home menu-icon"></i>
                     </a>
                 </li>
+
+
+
+
+
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic">
                         <span  class="menu-title">Category Module</span>
@@ -219,8 +224,24 @@
                             <li class="nav-item"> <a class="nav-link" href="{{route('category.index')}}">Manage Category</a></li>
                                 @isset(Auth::user()->role)
                                     @if(Auth::user()->role == "Admin")
-                                <li class="nav-item"> <a class="nav-link" href="{{route('category.newrequest')}}">Requested Category</a></li>
-                                        <li class="nav-item"> <a class="nav-link" href="{{route('category.updatedRequest')}}">Requested updateCategory</a></li>
+                                <li class="nav-item "> <a class="nav-link position-relative" href="{{route('category.newrequest')}}">Requested Category
+                                        @isset($categoryCount)
+                                            @if($categoryCount > 0)
+                                                <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$categoryCount}}</span>
+                                            @endif
+                                        @else
+                                            <span></span>
+                                        @endisset
+                                    </a></li>
+                                        <li class="nav-item"> <a class="nav-link position-relative" href="{{route('category.updatedRequest')}}">Req updateCategory
+                                                @isset($updatecategoryCount)
+                                                    @if($updatecategoryCount > 0)
+                                                        <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updatecategoryCount}}</span>
+                                                    @endif
+                                                @else
+                                                    <span></span>
+                                                @endisset
+                                            </a></li>
                                     @endif
                                 @else
                                     <span></span>
@@ -233,30 +254,6 @@
                                 @else
                                     <span></span>
                                 @endisset
-{{--                            @isset(Auth::user()->role)--}}
-{{--                            @if(Auth::user()->role == "Admin")--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link position-relative " href="{{route('category.updateshow')}}">Updated Category--}}
-{{--                                    @isset($updatecategoryCount)--}}
-{{--                                        @if($updatecategoryCount > 0)--}}
-{{--                                    <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updatecategoryCount}}</span>--}}
-{{--                                        @endif--}}
-{{--                                    @else--}}
-{{--                                       <span></span>--}}
-{{--                                    @endisset--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            @endif--}}
-{{--                                @else--}}
-{{--                                    <span></span>--}}
-{{--                                @endisset--}}
-                            @isset(Auth::user()->role)
-                            @if(Auth::user()->role == "Category Manager")
-{{--                                <li class="nav-item"> <a class="nav-link" href="{{route('category.request')}}">Updated  Category</a></li>--}}
-                            @endif
-                            @else
-                                <span></span>
-                            @endisset
                         </ul>
                     </div>
                 </li>
@@ -272,9 +269,30 @@
                             @isset(Auth::user()->role)
                             @if(Auth::user()->role == "Category Manager")
                             <li class="nav-item"> <a href="{{route('sub-category.create')}}" class="nav-link" >Add Sub Category</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="{{route('sub-category.index')}}">Manage Sub Category</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="{{route('sub-category.newcreatedrequest')}}">Requested SubCategory</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="{{route('sub-category.newUpdatedRequest')}}">Requested updateSubCategory</a></li>
                             @endif
-                                @if(Auth::user()->role == "Category Manager"  ||  Auth::user()->role == "Admin")
+                                @if(Auth::user()->role ==  "Admin")
                             <li class="nav-item"> <a class="nav-link" href="{{route('sub-category.index')}}">Manage Sub Category</a></li>
+                                    <li class="nav-item "> <a class="nav-link position-relative" href="{{route('sub-category.newrequest')}}">Requested SubCategory
+                                            @isset($categoryCount)
+                                                @if($categoryCount > 0)
+                                                    <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$categoryCount}}</span>
+                                                @endif
+                                            @else
+                                                <span></span>
+                                            @endisset
+                                        </a></li>
+                                    <li class="nav-item"> <a class="nav-link position-relative" href="{{route('sub-category.updatedRequest')}}">Req updateSubCategory
+                                            @isset($updatecategoryCount)
+                                                @if($updatecategoryCount > 0)
+                                                    <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updatecategoryCount}}</span>
+                                                @endif
+                                            @else
+                                                <span></span>
+                                            @endisset
+                                        </a></li>
                                 @endif
                             @else
                                 <span></span>
@@ -282,6 +300,13 @@
                         </ul>
                     </div>
                 </li>
+
+
+
+
+
+
+
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#gen" aria-expanded="false" aria-controls="gen">
                         <span class="menu-title">Brand Module</span>
@@ -432,6 +457,27 @@
         });
     }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    @isset(Auth::user()->role)
+        @if(Auth::user()->role == "Admin")
+        window.onload = function () {
+        @isset($total)
+        @if($total > 0)
+        Swal.fire({
+            title: '',
+            text: "You Have {{ $total }} Notification",
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#7fad39'
+        });
+        @endif
+        @endisset
+    };
+    @endif
+    @endisset
+</script>
+
 
 
 

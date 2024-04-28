@@ -63,10 +63,15 @@
 @endsection
 <script>
     window.onload = function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const message = urlParams.get('mes');
+        const message = new URLSearchParams(window.location.search).get('mes');
         if (message) {
-            alert(message);
-        }
-    };
+            Swal.fire({
+                title: '',
+                text: message,
+                icon: 'success',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#7fad39'
+        });
+    }
+    }
 </script>

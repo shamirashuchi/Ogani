@@ -131,7 +131,7 @@ console.log(parseInt(PublicationStatusNewValue.value));
             processData: false, // Don't process data
             success: function(response) {
                 // Handle success
-                window.location.href = '/category/manage?mes=Category%20info%20updated%20successfully';
+                window.location.href = 'http://127.0.0.1:8000/category/manage?mes=Category%20info%20updated%20successfully';
             },
             error: function(xhr, status, error) {
                 // Handle error

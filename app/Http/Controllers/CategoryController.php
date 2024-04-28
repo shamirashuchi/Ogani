@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\UpdateCategory;
 use Illuminate\Http\Request;
-//public $category;
 class CategoryController extends Controller
 {
     public function index()
@@ -26,7 +25,7 @@ class CategoryController extends Controller
 
     public function newcreatedrequest()
     {
-        return view('admin.category.newcreatedrequest', ['categories' => Category::all()]);
+        return view('admin.category.newcreatedrequest', ['categories' => Category::where('user_id', auth()->id())->get()]);
     }
 
     public function newrequest()
@@ -74,7 +73,7 @@ class CategoryController extends Controller
 
     public function newupdaterequest()
     {
-        return view('admin.category.showdata', ['updatecategories' => UpdateCategory::all()]);
+        return view('admin.category.showdata', ['updatecategories' => UpdateCategory::where('user_id', auth()->id())->get()]);
     }
 
     public function updaterequest()
