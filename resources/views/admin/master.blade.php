@@ -306,7 +306,8 @@
 
 
 
-
+                @isset(Auth::user()->role)
+                    @if(Auth::user()->role == "Brand Manager"  || Auth::user()->role ==  "Admin")
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#gen" aria-expanded="false" aria-controls="gen">
                         <span class="menu-title">Brand Module</span>
@@ -315,11 +316,40 @@
                     </a>
                     <div class="collapse" id="gen">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{route('brand.create')}}">Add Brand</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{route('brand.index')}}">Manage Brand</a></li>
+                                @if(Auth::user()->role == "Brand Manager")
+                                    <li class="nav-item"> <a class="nav-link" href="{{route('brand.create')}}">Add Brand</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="{{route('brand.index')}}">Manage Brand</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="{{route('brand.newcreatedrequest')}}">Requested Brand</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="{{route('brand.newUpdatedRequest')}}">Requested updateBrand</a></li>
+                                @endif
+                                @if(Auth::user()->role ==  "Admin")
+                                        <li class="nav-item"> <a class="nav-link" href="{{route('brand.index')}}">Manage Brand</a></li>
+                                        <li class="nav-item "> <a class="nav-link position-relative" href="{{route('brand.newrequest')}}">Requested Brand
+                                                @isset($brandCount)
+                                                    @if($brandCount > 0)
+                                                        <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$brandCount}}</span>
+                                                    @endif
+                                                @else
+                                                    <span></span>
+                                                @endisset
+                                            </a></li>
+                                        <li class="nav-item"> <a class="nav-link position-relative" href="{{route('brand.updatedRequest')}}">Req updateBrand
+                                                @isset($updatebrandCount)
+                                                    @if($updatebrandCount > 0)
+                                                        <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updatebrandCount}}</span>
+                                                    @endif
+                                                @else
+                                                    <span></span>
+                                                @endisset
+                                            </a></li>
+                                    @endif
                         </ul>
                     </div>
                 </li>
+                    @endif
+                @else
+                    <span></span>
+                @endisset
 
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic4">

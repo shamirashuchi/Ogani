@@ -32,13 +32,24 @@
                                     <td><img src="{{asset($brand->image)}}" alt="" height="50" width="60"/></td>
                                     <td>{{$brand->status}}</td>
                                     <td>
+                                        @isset(Auth::user()->role)
+                                            @if(Auth::user()->role == "Brand Manager")
                                         <a href="{{route('brand.edit', ['id' => $brand->id])}}" class="btn site-btn btn-sm rounded-0">
                                             <i class="fa fa-edit"></i>
                                         </a>
+                                            @endif
+                                        @else
+                                            <span></span>
+                                        @endisset
+                                        @isset(Auth::user()->role)
+                                            @if(Auth::user()->role == "Admin")
                                         <a href="{{route('brand.delete', ['id' => $brand->id])}}" onclick="return confirm('Are you sure to delete this..');" class="btn btn-danger btn-sm rounded-0">
                                             <i class="fa fa-trash"></i>
                                         </a>
-
+                                                @endif
+                                            @else
+                                                <span></span>
+                                            @endisset
                                     </td>
                                 </tr>
                             @endforeach

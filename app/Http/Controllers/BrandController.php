@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\UpdateBrand;
 use App\Models\UpdateCategory;
 use Illuminate\Http\Request;
 
@@ -11,95 +12,93 @@ class BrandController extends Controller
 {
     public function index()
     {
-        return view('admin.category.index', ['categories' => Category::where('flag', 2)->get()]);
+        return view('admin.brand.index', ['brands' => Brand::where('flag', 2)->get()]);
     }
 
     public function create()
     {
-        return view('admin.category.add');
+        return view('admin.brand.add');
     }
 
     public function store(Request $request)
     {
-        Category::newCategory($request);
-        return redirect('/category/newcreatedrequest')->with('message', 'Category info created request go  successfully.');
+        Brand::newCategory($request);
+        return redirect('/brand/newcreatedrequest')->with('message', 'Brand info created request go  successfully.');
     }
 
     public function newcreatedrequest()
     {
-        return view('admin.category.newcreatedrequest', ['categories' => Category::where('user_id', auth()->id())->get()]);
+        return view('admin.brand.newcreatedrequest', ['categories' => Brand::where('user_id', auth()->id())->where('flag', '!=', 2)->get()]);
     }
 
     public function newrequest()
     {
-        Category::updateNewCategory();
-        return view('admin.category.showNewCategory', ['categories' => Category::where('flag', 1)->get()]);
+        Brand::updateNewCategory();
+        return view('admin.brand.showNewCategory', ['categories' => Brand::where('flag', 1)->get()]);
     }
 
     public function accept($id)
     {
-        Category::acceptCategory($id);
-        return redirect('/category/manage')->with('message', 'Category info create successfully.');
+        Brand::acceptCategory($id);
+        return redirect('/brand/manage')->with('message', 'Brand info create successfully.');
     }
 
     public function cancel($id)
     {
-        Category::cancelCategory($id);
-        return redirect('/category/newrequest')->with('message', 'Category info cancel successfully.');
+        Brand::cancelCategory($id);
+        return redirect('/brand/newrequest')->with('message', 'Category info cancel successfully.');
     }
 
     public function deleterequest($id)
     {
-        Category::deleteCategory($id);
-        return redirect('/category/newcreatedrequest')->with('message', 'Category requested  info delete successfully.');
+        Brand::deleteCategory($id);
+        return redirect('/brand/newcreatedrequest')->with('message', 'Category requested  info delete successfully.');
     }
 
     public function delete($id)
     {
-        Category::deleteCategory($id);
-        return redirect('/category/manage')->with('message', 'Category  info delete successfully.');
+        Brand::deleteCategory($id);
+        return redirect('/brand/manage')->with('message', 'Category  info delete successfully.');
     }
 
     public function edit($id)
     {
-        return view('admin.category.edit', ['category' => Category::find($id)]);
+        return view('admin.brand.edit', ['brand' => Brand::find($id)]);
     }
 
     public function update(Request $request, $id)
     {
-
-        UpdateCategory::newCategory($request, $id);
-//        SubCategory::updateSubCategory($request, $id);
-        return redirect('/category/manage')->with('message', 'Sub Category info update successfully.');
+        UpdateBrand::newCategory($request, $id);
+        return redirect('/brand/manage')->with('message', 'Sub Category info update successfully.');
     }
 
     public function newupdaterequest()
     {
-        return view('admin.category.showdata', ['updatecategories' => UpdateCategory::where('user_id', auth()->id())->get()]);
+        return view('admin.brand.showdata', ['updatecategories' => UpdateBrand::where('user_id', auth()->id())->get()]);
     }
 
     public function updaterequest()
     {
-        UpdateCategory::updateCategoryflag();
-        return view('admin.category.show', ['updatecategories' => UpdateCategory::where('flag', 1)->get()]);
+        UpdateBrand::updateCategoryflag();
+        return view('admin.brand.show', ['updatecategories' => UpdateBrand::where('flag', 1)->get()]);
     }
 
     public function acceptbyadmin($id)
     {
-        UpdateCategory::acceptCategory($id);
-        return redirect('/category/manage')->with('message', 'Category info updated successfully.');
+        UpdateBrand::acceptCategory($id);
+        return redirect('/brand/manage')->with('message', 'Category info updated successfully.');
     }
 
     public function cancelbyadmin($id)
     {
-        UpdateCategory::cancelCategory($id);
-        return redirect('/category/updatedRequest')->with('message', 'Category updated info canceled successfully.');
+        UpdateBrand::cancelCategory($id);
+        return redirect('/brand/updatedRequest')->with('message', 'Category updated info canceled successfully.');
     }
 
     public function deletebyuser($id)
     {
-        UpdateCategory::deleteCategorydata($id);
-        return redirect('/category/newUpdatedRequest')->with('message', 'updateCategory info delete successfully.');
+        UpdateBrand::deleteCategorydata($id);
+        return redirect('/brand/newUpdatedRequest')->with('message', 'updateCategory info delete successfully.');
     }
 //    public function index()
 //    {
