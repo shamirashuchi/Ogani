@@ -20,7 +20,13 @@
                                 <th class="wd-20p border-bottom-0">Description</th>
                                 <th class="wd-15p border-bottom-0">Image</th>
                                 <th class="wd-10p border-bottom-0">Status</th>
+                                @isset(Auth::user()->role)
+                                    @if(Auth::user()->role == "Brand Manager"  || Auth::user()->role == "Admin")
                                 <th class="wd-25p border-bottom-0">Action</th>
+                                    @endif
+                                @else
+                                    <span></span>
+                                @endisset
                             </tr>
                             </thead>
                             <tbody>
@@ -31,6 +37,8 @@
                                     <td>{{$brand->description}}</td>
                                     <td><img src="{{asset($brand->image)}}" alt="" height="50" width="60"/></td>
                                     <td>{{$brand->status}}</td>
+                                    @isset(Auth::user()->role)
+                                        @if(Auth::user()->role == "Brand Manager"  || Auth::user()->role == "Admin")
                                     <td>
                                         @isset(Auth::user()->role)
                                             @if(Auth::user()->role == "Brand Manager")
@@ -51,6 +59,10 @@
                                                 <span></span>
                                             @endisset
                                     </td>
+                                        @endif
+                                    @else
+                                        <span></span>
+                                    @endisset
                                 </tr>
                             @endforeach
                             </tbody>

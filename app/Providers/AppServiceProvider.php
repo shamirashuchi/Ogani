@@ -62,7 +62,7 @@ class AppServiceProvider extends ServiceProvider
                 'updatesubcategoryCount'=> $updateSubCategoryCount,
                 'brandCount'=> $brandCount,
                 'updatebrandCount'=> $updateBrandCount,
-                'subunitCount'=> $unitCount,
+                'unitCount'=> $unitCount,
                 'updateunitCount'=>  $updateUnitCount,
                 'total' => $total,
                 ]);

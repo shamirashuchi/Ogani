@@ -266,6 +266,7 @@
                     </a>
                     <div class="collapse" id="ui-basic2">
                         <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{route('sub-category.index')}}">Manage Sub Category</a></li>
                             @isset(Auth::user()->role)
                             @if(Auth::user()->role == "Category Manager")
                             <li class="nav-item"> <a href="{{route('sub-category.create')}}" class="nav-link" >Add Sub Category</a></li>
@@ -306,8 +307,8 @@
 
 
 
-                @isset(Auth::user()->role)
-                    @if(Auth::user()->role == "Brand Manager"  || Auth::user()->role ==  "Admin")
+
+
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#gen" aria-expanded="false" aria-controls="gen">
                         <span class="menu-title">Brand Module</span>
@@ -316,6 +317,8 @@
                     </a>
                     <div class="collapse" id="gen">
                         <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{route('brand.index')}}">Manage Brand</a></li>
+                            @isset(Auth::user()->role)
                                 @if(Auth::user()->role == "Brand Manager")
                                     <li class="nav-item"> <a class="nav-link" href="{{route('brand.create')}}">Add Brand</a></li>
                                     <li class="nav-item"> <a class="nav-link" href="{{route('brand.index')}}">Manage Brand</a></li>
@@ -343,13 +346,13 @@
                                                 @endisset
                                             </a></li>
                                     @endif
+                            @else
+                                <span></span>
+                            @endisset
                         </ul>
                     </div>
                 </li>
-                    @endif
-                @else
-                    <span></span>
-                @endisset
+
 
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic4">
@@ -359,8 +362,37 @@
                 </a>
                 <div class="collapse" id="ui-basic4">
                     <ul class="nav flex-column sub-menu">
+                        @isset(Auth::user()->role)
+                            @if(Auth::user()->role == "Unit Manager")
                         <li class="nav-item"> <a class="nav-link" href="{{route('unit.create')}}">Add Unit</a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{route('unit.index')}}">Manage Unit</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{route('unit.newcreatedrequest')}}">Requested Unit</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{route('unit.newUpdatedRequest')}}">Requested updateUnit</a></li>
+                            @endif
+                            @if(Auth::user()->role ==  "Admin")
+                                    <li class="nav-item"> <a class="nav-link" href="{{route('unit.index')}}">Manage Brand</a></li>
+                                    <li class="nav-item "> <a class="nav-link position-relative" href="{{route('unit.newrequest')}}">Requested Brand
+                                            @isset($unitCount)
+                                                @if($unitCount > 0)
+                                                    <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$unitCount}}</span>
+                                                @endif
+                                            @else
+                                                <span></span>
+                                            @endisset
+                                        </a></li>
+                                    <li class="nav-item"> <a class="nav-link position-relative" href="{{route('unit.updatedRequest')}}">Req updateBrand
+                                            @isset($updateunitCount)
+                                                @if($updateunitCount > 0)
+                                                    <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updateunitCount}}</span>
+                                                @endif
+                                            @else
+                                                <span></span>
+                                            @endisset
+                                        </a></li>
+                                @endif
+                        @else
+                            <span></span>
+                        @endisset
                     </ul>
                 </div>
             </li>
