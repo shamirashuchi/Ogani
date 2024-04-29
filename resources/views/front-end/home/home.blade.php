@@ -24,6 +24,7 @@
 
                                     <ul class="inner-sub-category  dropdown-menu">
                                         @foreach($category->subCategory as $subCategory)
+                                            @if($subCategory->flag == 2)
                                             <li><a href="{{route('product-sub-category', ['id' => $subCategory->id])}}">
                                                    <div class="sub">
                                                        <img  class="mr-0 rounded" src="{{$subCategory->image}}" alt="" srcset=""/>
@@ -31,6 +32,7 @@
                                                    </div>
                                                 </a>
                                             </li>
+                                            @endif
                                         @endforeach
                                     </ul>
                                 @endif

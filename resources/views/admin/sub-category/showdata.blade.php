@@ -49,7 +49,7 @@
                                     </td>
                                     <td>{{$category->action}}</td>
                                     <td>
-                                        <a href="{{route('category.deletebyuser', ['id' => $category->id])}}" class="btn bg-danger btn-sm rounded-0 text-white">
+                                        <a href="{{route('sub-category.deletebyuser', ['id' => $category->id])}}" class="btn bg-danger btn-sm rounded-0 text-white">
                                             Delete
                                         </a>
                                     </td>
@@ -64,3 +64,17 @@
     </div>
     <!-- End Row -->
 @endsection
+<script>
+    window.onload = function() {
+        const message = new URLSearchParams(window.location.search).get('mes');
+        if (message) {
+            Swal.fire({
+                title: '',
+                text: message,
+                icon: 'success',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#7fad39'
+            });
+        }
+    }
+</script>

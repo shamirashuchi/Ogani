@@ -60,6 +60,7 @@ class SubCategory extends Model
 
     private static function saveBasicInfo($subcategory, $request, $imageUrl)
     {
+        $subcategory->category_id    = $request->category_id;
         $subcategory->name           = $request->name;
         $subcategory->user_id        =Auth::user()->id;
         $subcategory->description    = $request->description;

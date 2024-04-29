@@ -25,7 +25,9 @@ class CategoryController extends Controller
 
     public function newcreatedrequest()
     {
-        return view('admin.category.newcreatedrequest', ['categories' => Category::where('user_id', auth()->id())->get()]);
+        return view('admin.category.newcreatedrequest', ['categories' => Category::where('user_id', auth()->id())
+            ->where('flag', '!=', 2)
+            ->get()]);
     }
 
     public function newrequest()

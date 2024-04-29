@@ -6,11 +6,12 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UpdateSubCategory extends Model
 {
     use HasFactory;
-    private static $category, $image, $imageUrl,$updateCategoryinfo;
+    private static $category, $image, $imageUrl,$info;
     public $timestamps = false;
 
     public $updated_at = null;
@@ -25,12 +26,13 @@ class UpdateSubCategory extends Model
             $file = $request->file('new_value');
             $fileName = rand(10000, 500000) . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('/sub-upload/directory/'), $fileName);
-            $fileUrl = '/upload/directory/' . $fileName;
+            $fileUrl = '/sub-upload/directory/' . $fileName;
             $category->new_value = $fileUrl;
         } else {
             $category->new_value = $request->input('new_value');
         }
 
+        $category->sub_category_id = $request->input('sub_category_id');
         $category->category_id = $request->input('category_id');
         $category->custom_created_at = Carbon::now('Asia/Dhaka');
         $category->save();
@@ -46,30 +48,54 @@ class UpdateSubCategory extends Model
     }
     public static function acceptCategory($id)
     {
-        $updateCategoryinfo     = UpdateSubCategory::find($id);
-        $category     = SubCategory::find($updateCategoryinfo->category_id);
-        $category->user_id  = $updateCategoryinfo->user_id;
-        if($updateCategoryinfo->field === "name")
-        {
-            $category->name  = $updateCategoryinfo->new_value;
+        $info     = UpdateSubCategory::find($id);
+
+        if ($info) {
+            $category = SubCategory::find($info->sub_category_id);
+            $category->user_id = $info->user_id;
+            if ($info->field === "category_id") {
+                $category->category_id = $info->new_value;
+                $category->custom_updated_at = Carbon::now('Asia/Dhaka');
+                $info->flag = 2;
+                $info->action = "Accepted";
+                $info->save();
+                $category->save();
+            }
+            if ($info->field === "name") {
+                $category->name = $info->new_value;
+                $category->custom_updated_at = Carbon::now('Asia/Dhaka');
+                $info->flag = 2;
+                $info->action = "Accepted";
+                $info->save();
+                $category->save();
+            }
+            if ($info->field === "description") {
+                $category->description = $info->new_value;
+                $category->custom_updated_at = Carbon::now('Asia/Dhaka');
+                $info->flag = 2;
+                $info->action = "Accepted";
+                $info->save();
+                $category->save();
+            }
+
+            if ($info->field === "image") {
+                $category->image = $info->new_value;
+                $category->custom_updated_at = Carbon::now('Asia/Dhaka');
+                $info->flag = 2;
+                $info->action = "Accepted";
+                $info->save();
+                $category->save();
+            }
+            if ($info->field === "status") {
+                $category->status = $info->new_value;
+                $category->custom_updated_at = Carbon::now('Asia/Dhaka');
+                $info->flag = 2;
+                $info->action = "Accepted";
+                $info->save();
+                $category->save();
+            }
         }
-        if($updateCategoryinfo->field === "description")
-        {
-            $category->description = $updateCategoryinfo->new_value;
-        }
-        if($updateCategoryinfo->field === "image")
-        {
-            $category->image = $updateCategoryinfo->new_value;
-        }
-        if($updateCategoryinfo->field === "status")
-        {
-            $category->status = $updateCategoryinfo->new_value;
-        }
-        $category->custom_updated_at = Carbon::now('Asia/Dhaka');
-        $updateCategoryinfo->flag = 2;
-        $updateCategoryinfo->action = "Accepted";
-        $updateCategoryinfo->save();
-        $category->save();
+
     }
     public static function cancelCategory($id)
     {

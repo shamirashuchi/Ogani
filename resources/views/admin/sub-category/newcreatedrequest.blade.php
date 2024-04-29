@@ -18,6 +18,7 @@
                             <tr>
                                 <th class="wd-15p border-bottom-0">SL NO</th>
                                 <th class="wd-15p border-bottom-0">User_id</th>
+                                <th class="wd-15p border-bottom-0">Category_id</th>
                                 <th class="wd-15p border-bottom-0">Name</th>
                                 <th class="wd-15p border-bottom-0">Flag</th>
                                 <th class="wd-20p border-bottom-0">Description</th>
@@ -32,6 +33,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$category->user_id}}</td>
+                                    <td>{{$category->category_id}}</td>
                                     <td>{{$category->name}}</td>
                                     <td>{{$category->flag}}</td>
                                     <td style="white-space: wrap;">{{$category->description}}</td>
@@ -39,7 +41,7 @@
                                     <td style="white-space: wrap;">{{$category->action}}</td>
                                     <td>{{$category->status}}</td>
                                     <td>
-                                        <a href="{{route('category.deleterequest', ['id' => $category->id])}}" class="btn bg-danger btn-sm rounded-0 text-white">
+                                        <a href="{{route('sub-category.deleterequest', ['id' => $category->id])}}" class="btn bg-danger btn-sm rounded-0 text-white">
                                             Delete
                                         </a>
                                     </td>

@@ -276,18 +276,18 @@
                                 @if(Auth::user()->role ==  "Admin")
                             <li class="nav-item"> <a class="nav-link" href="{{route('sub-category.index')}}">Manage Sub Category</a></li>
                                     <li class="nav-item "> <a class="nav-link position-relative" href="{{route('sub-category.newrequest')}}">Requested SubCategory
-                                            @isset($categoryCount)
-                                                @if($categoryCount > 0)
-                                                    <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$categoryCount}}</span>
+                                            @isset($subcategoryCount)
+                                                @if($subcategoryCount > 0)
+                                                    <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$subcategoryCount}}</span>
                                                 @endif
                                             @else
                                                 <span></span>
                                             @endisset
                                         </a></li>
                                     <li class="nav-item"> <a class="nav-link position-relative" href="{{route('sub-category.updatedRequest')}}">Req updateSubCategory
-                                            @isset($updatecategoryCount)
-                                                @if($updatecategoryCount > 0)
-                                                    <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updatecategoryCount}}</span>
+                                            @isset($updatesubcategoryCount)
+                                                @if($updatesubcategoryCount > 0)
+                                                    <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updatesubcategoryCount}}</span>
                                                 @endif
                                             @else
                                                 <span></span>

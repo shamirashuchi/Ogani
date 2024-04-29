@@ -12,7 +12,7 @@ class SubCategoryController extends Controller
 {
     public function index()
     {
-        return view('admin.sub-category.index', ['categories' => SubCategory::where('flag', 2)->get()]);
+        return view('admin.sub-category.index', ['subCateogories' => SubCategory::where('flag', 2)->get()]);
     }
 
     public function create()
@@ -25,56 +25,60 @@ class SubCategoryController extends Controller
 
     public function store(Request $request)
     {
-        Category::newCategory($request);
+        SubCategory::newCategory($request);
         return redirect('/sub-category/newcreatedrequest')->with('message', 'Category info created request go  successfully.');
     }
 
     public function newcreatedrequest()
     {
-        return view('admin.sub-category.newcreatedrequest', ['categories' => SubCategory::where('user_id', auth()->id())->get()]);
+        return view('admin.sub-category.newcreatedrequest', ['categories' => SubCategory::where('user_id', auth()->id())
+            ->where('flag', '!=', 2)
+            ->get()]);
     }
 
     public function newrequest()
     {
-        Category::updateNewCategory();
+        SubCategory::updateNewCategory();
         return view('admin.sub-category.showNewCategory', ['categories' => SubCategory::where('flag', 1)->get()]);
     }
 
     public function accept($id)
     {
-        Category::acceptCategory($id);
+        SubCategory::acceptCategory($id);
         return redirect('/sub-category/manage')->with('message', 'Category info create successfully.');
     }
 
     public function cancel($id)
     {
-        Category::cancelCategory($id);
+        SubCategory::cancelCategory($id);
         return redirect('/sub-category/newrequest')->with('message', 'Category info cancel successfully.');
     }
 
     public function deleterequest($id)
     {
-        Category::deleteCategory($id);
+        SubCategory::deleteCategory($id);
         return redirect('/sub-category/newcreatedrequest')->with('message', 'Category requested  info delete successfully.');
     }
 
     public function delete($id)
     {
-        Category::deleteCategory($id);
+        SubCategory::deleteCategory($id);
         return redirect('/sub-category/manage')->with('message', 'Category  info delete successfully.');
     }
 
     public function edit($id)
     {
-        return view('admin.sub-category.edit', ['category' => SubCategory::find($id)]);
+        return view('admin.sub-category.edit', [
+            'categories'    => Category::where('flag', 2)->get(),
+            'subCateogory' => SubCategory::find($id)]);
     }
 
     public function update(Request $request, $id)
     {
 
-        UpdateCategory::newCategory($request, $id);
+        UpdateSubCategory::newCategory($request, $id);
 //        SubCategory::updateSubCategory($request, $id);
-        return redirect('/sub-category/manage')->with('message', 'Sub Category info update successfully.');
+//        return redirect('/sub-category/manage')->with('message', 'Sub Category info update successfully.');
     }
 
     public function newupdaterequest()
@@ -84,25 +88,25 @@ class SubCategoryController extends Controller
 
     public function updaterequest()
     {
-        UpdateCategory::updateCategoryflag();
+        UpdateSubCategory::updateCategoryflag();
         return view('admin.sub-category.show', ['updatecategories' => UpdateSubCategory::where('flag', 1)->get()]);
     }
 
     public function acceptbyadmin($id)
     {
-        UpdateCategory::acceptCategory($id);
+        UpdateSubCategory::acceptCategory($id);
         return redirect('/sub-category/manage')->with('message', 'Category info updated successfully.');
     }
 
     public function cancelbyadmin($id)
     {
-        UpdateCategory::cancelCategory($id);
+        UpdateSubCategory::cancelCategory($id);
         return redirect('/sub-category/updatedRequest')->with('message', 'Category updated info canceled successfully.');
     }
 
     public function deletebyuser($id)
     {
-        UpdateCategory::deleteCategorydata($id);
+        UpdateSubCategory::deleteCategorydata($id);
         return redirect('/sub-category/newUpdatedRequest')->with('message', 'updateCategory info delete successfully.');
     }
 //    public function index()

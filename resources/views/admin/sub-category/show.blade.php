@@ -49,10 +49,10 @@
                                     </td>
                                     <td>{{$category->action}}</td>
                                     <td>
-                                        <a href="{{route('category.acceptbyadmin', ['id' => $category->id])}}" class="btn site-btn btn-sm rounded-0 text-white">
+                                        <a href="{{route('sub-category.acceptbyadmin', ['id' => $category->id])}}" class="btn site-btn btn-sm rounded-0 text-white">
                                             Accept
                                         </a>
-                                        <a href="{{route('category.cancelbyadmin', ['id' => $category->id])}}"  class="btn btn-danger btn-sm rounded-0">
+                                        <a href="{{route('sub-category.cancelbyadmin', ['id' => $category->id])}}"  class="btn btn-danger btn-sm rounded-0">
                                             Cancel
                                         </a>
                                     </td>

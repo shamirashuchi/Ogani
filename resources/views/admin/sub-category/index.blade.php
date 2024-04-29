@@ -40,12 +40,24 @@
                                     <td><img src="{{asset($subCateogory->image)}}" alt="" height="50" width="60"/></td>
                                     <td>{{$subCateogory->status}}</td>
                                     <td>
+                                        @isset(Auth::user()->role)
+                                            @if(Auth::user()->role == "Category Manager")
                                         <a href="{{route('sub-category.edit', ['id' => $subCateogory->id])}}" class="btn site-btn btn-sm rounded-0">
                                             <i class="fa fa-edit"></i>
                                         </a>
+                                            @endif
+                                        @else
+                                            <span></span>
+                                        @endisset
+                                        @isset(Auth::user()->role)
+                                            @if(Auth::user()->role == "Admin")
                                         <a href="{{route('sub-category.delete', ['id' => $subCateogory->id])}}" onclick="return confirm('Are you sure to delete this...');" class="btn btn-danger btn-sm rounded-0">
                                             <i class="fa fa-trash"></i>
                                         </a>
+                                                @endif
+                                            @else
+                                                <span></span>
+                                            @endisset
                                     </td>
                                 </tr>
                             @endforeach
