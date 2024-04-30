@@ -178,6 +178,7 @@
                 formData.append('field', 'product_manager_id');
                 formData.append('old_value', productManagerIdOldValue);
                 formData.append('new_value', productManagerIdNewValue);
+                logProductChange(formData)
             }
 
 
@@ -189,6 +190,7 @@
                     formData.append('field', 'category_id');
                     formData.append('old_value', categoryIdOldValue);
                     formData.append('new_value', categoryIdNewValue);
+                    logProductChange(formData)
                 }
 
 
@@ -201,6 +203,7 @@
                     formData.append('field', 'sub_category_id');
                     formData.append('old_value', subCategoryIdOldValue);
                     formData.append('new_value', subCategoryIdNewValue);
+                    logProductChange(formData)
                 }
 
 
@@ -210,6 +213,7 @@
                     formData.append('field', 'brand_id');
                     formData.append('old_value', brandIdOldValue);
                     formData.append('new_value', brandIdNewValue);
+                    logProductChange(formData)
                 }
 
 
@@ -220,6 +224,7 @@
                     formData.append('field', 'unit_id');
                     formData.append('old_value', unitIdOldValue);
                     formData.append('new_value', unitIdNewValue);
+                    logProductChange(formData)
                 }
 
                 var productNameOldValue = '{{$product->name}}';
@@ -228,6 +233,7 @@
                     formData.append('field', 'name');
                     formData.append('old_value', productNameOldValue);
                     formData.append('new_value', productNameNewValue);
+                    logProductChange(formData)
                 }
 
 
@@ -237,6 +243,7 @@
                     formData.append('field', 'code');
                     formData.append('old_value', productCodeOldValue);
                     formData.append('new_value', productCodeNewValue);
+                    logProductChange(formData)
                 }
 
 
@@ -246,6 +253,7 @@
                     formData.append('field', 'short_description');
                     formData.append('old_value', shortDescriptionOldValue);
                     formData.append('new_value', shortDescriptionNewValue);
+                    logProductChange(formData)
                 }
 
             var longDescriptionOldValue = '{{$product->long_description}}';
@@ -254,6 +262,7 @@
                 formData.append('field', 'long_description');
                 formData.append('old_value', longDescriptionOldValue);
                 formData.append('new_value', longDescriptionNewValue);
+                logProductChange(formData)
             }
             var metaTitleOldValue = '{{$product->meta_title}}';
             var metaTitleNewValue = document.getElementById('metaTitle').value;
@@ -261,6 +270,7 @@
                     formData.append('field', 'meta_title');
                     formData.append('old_value', metaTitleOldValue);
                     formData.append('new_value', metaTitleNewValue);
+                    logProductChange(formData)
                 }
 
             var metaDescriptionOldValue = '{{$product->meta_description}}';
@@ -269,6 +279,7 @@
                     formData.append('field', 'meta_description');
                     formData.append('old_value', metaDescriptionOldValue);
                     formData.append('new_value', metaDescriptionNewValue);
+                    logProductChange(formData)
                 }
 
 
@@ -278,6 +289,7 @@
                     formData.append('field', 'regular_price');
                     formData.append('old_value', regularPriceOldValue);
                     formData.append('new_value', regularPriceNewValue);
+                    logProductChange(formData)
                 }
 
 
@@ -287,6 +299,7 @@
                     formData.append('field', 'selling_price');
                     formData.append('old_value', sellingPriceOldValue);
                     formData.append('new_value', sellingPriceNewValue);
+                    logProductChange(formData)
                 }
 
 
@@ -296,6 +309,7 @@
                     formData.append('field', 'stock_amount');
                     formData.append('old_value', stockAmountOldValue);
                     formData.append('new_value', stockAmountNewValue);
+                    logProductChange(formData)
                 }
 
 
@@ -305,6 +319,7 @@
                 formData.append('field', "image");
                 formData.append('old_value', ProductImageOldValue);
                 formData.append('new_value', ProductImageNewValue);
+                logProductChange(formData)
             }
 
 
@@ -314,16 +329,36 @@
                 formData.append('field', "other_image[]");
                 formData.append('old_value', otherImagePreview);
                 formData.append('new_value', otherImageInput);
+                logProductChange(formData)
             }
 
             var ProductPublicationStatusOldValue = '{{$product->status}}';
             var ProductPublicationStatusNewValue = document.querySelector('input[name="status"]:checked');
             if (ProductPublicationStatusOldValue != parseInt(ProductPublicationStatusNewValue.value)){
-                // If a new value is selected and it's different from the old value
                 statusFormData.append('field', "status");
                 statusFormData.append('old_value', ProductPublicationStatusOldValue);
                 statusFormData.append('new_value', parseInt(ProductPublicationStatusNewValue.value).toString());
+                logProductChange(statusFormData);
             }
 });
     });
+
+    function logProductChange(formData) {
+        // Send AJAX request
+        $.ajax({
+            url: '{{ route('product.update', ['id' => $product->id]) }}',
+            method: 'POST',
+            data: formData,
+            contentType: false, // Don't set contentType
+            processData: false, // Don't process data
+            success: function(response) {
+                // Handle success
+                window.location.href = '/product/newUpdatedRequest?mes=Brand%20info%20update%20request%20successfully';
+            },
+            error: function(xhr, status, error) {
+                // Handle error
+                console.log(error);
+            }
+        });
+    }
 </script>
