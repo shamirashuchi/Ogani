@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\SubCategory;
 use App\Models\Unit;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -26,8 +27,15 @@ class ProductController extends Controller
             'categories' => Category::all(),
             'units' => Unit::all(),
             'brands' => Brand::all(),
-            'subCategories' => SubCategory::all()
+            'subCategories' => SubCategory::all(),
+            'product_managers' => User::where('role', 'Product Manager')->get()
         ]);
+    }
+    public function newcreatedrequest()
+    {
+        return view('admin.product.newcreatedrequest', ['products' => Product::where('user_id', auth()->id())
+            ->where('flag', '!=', 2)
+            ->get()]);
     }
     private $subCategory;
     public function getSubCategoryByCategory()
@@ -41,6 +49,11 @@ class ProductController extends Controller
         $this->product = Product::newProduct($request);
         ProductImage::newProductImage($request->file('other_image'), $this->product->id);
         return back()->with('message', 'Product info save successfully.');
+    }
+    public function newrequest()
+    {
+        Product::updateNewProduct();
+        return view('admin.product.showNewCategory', ['products' => Product::where('flag', 1)->get()]);
     }
 
     public function detail($id)

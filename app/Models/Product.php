@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
 {
     use HasFactory;
     private static $product, $image, $extension, $imageName, $directory, $imageUrl;
+    public $timestamps = false;
 
+    public $updated_at = null;
     private static function getImageUrl($image)
     {
         self::$extension    = $image->getClientOriginalExtension(); // png
@@ -22,7 +26,20 @@ class Product extends Model
 
     public static function newProduct($request)
     {
-        return self::saveBasicInfo(new Product(), $request, self::getImageUrl($request->file('image')));
+        $product = new Product();
+        $product->custom_created_at = Carbon::now('Asia/Dhaka');
+        self::saveBasicInfo($product, $request, self::getImageUrl($request->file('image')));
+        $product->save();
+        return $product;
+    }
+    public static function updateNewProduct()
+    {
+        $products = Product::where('flag', 0)->get();
+        foreach ($products as $product) {
+            $product->action = "Seen";
+            $product->flag = 1;
+            $product->save();
+        }
     }
 
     public static function updateProduct($request, $id)
@@ -49,6 +66,8 @@ class Product extends Model
 
     private static function saveBasicInfo($product, $request, $imageUrl)
     {
+        $product->user_id               = Auth::user()->id;;
+        $product->product_manager_id    = $request->product_manager_id;
         $product->category_id           = $request->category_id;
         $product->sub_category_id       = $request->sub_category_id;
         $product->brand_id              = $request->brand_id;
@@ -64,8 +83,6 @@ class Product extends Model
         $product->stock_amount          = $request->stock_amount;
         $product->image                 = $imageUrl;
         $product->status                = $request->status;
-        $product->save();
-        return $product;
     }
 
     private static function deleteImageFormFolder($imageUrl)

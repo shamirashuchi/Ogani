@@ -13,6 +13,19 @@
                     <form class="form-horizontal" action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
+                            <label for="firstName" class="col-md-3 form-label">Product Manager Name</label>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <select class="form-control" name="product_manager_id"  style="height: 40px;">
+                                    <option value=""> -- Select Product Manager Name -- </option>
+                                    @foreach($product_managers as $product_manager)
+                                        <option value="{{$product_manager->id}}">{{$product_manager->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
                             <label for="firstName" class="col-md-3 form-label">Category Name</label>
                         </div>
                             <div class="row mb-4">

@@ -20,7 +20,13 @@
                                 <th class="wd-15p border-bottom-0">Code</th>
                                 <th class="wd-20p border-bottom-0">Description</th>
                                 <th class="wd-10p border-bottom-0">Status</th>
+                                @isset(Auth::user()->role)
+                                    @if(Auth::user()->role == "Unit Manager"  || Auth::user()->role == "Admin")
                                 <th class="wd-25p border-bottom-0">Action</th>
+                                    @endif
+                                @else
+                                    <span></span>
+                                @endisset
                             </tr>
                             </thead>
                             <tbody>
@@ -31,14 +37,32 @@
                                     <td>{{$unit->code}}</td>
                                     <td>{{$unit->description}}</td>
                                     <td>{{$unit->status}}</td>
+                                    @isset(Auth::user()->role)
+                                        @if(Auth::user()->role == "Unit Manager"  || Auth::user()->role == "Admin")
                                     <td>
+                                        @isset(Auth::user()->role)
+                                            @if(Auth::user()->role == "Unit Manager")
                                         <a href="{{route('unit.edit', ['id' => $unit->id])}}" class="btn site-btn btn-sm rounded-0">
                                             <i class="fa fa-edit"></i>
                                         </a>
+                                            @endif
+                                        @else
+                                            <span></span>
+                                        @endisset
+                                            @isset(Auth::user()->role)
+                                                @if(Auth::user()->role == "Admin")
                                         <a href="{{route('unit.delete', ['id' => $unit->id])}}" onclick="return confirm('Are you sure to delete this..');" class="btn btn-danger btn-sm rounded-0">
                                             <i class="fa fa-trash"></i>
                                         </a>
+                                                @endif
+                                            @else
+                                                <span></span>
+                                            @endisset
                                     </td>
+                                        @endif
+                                    @else
+                                        <span></span>
+                                    @endisset
                                 </tr>
                             @endforeach
                             </tbody>

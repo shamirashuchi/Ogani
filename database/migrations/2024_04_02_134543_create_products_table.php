@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->integer('product_manager_id');
             $table->integer('category_id');
             $table->integer('sub_category_id');
             $table->integer('brand_id');
@@ -32,7 +34,10 @@ return new class extends Migration
             $table->integer('sales_count')->default(0);
             $table->integer('hit_count')->default(0);
             $table->text('image');
-            $table->timestamps();
+             $table->tinyInteger('flag')->default(0);
+            $table->string('action')->default('Requested');
+            $table->datetime('custom_created_at')->nullable();
+            $table->datetime('custom_updated_at')->nullable();
         });
     }
 

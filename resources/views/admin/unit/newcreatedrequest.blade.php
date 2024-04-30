@@ -8,7 +8,7 @@
         <div class="col-lg-10 mx-auto">
             <div class="card  mt-5 site-btn">
                 <div class="card-header border-bottom mx-auto">
-                    <h3 class="card-title text-white fs-1">All Category Information</h3>
+                    <h3 class="card-title text-white fs-1">All Unit Information</h3>
                 </div>
                 <div class="card-body">
                     <p class="text-white text-center">{{session('message')}}</p>
@@ -21,25 +21,25 @@
                                 <th class="wd-15p border-bottom-0">Name</th>
                                 <th class="wd-15p border-bottom-0">Flag</th>
                                 <th class="wd-20p border-bottom-0">Description</th>
-                                <th class="wd-15p border-bottom-0">Image</th>
+                                <th class="wd-15p border-bottom-0">code</th>
                                 <th class="wd-15p border-bottom-0">Action</th>
                                 <th class="wd-10p border-bottom-0">Status</th>
                                 <th class="wd-25p border-bottom-0">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $category)
+                            @foreach($units as $unit)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$category->user_id}}</td>
-                                    <td>{{$category->name}}</td>
-                                    <td>{{$category->flag}}</td>
-                                    <td style="white-space: wrap;">{{$category->description}}</td>
-                                    <td><img src="{{asset($category->image)}}" alt="" height="50" width="60"/></td>
-                                    <td style="white-space: wrap;">{{$category->action}}</td>
-                                    <td>{{$category->status}}</td>
+                                    <td>{{$unit->user_id}}</td>
+                                    <td>{{$unit->name}}</td>
+                                    <td>{{$unit->flag}}</td>
+                                    <td style="white-space: wrap;">{{$unit->description}}</td>
+                                    <td>{{$unit->code}}</td>
+                                    <td style="white-space: wrap;">{{$unit->action}}</td>
+                                    <td>{{$unit->status}}</td>
                                     <td>
-                                        <a href="{{route('category.deleterequest', ['id' => $category->id])}}" class="btn bg-danger btn-sm rounded-0 text-white">
+                                        <a href="{{route('unit.deleterequest', ['id' => $unit->id])}}" class="btn bg-danger btn-sm rounded-0 text-white">
                                             Delete
                                         </a>
                                     </td>

@@ -270,12 +270,10 @@
                             @isset(Auth::user()->role)
                             @if(Auth::user()->role == "Category Manager")
                             <li class="nav-item"> <a href="{{route('sub-category.create')}}" class="nav-link" >Add Sub Category</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="{{route('sub-category.index')}}">Manage Sub Category</a></li>
                                     <li class="nav-item"> <a class="nav-link" href="{{route('sub-category.newcreatedrequest')}}">Requested SubCategory</a></li>
                                     <li class="nav-item"> <a class="nav-link" href="{{route('sub-category.newUpdatedRequest')}}">Requested updateSubCategory</a></li>
                             @endif
                                 @if(Auth::user()->role ==  "Admin")
-                            <li class="nav-item"> <a class="nav-link" href="{{route('sub-category.index')}}">Manage Sub Category</a></li>
                                     <li class="nav-item "> <a class="nav-link position-relative" href="{{route('sub-category.newrequest')}}">Requested SubCategory
                                             @isset($subcategoryCount)
                                                 @if($subcategoryCount > 0)
@@ -321,12 +319,10 @@
                             @isset(Auth::user()->role)
                                 @if(Auth::user()->role == "Brand Manager")
                                     <li class="nav-item"> <a class="nav-link" href="{{route('brand.create')}}">Add Brand</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="{{route('brand.index')}}">Manage Brand</a></li>
                                     <li class="nav-item"> <a class="nav-link" href="{{route('brand.newcreatedrequest')}}">Requested Brand</a></li>
                                     <li class="nav-item"> <a class="nav-link" href="{{route('brand.newUpdatedRequest')}}">Requested updateBrand</a></li>
                                 @endif
                                 @if(Auth::user()->role ==  "Admin")
-                                        <li class="nav-item"> <a class="nav-link" href="{{route('brand.index')}}">Manage Brand</a></li>
                                         <li class="nav-item "> <a class="nav-link position-relative" href="{{route('brand.newrequest')}}">Requested Brand
                                                 @isset($brandCount)
                                                     @if($brandCount > 0)
@@ -362,16 +358,15 @@
                 </a>
                 <div class="collapse" id="ui-basic4">
                     <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{route('unit.index')}}">Manage Unit</a></li>
                         @isset(Auth::user()->role)
                             @if(Auth::user()->role == "Unit Manager")
                         <li class="nav-item"> <a class="nav-link" href="{{route('unit.create')}}">Add Unit</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{route('unit.index')}}">Manage Unit</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{route('unit.newcreatedrequest')}}">Requested Unit</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{route('unit.newUpdatedRequest')}}">Requested updateUnit</a></li>
                             @endif
                             @if(Auth::user()->role ==  "Admin")
-                                    <li class="nav-item"> <a class="nav-link" href="{{route('unit.index')}}">Manage Brand</a></li>
-                                    <li class="nav-item "> <a class="nav-link position-relative" href="{{route('unit.newrequest')}}">Requested Brand
+                                    <li class="nav-item "> <a class="nav-link position-relative" href="{{route('unit.newrequest')}}">Requested Unit
                                             @isset($unitCount)
                                                 @if($unitCount > 0)
                                                     <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$unitCount}}</span>
@@ -380,7 +375,7 @@
                                                 <span></span>
                                             @endisset
                                         </a></li>
-                                    <li class="nav-item"> <a class="nav-link position-relative" href="{{route('unit.updatedRequest')}}">Req updateBrand
+                                    <li class="nav-item"> <a class="nav-link position-relative" href="{{route('unit.updatedRequest')}}">Req updateUnit
                                             @isset($updateunitCount)
                                                 @if($updateunitCount > 0)
                                                     <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updateunitCount}}</span>
@@ -404,7 +399,34 @@
                 </a>
                 <div class="collapse" id="ui-basic5">
                     <ul class="nav flex-column sub-menu">
+                        @isset(Auth::user()->role)
+                            @if(Auth::user()->role == "Employee")
                         <li class="nav-item"> <a class="nav-link" href="{{route("product.create")}}">Add Product</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{route('product.newcreatedrequest')}}">Requested Product</a></li>
+                            @endif
+                            @if(Auth::user()->role ==  "Product Manager")
+                                <li class="nav-item "> <a class="nav-link position-relative" href="{{route('product.newrequest')}}">Requested Product
+                                        @isset($unitCount)
+                                            @if($unitCount > 0)
+                                                <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$unitCount}}</span>
+                                            @endif
+                                        @else
+                                            <span></span>
+                                        @endisset
+                                    </a></li>
+{{--                                <li class="nav-item"> <a class="nav-link position-relative" href="{{route('product.updatedRequest')}}">Req updateProduct--}}
+                                        @isset($updateunitCount)
+                                            @if($updateunitCount > 0)
+                                                <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updateunitCount}}</span>
+                                            @endif
+                                        @else
+                                            <span></span>
+                                        @endisset
+                                    </a></li>
+                            @endif
+                            @else
+                                <span></span>
+                            @endisset
                         <li class="nav-item"> <a class="nav-link" href="{{route("product.index")}}">Manage Product</a></li>
                     </ul>
                 </div>

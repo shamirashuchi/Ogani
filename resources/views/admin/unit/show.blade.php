@@ -8,7 +8,7 @@
         <div class="col-lg-10 mx-auto">
             <div class="card  mt-5 site-btn">
                 <div class="card-header border-bottom mx-auto">
-                    <h3 class="card-title text-white fs-1">All Category Information</h3>
+                    <h3 class="card-title text-white fs-1">All Unit update Information</h3>
                 </div>
                 <div class="card-body">
                     <p class="text-white text-center">{{session('message')}}</p>
@@ -27,32 +27,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($updatecategories as $category)
+                            @foreach($updateunits as $unit)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$category->user_id}}</td>
-                                    <td>{{$category->flag}}</td>
-                                    <td>{{$category->field}}</td>
+                                    <td>{{$unit->user_id}}</td>
+                                    <td>{{$unit->flag}}</td>
+                                    <td>{{$unit->field}}</td>
+                                    <td>{{$unit->old_value}}</td>
+                                    <td>{{$unit->new_value}}</td>
+                                    <td>{{$unit->action}}</td>
                                     <td>
-                                        @if($category->field === 'image')
-                                            <img src="{{asset($category->old_value)}}" alt="" height="50" width="60"/>
-                                        @else
-                                            {{$category->old_value}}
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if($category->field === 'image')
-                                            <img src="{{asset($category->new_value)}}" alt="" height="50" width="60"/>
-                                        @else
-                                            {{$category->new_value}}
-                                        @endif
-                                    </td>
-                                    <td>{{$category->action}}</td>
-                                    <td>
-                                        <a href="{{route('category.acceptbyadmin', ['id' => $category->id])}}" class="btn site-btn btn-sm rounded-0 text-white">
+                                        <a href="{{route('unit.acceptbyadmin', ['id' => $unit->id])}}" class="btn site-btn btn-sm rounded-0 text-white">
                                             Accept
                                         </a>
-                                        <a href="{{route('category.cancelbyadmin', ['id' => $category->id])}}"  class="btn btn-danger btn-sm rounded-0">
+                                        <a href="{{route('unit.cancelbyadmin', ['id' => $unit->id])}}"  class="btn btn-danger btn-sm rounded-0">
                                             Cancel
                                         </a>
                                     </td>
