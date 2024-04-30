@@ -131,10 +131,12 @@
                         <div class="row mb-4">
                             <label for="" class="col-md-3 form-label">Product Other Image</label>
                             <div class="col-md-9">
-                                <input class="form-control bg-white" id="" type="file" name="other_image[]" multiple accept="image/*"/>
-                                @foreach($product->otherImage as $otherImage)
-                                    <img src="{{asset($otherImage->image)}}" alt="" width="70px" height="70px">
-                                @endforeach
+                                <input class="form-control bg-white" id="otherImageInput" type="file" name="other_image[]" multiple accept="image/*"/>
+                              <div id="otherImagePreview">
+                                  @foreach($product->otherImage as $otherImage)
+                                      <img src="{{asset($otherImage->image)}}" alt="" width="70px" height="70px">
+                                  @endforeach
+                              </div>
                             </div>
                         </div>
                         <div class="row">
@@ -305,6 +307,14 @@
                 formData.append('new_value', ProductImageNewValue);
             }
 
+
+            var otherImagePreview = document.getElementById('otherImagePreview').files;
+            var otherImageInput = document.getElementById('otherImageInput').files;
+            if (otherImageInput) {
+                formData.append('field', "other_image[]");
+                formData.append('old_value', otherImagePreview);
+                formData.append('new_value', otherImageInput);
+            }
 
             var ProductPublicationStatusOldValue = '{{$product->status}}';
             var ProductPublicationStatusNewValue = document.querySelector('input[name="status"]:checked');
