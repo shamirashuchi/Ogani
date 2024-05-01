@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body text-white">
                     <p class="text-muted">{{session('message')}}</p>
-                    <form class="form-horizontal" action="{{route('product.update', ['id' => $product->id])}}" method="POST" enctype="multipart/form-data">
+                    <div class="form-horizontal"  enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <label for="firstName" class="col-md-3 form-label">Product Manager Name</label>
@@ -19,8 +19,12 @@
                             <div class="col-md-12">
                                 <select id="productManagerName" class="form-control" name="product_manager_id"  style="height: 40px;">
                                     <option value=""> -- Select Product Manager Name -- </option>
+{{--                                    @foreach($product_managers as $product_manager)--}}
+{{--                                        <option value="{{$product_manager->id}}" @if($product->product_manager && $product->product_manager_id->id == $product_manager->id) selected @endif>{{$product_manager->name}}</option>--}}
+{{--                                    @endforeach--}}
+
                                     @foreach($product_managers as $product_manager)
-                                        <option value="{{$product_manager->id}}" @selected($product->product_manager->id == $product_manager->id)>{{$product_manager->name}}</option>
+                                        <option value="{{$product_manager->id}}" @selected($product->product_manager_id == $product_manager->id)>{{$product_manager->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -147,9 +151,9 @@
                             </div>
                         </div>
                         <div class="row">
-                        <button class="btn bg-white text-success mx-auto col-md-4" type="submit">Update Product Info</button>
+                        <button class="btn bg-white text-success mx-auto col-md-4" id="updateProductButton" type="submit">Update Product Info</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -178,6 +182,10 @@
                 formData.append('field', 'product_manager_id');
                 formData.append('old_value', productManagerIdOldValue);
                 formData.append('new_value', productManagerIdNewValue);
+                var ProductId = '{{$product->id}}';
+                var ProductManagerId = document.getElementById('productManagerName').value;;
+                formData.append('product_id', ProductId);
+                formData.append('product_manager_id', ProductManagerId);
                 logProductChange(formData)
             }
 
@@ -319,17 +327,17 @@
                 formData.append('field', "image");
                 formData.append('old_value', ProductImageOldValue);
                 formData.append('new_value', ProductImageNewValue);
+
                 logProductChange(formData)
             }
 
 
-            var otherImagePreview = document.getElementById('otherImagePreview').files;
             var otherImageInput = document.getElementById('otherImageInput').files;
-            if (otherImageInput) {
-                formData.append('field', "other_image[]");
-                formData.append('old_value', otherImagePreview);
-                formData.append('new_value', otherImageInput);
-                logProductChange(formData)
+            if (otherImageInput.length > 0) {
+                for (var i = 0; i < otherImageInput.length; i++) {
+                    statusFormData.append('other_image[]', otherImageInput[i]);
+                }
+                logProductChange(statusFormData)
             }
 
             var ProductPublicationStatusOldValue = '{{$product->status}}';
@@ -353,7 +361,7 @@
             processData: false, // Don't process data
             success: function(response) {
                 // Handle success
-                window.location.href = '/product/newUpdatedRequest?mes=Brand%20info%20update%20request%20successfully';
+                window.location.href = '/product/manage?mes=Brand%20info%20update%20request%20successfully';
             },
             error: function(xhr, status, error) {
                 // Handle error

@@ -12,6 +12,10 @@
                     <p class="text-muted text-white">{{session('message')}}</p>
                     <table class="table table-bordered table-hover text-nowrap bg-white">
                         <tr>
+                            <th>Product manager</th>
+                            <td>{{$product->product_manager_id}}</td>
+                        </tr>
+                        <tr>
                             <th>Product Id</th>
                             <td>{{$product->id}}</td>
                         </tr>

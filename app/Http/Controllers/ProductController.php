@@ -8,6 +8,9 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\SubCategory;
 use App\Models\Unit;
+use App\Models\UpdateProduct;
+use App\Models\UpdateProductImage;
+use App\Models\UpdateUnit;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -71,19 +74,32 @@ class ProductController extends Controller
             'categories' => Category::all(),
             'units' => Unit::all(),
             'brands' => Brand::all(),
-            'subCategories' => SubCategory::all()
+            'subCategories' => SubCategory::all(),
+            'product_managers' => User::where('role', 'Product Manager')->get()
         ]);
     }
 
     public function update(Request $request, $id)
     {
-        Product::updateProduct($request, $id);
         if ($images = $request->file('other_image'))
         {
-            ProductImage::updateProductImage($images, $id);
+            UpdateProductImage::newProductImage($images, $id);
+            return redirect('/product/manage')->with('message', 'product info update request go  successfully.');
         }
-        return redirect('/product/manage')->with('message', 'Product info Update successfully');
+        UpdateProduct::newProduct($request, $id);
+
+        return redirect('/product/manage')->with('message', 'product info update request go  successfully.');
     }
+
+//    public function update(Request $request, $id)
+//    {
+//        Product::updateProduct($request, $id);
+//        if ($images = $request->file('other_image'))
+//        {
+//            ProductImage::updateProductImage($images, $id);
+//        }
+//        return redirect('/product/manage')->with('message', 'Product info Update successfully');
+//    }
 
     public function delete($id)
     {
