@@ -21,7 +21,19 @@ class UpdateProduct extends Model
         $product->product_manager_id = $request->input('product_manager_id');
         $product->field = $request->input('field');
         $product->old_value = $request->input('old_value');
-        $product->new_value = $request->input('new_value');
+        if ($request->hasFile('new_value')) {
+            $file = $request->file('new_value');
+
+            $fileName = rand(10000, 500000) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('/updateproduct/directory/'), $fileName);
+
+            $fileUrl = '/updateproduct/directory/' . $fileName;
+
+            $product->new_value = $fileUrl;
+
+        } else {
+            $product->new_value = $request->input('new_value');
+        }
         $product->product_id = $request->input('product_id');
         $product->custom_created_at = Carbon::now('Asia/Dhaka');
         $product->save();

@@ -198,6 +198,10 @@
                     formData.append('field', 'category_id');
                     formData.append('old_value', categoryIdOldValue);
                     formData.append('new_value', categoryIdNewValue);
+                    var ProductId = '{{$product->id}}';
+                    var ProductManagerId = document.getElementById('productManagerName').value;;
+                    formData.append('product_id', ProductId);
+                    formData.append('product_manager_id', ProductManagerId);
                     logProductChange(formData)
                 }
 
@@ -211,6 +215,10 @@
                     formData.append('field', 'sub_category_id');
                     formData.append('old_value', subCategoryIdOldValue);
                     formData.append('new_value', subCategoryIdNewValue);
+                    var ProductId = '{{$product->id}}';
+                    var ProductManagerId = document.getElementById('productManagerName').value;;
+                    formData.append('product_id', ProductId);
+                    formData.append('product_manager_id', ProductManagerId);
                     logProductChange(formData)
                 }
 
@@ -221,6 +229,10 @@
                     formData.append('field', 'brand_id');
                     formData.append('old_value', brandIdOldValue);
                     formData.append('new_value', brandIdNewValue);
+                    var ProductId = '{{$product->id}}';
+                    var ProductManagerId = document.getElementById('productManagerName').value;;
+                    formData.append('product_id', ProductId);
+                    formData.append('product_manager_id', ProductManagerId);
                     logProductChange(formData)
                 }
 
@@ -232,6 +244,10 @@
                     formData.append('field', 'unit_id');
                     formData.append('old_value', unitIdOldValue);
                     formData.append('new_value', unitIdNewValue);
+                    var ProductId = '{{$product->id}}';
+                    var ProductManagerId = document.getElementById('productManagerName').value;;
+                    formData.append('product_id', ProductId);
+                    formData.append('product_manager_id', ProductManagerId);
                     logProductChange(formData)
                 }
 
@@ -241,6 +257,10 @@
                     formData.append('field', 'name');
                     formData.append('old_value', productNameOldValue);
                     formData.append('new_value', productNameNewValue);
+                    var ProductId = '{{$product->id}}';
+                    var ProductManagerId = document.getElementById('productManagerName').value;;
+                    formData.append('product_id', ProductId);
+                    formData.append('product_manager_id', ProductManagerId);
                     logProductChange(formData)
                 }
 
@@ -251,6 +271,10 @@
                     formData.append('field', 'code');
                     formData.append('old_value', productCodeOldValue);
                     formData.append('new_value', productCodeNewValue);
+                    var ProductId = '{{$product->id}}';
+                    var ProductManagerId = document.getElementById('productManagerName').value;;
+                    formData.append('product_id', ProductId);
+                    formData.append('product_manager_id', ProductManagerId);
                     logProductChange(formData)
                 }
 
@@ -261,6 +285,10 @@
                     formData.append('field', 'short_description');
                     formData.append('old_value', shortDescriptionOldValue);
                     formData.append('new_value', shortDescriptionNewValue);
+                    var ProductId = '{{$product->id}}';
+                    var ProductManagerId = document.getElementById('productManagerName').value;;
+                    formData.append('product_id', ProductId);
+                    formData.append('product_manager_id', ProductManagerId);
                     logProductChange(formData)
                 }
 
@@ -270,6 +298,10 @@
                 formData.append('field', 'long_description');
                 formData.append('old_value', longDescriptionOldValue);
                 formData.append('new_value', longDescriptionNewValue);
+                var ProductId = '{{$product->id}}';
+                var ProductManagerId = document.getElementById('productManagerName').value;;
+                formData.append('product_id', ProductId);
+                formData.append('product_manager_id', ProductManagerId);
                 logProductChange(formData)
             }
             var metaTitleOldValue = '{{$product->meta_title}}';
@@ -278,6 +310,10 @@
                     formData.append('field', 'meta_title');
                     formData.append('old_value', metaTitleOldValue);
                     formData.append('new_value', metaTitleNewValue);
+                    var ProductId = '{{$product->id}}';
+                    var ProductManagerId = document.getElementById('productManagerName').value;;
+                    formData.append('product_id', ProductId);
+                    formData.append('product_manager_id', ProductManagerId);
                     logProductChange(formData)
                 }
 
@@ -287,6 +323,10 @@
                     formData.append('field', 'meta_description');
                     formData.append('old_value', metaDescriptionOldValue);
                     formData.append('new_value', metaDescriptionNewValue);
+                    var ProductId = '{{$product->id}}';
+                    var ProductManagerId = document.getElementById('productManagerName').value;;
+                    formData.append('product_id', ProductId);
+                    formData.append('product_manager_id', ProductManagerId);
                     logProductChange(formData)
                 }
 
@@ -297,6 +337,10 @@
                     formData.append('field', 'regular_price');
                     formData.append('old_value', regularPriceOldValue);
                     formData.append('new_value', regularPriceNewValue);
+                    var ProductId = '{{$product->id}}';
+                    var ProductManagerId = document.getElementById('productManagerName').value;;
+                    formData.append('product_id', ProductId);
+                    formData.append('product_manager_id', ProductManagerId);
                     logProductChange(formData)
                 }
 
@@ -307,6 +351,10 @@
                     formData.append('field', 'selling_price');
                     formData.append('old_value', sellingPriceOldValue);
                     formData.append('new_value', sellingPriceNewValue);
+                    var ProductId = '{{$product->id}}';
+                    var ProductManagerId = document.getElementById('productManagerName').value;;
+                    formData.append('product_id', ProductId);
+                    formData.append('product_manager_id', ProductManagerId);
                     logProductChange(formData)
                 }
 
@@ -317,6 +365,10 @@
                     formData.append('field', 'stock_amount');
                     formData.append('old_value', stockAmountOldValue);
                     formData.append('new_value', stockAmountNewValue);
+                    var ProductId = '{{$product->id}}';
+                    var ProductManagerId = document.getElementById('productManagerName').value;;
+                    formData.append('product_id', ProductId);
+                    formData.append('product_manager_id', ProductManagerId);
                     logProductChange(formData)
                 }
 
@@ -327,7 +379,10 @@
                 formData.append('field', "image");
                 formData.append('old_value', ProductImageOldValue);
                 formData.append('new_value', ProductImageNewValue);
-
+                var ProductId = '{{$product->id}}';
+                var ProductManagerId = document.getElementById('productManagerName').value;;
+                formData.append('product_id', ProductId);
+                formData.append('product_manager_id', ProductManagerId);
                 logProductChange(formData)
             }
 
