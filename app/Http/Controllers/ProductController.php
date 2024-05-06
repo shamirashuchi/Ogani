@@ -19,9 +19,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        return view('admin.product.index', [
-            'products' => Product::all(),
-        ]);
+        return view('admin.product.index',['products' => Product::where('flag', 2)->get()]);
     }
 
     public function create()
@@ -56,7 +54,27 @@ class ProductController extends Controller
     public function newrequest()
     {
         Product::updateNewProduct();
-        return view('admin.product.showNewCategory', ['products' => Product::where('flag', 1)->get()]);
+        return view('admin.product.showNewCategory', ['products' => Product::where('product_manager_id', auth()->id())->where('flag', 1)->get()]);
+    }
+
+
+    public function accept($id)
+    {
+        Product::acceptProduct($id);
+        return redirect('/product/manage')->with('message', 'product info create successfully.');
+    }
+
+    public function cancel($id)
+    {
+        Product::cancelProduct($id);
+        return redirect('/product/newrequest')->with('message', 'product info cancel successfully.');
+    }
+
+    public function deleterequest($id)
+    {
+        Product::deleteProduct($id);
+        ProductImage::deleteProductImage($id);
+        return redirect('/product/newcreatedrequest')->with('message', 'product requested  info delete successfully.');
     }
 
     public function detail($id)
@@ -83,7 +101,7 @@ class ProductController extends Controller
     {
         if ($images = $request->file('other_image'))
         {
-            UpdateProductImage::newProductImage($images, $id);
+            UpdateProductImage::newProductImage($images, $id,$request);
             return redirect('/product/manage')->with('message', 'product info update request go  successfully.');
         }
         UpdateProduct::newProduct($request, $id);
@@ -104,7 +122,43 @@ class ProductController extends Controller
     public function delete($id)
     {
         Product::deleteProduct($id);
-        ProductImage::deleteProductImage();
+        ProductImage::deleteProductImage($id);
         return redirect('/product/manage') ->with('message', 'Product info delete successfully');
+    }
+    public function newupdaterequest()
+    {
+        return view('admin.product.showdata', ['updateproducts' => UpdateProduct::where('user_id', auth()->id())->get(),
+            'updateimages' => UpdateProductImage::where('user_id', auth()->id())->get()->groupBy('product_id')]);
+    }
+    public function updaterequest()
+    {
+        UpdateProduct::updateProductflag();
+        return view('admin.product.show', [
+            'updateproducts' => UpdateProduct::where('flag', 1)->get(),
+            'updateimages' => UpdateProductImage::where('product_manager_id', auth()->id())->get()->groupBy(['product_id', 'user_id'])
+        ]);
+    }
+
+    public function acceptbyadmin($id)
+    {
+        UpdateProduct::acceptProduct($id);
+        return redirect('/product/manage')->with('message', 'Product info updated successfully.');
+    }
+
+    public function cancelbyadmin($id)
+    {
+        UpdateProduct::cancelProduct($id);
+        return redirect('/product/updatedRequest')->with('message', 'Product updated info canceled successfully.');
+    }
+
+    public function deletebyuser($id)
+    {
+        UpdateProduct::deleteProductdata($id);
+        return redirect('/product/newUpdatedRequest')->with('message', 'updateProduct info delete successfully.');
+    }
+    public function deleteimage($id)
+    {
+        UpdateProductImage::deleteProductImage($id);
+        return redirect('/product/newUpdatedRequest')->with('message', 'updateImage info delete successfully.');
     }
 }

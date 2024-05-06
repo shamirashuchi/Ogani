@@ -150,12 +150,21 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
     Route::get('/product/newcreatedrequest', [ProductController::class, 'newcreatedrequest'])->name('product.newcreatedrequest');
     Route::get('/product/newrequest', [ProductController::class, 'newrequest'])->name('product.newrequest');
+    Route::get('/product/accept/{id}', [ProductController::class, 'accept'])->name('product.accept');
+    Route::get('/product/cancel/{id}', [ProductController::class, 'cancel'])->name('product.cancel');
+    Route::get('/product/deleterequest/{id}', [ProductController::class, 'deleterequest'])->name('product.deleterequest');
+    Route::get('/product/newUpdatedRequest', [ProductController::class, 'newupdaterequest'])->name('product.newUpdatedRequest');
+    Route::get('/product/updatedRequest', [ProductController::class, 'updaterequest'])->name('product.updatedRequest');
 
 
     Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::get('/product/detail/{id}', [ProductController::class, 'detail'])->name('product.detail');
     Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+    Route::get('/product/acceptbyadmin/{id}', [ProductController::class, 'acceptbyadmin'])->name('product.acceptbyadmin');
+    Route::get('/product/cancelbyadmin/{id}', [ProductController::class, 'cancelbyadmin'])->name('product.cancelbyadmin');
+    Route::get('/product/deletebyuser/{id}', [ProductController::class, 'deletebyuser'])->name('product.deletebyuser');
+    Route::get('/product/deleteimage/{id}', [ProductController::class, 'deleteimage'])->name('product.deleteimage');
 
     Route::get('/manage/order', [OrderController::class, 'index'])->name('manage.order');
     Route::get('/order/detail/{id}', [OrderController::class, 'orderDetail'])->name('order.detail');

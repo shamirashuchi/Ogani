@@ -403,21 +403,22 @@
                             @if(Auth::user()->role == "Employee")
                         <li class="nav-item"> <a class="nav-link" href="{{route("product.create")}}">Add Product</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{route('product.newcreatedrequest')}}">Requested Product</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{route('product.newUpdatedRequest')}}">Requested updateProduct</a></li>
                             @endif
                             @if(Auth::user()->role ==  "Product Manager")
                                 <li class="nav-item "> <a class="nav-link position-relative" href="{{route('product.newrequest')}}">Requested Product
-                                        @isset($unitCount)
-                                            @if($unitCount > 0)
-                                                <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$unitCount}}</span>
+                                        @isset($productCount)
+                                            @if($productCount > 0)
+                                                <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$productCount}}</span>
                                             @endif
                                         @else
                                             <span></span>
                                         @endisset
                                     </a></li>
-{{--                                <li class="nav-item"> <a class="nav-link position-relative" href="{{route('product.updatedRequest')}}">Req updateProduct--}}
-                                        @isset($updateunitCount)
-                                            @if($updateunitCount > 0)
-                                                <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updateunitCount}}</span>
+                                <li class="nav-item"> <a class="nav-link position-relative" href="{{route('product.updatedRequest')}}">Req updateProduct
+                                        @isset($updateProductCount)
+                                            @if($updateProductCount > 0)
+                                                <span class="position-absolute font-weight-bold bg-danger text-white " style="top:5px; right: 20px;  width:10%;    border-radius: 100%; text-align: center; line-height: 20px ;  font-size: 0.6em;">{{$updateProductCount}}</span>
                                             @endif
                                         @else
                                             <span></span>

@@ -39,4 +39,130 @@ class UpdateProduct extends Model
         $product->save();
         return $product;
     }
+    public static function updateProductflag()
+    {
+        $updateproducts = UpdateProduct::where('flag', 0)->get();
+        foreach ($updateproducts as $product) {
+            $product->action = "Seen";
+            $product->flag = 1;
+            $product->save();
+        }
+    }
+    public static function deleteImageFormFolder($imageUrl)
+    {
+        if (file_exists($imageUrl))
+        {
+            unlink($imageUrl);
+        }
+    }
+    public static function updateProductImage($images, $id)
+    {
+        self::deleteProductImage($id);
+        $updateimageinfo = UpdateProductImage::where('product_id', $id)->get();
+        foreach ($updateimageinfo as $image)
+        {
+            $productImage = New ProductImage();
+            $productImage->product_id = $id;
+            $productImage->image = $image->image;
+            $productImage->save();
+        }
+    }
+
+    public static function deleteProductImage($id)
+    {
+        $productImages = ProductImage::where('product_id', $id)->get();
+        foreach ($productImages as $productImage)
+        {
+            if (file_exists($productImage->image))
+            {
+                self::deleteImageFormFolder($productImage->image);
+                $productImage->delete();
+            }
+        }
+
+}
+    public static function acceptProduct($id)
+    {
+        $updateproductinfo = UpdateProduct::find($id);
+        if($updateproductinfo) {
+            $product = Product::find($updateproductinfo->product_id);
+
+            $product->user_id = $updateproductinfo->user_id;
+
+            if ($updateproductinfo->field === "category_id") {
+                $product->category_id = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "sub_category_id") {
+                $product->sub_category_id = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "brand_id") {
+                $product->brand_id = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "unit_id") {
+                $product->unit_id = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "name") {
+                $product->name = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "code") {
+                $product->code = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "short_description") {
+                $product->short_description = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "long_description") {
+                $product->long_description = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "meta_title") {
+                $product->meta_title = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "meta_description") {
+                $product->meta_description = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "regular_price") {
+                $product->regular_price = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "selling_price") {
+                $product->selling_price = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "stock_amount") {
+                $product->stock_amount = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "status") {
+                $product->status = $updateproductinfo->new_value;
+            }
+            if ($updateproductinfo->field === "image") {
+                $product->image = $updateproductinfo->new_value;
+            }
+            $product->custom_updated_at = Carbon::now('Asia/Dhaka');
+
+            $updateproductinfo->flag = 2;
+            $updateproductinfo->action = "Accepted";
+            $updateproductinfo->save();
+
+            $product->save();
+        }
+        else{
+                $images = ProductImage::find($id);
+                self::updateProductImage($images, $id);
+        }
+
+
+
+    }
+
+
+    public static function cancelProduct($id)
+    {
+        $updateproductinfo = UpdateProduct::find($id);
+        $updateproductinfo->flag = 3;
+        $updateproductinfo->action = "Canceled";
+        $updateproductinfo->save();
+    }
+
+    public static function deleteProductdata($id)
+    {
+        self::$product = UpdateProduct::find($id);
+        self::$product->delete();
+    }
 }

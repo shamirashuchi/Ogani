@@ -34,15 +34,18 @@
                                     <td>{{$category->user_id}}</td>
                                     <td>{{$category->name}}</td>
                                     <td>{{$category->flag}}</td>
-                                    <td style="white-space: wrap;">{{$category->description}}</td>
+                                    <td style="white-space: wrap;">{{$category->short_description}}</td>
                                     <td><img src="{{asset($category->image)}}" alt="" height="50" width="60"/></td>
                                     <td style="white-space: wrap;">{{$category->action}}</td>
                                     <td>{{$category->status}}</td>
                                     <td>
-                                        <a href="{{route('category.accept', ['id' => $category->id])}}" class="btn site-btn btn-sm rounded-0 text-white">
+                                        <a href="{{route('product.detail', ['id' => $category->id])}}" class="btn site-btn btn-sm rounded-0">
+                                            <i class="fa fa-bookmark-o"></i>
+                                        </a>
+                                        <a href="{{route('product.accept', ['id' => $category->id])}}" class="btn site-btn btn-sm rounded-0 text-white">
                                             Accept
                                         </a>
-                                        <a href="{{route('category.cancel', ['id' => $category->id])}}"  class="btn btn-danger btn-sm rounded-0">
+                                        <a href="{{route('product.cancel', ['id' => $category->id])}}"  class="btn btn-danger btn-sm rounded-0">
                                             Cancel
                                         </a>
                                     </td>

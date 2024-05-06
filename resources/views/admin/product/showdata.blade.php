@@ -27,7 +27,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($updatecategories as $category)
+                            @foreach($updateproducts as $category)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$category->user_id}}</td>
@@ -49,12 +49,41 @@
                                     </td>
                                     <td>{{$category->action}}</td>
                                     <td>
-                                        <a href="{{route('category.deletebyuser', ['id' => $category->id])}}" class="btn bg-danger btn-sm rounded-0 text-white">
+                                        <a href="{{route('product.deletebyuser', ['id' => $category->id])}}" class="btn bg-danger btn-sm rounded-0 text-white">
                                             Delete
                                         </a>
                                     </td>
                                 </tr>
                             @endforeach
+                            @foreach($updateimages as $productId => $images)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$productId}}</td>
+                                    <td>0</td>
+                                    <td>Other image</td>
+                                    <td>
+                                        @php
+                                            $productImages = \App\Models\ProductImage::where('product_id', $productId)->get();
+                                        @endphp
+                                        @foreach($productImages as $productImage)
+                                            <img src="{{asset($productImage->image)}}" alt="" height="50" width="60"/>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach($images as $image)
+                                            <img src="{{asset($image->image)}}" alt="" height="50" width="60"/>
+                                        @endforeach
+                                    </td>
+                                    <td>Requested</td>
+                                    <td>
+                                        <a href="{{route('product.deleteimage', ['id' =>$productId])}}" class="btn bg-danger btn-sm rounded-0 text-white">
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+
                             </tbody>
                         </table>
                     </div>
@@ -64,3 +93,17 @@
     </div>
     <!-- End Row -->
 @endsection
+<script>
+    window.onload = function() {
+        const message = new URLSearchParams(window.location.search).get('mes');
+        if (message) {
+            Swal.fire({
+                title: '',
+                text: message,
+                icon: 'success',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#7fad39'
+            });
+        }
+    }
+</script>

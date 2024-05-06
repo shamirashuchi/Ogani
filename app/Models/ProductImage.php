@@ -34,7 +34,7 @@ class ProductImage extends Model
     }
 
 
-    private static function deleteImageFormFolder($imageUrl)
+    public static function deleteImageFormFolder($imageUrl)
     {
         if (file_exists($imageUrl))
         {
@@ -54,6 +54,7 @@ class ProductImage extends Model
         {
             if (file_exists($productImage->image))
             {
+                self::deleteImageFormFolder($productImage->image);
                 $productImage->delete();
             }
         }

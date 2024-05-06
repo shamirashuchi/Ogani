@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\SubCategory;
 use App\Models\Unit;
 use App\Models\UpdateBrand;
 use App\Models\UpdateCategory;
+use App\Models\UpdateProduct;
 use App\Models\UpdateSubCategory;
 use App\Models\UpdateUnit;
 use Illuminate\Support\ServiceProvider;
@@ -51,11 +53,16 @@ class AppServiceProvider extends ServiceProvider
             $updateUnitCount =  $updateUnits->count();
 
 
+            $products = Product::where('flag', 0)->get();
+            $productCount = $products->count();
+            $updateProducts = UpdateProduct::where('flag', 0)->get();
+            $updateProductCount = $updateProducts->count();
 
 
 
 
-            $total=$categoryCount + $updateCategoryCount+$SubcategoryCount+$updateSubCategoryCount+$brandCount+$updateBrandCount+$unitCount+$updateUnitCount;
+
+            $total=$categoryCount + $updateCategoryCount+$SubcategoryCount+$updateSubCategoryCount+$brandCount+$updateBrandCount+$unitCount+$updateUnitCount+$productCount+$updateProductCount;
             $view->with(['categoryCount' => $categoryCount,
                 'updatecategoryCount'=> $updateCategoryCount,
                 'subcategoryCount'=> $SubcategoryCount,
@@ -64,6 +71,8 @@ class AppServiceProvider extends ServiceProvider
                 'updatebrandCount'=> $updateBrandCount,
                 'unitCount'=> $unitCount,
                 'updateunitCount'=>  $updateUnitCount,
+                'productCount' => $productCount,
+                'updateProductCount' => $updateProductCount,
                 'total' => $total,
                 ]);
         });

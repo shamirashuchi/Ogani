@@ -34,12 +34,36 @@ class Product extends Model
     }
     public static function updateNewProduct()
     {
-        $products = Product::where('flag', 0)->get();
+        $products = Product::where('product_manager_id', auth()->id())->where('flag', 0)->get();
         foreach ($products as $product) {
             $product->action = "Seen";
             $product->flag = 1;
             $product->save();
         }
+    }
+
+    public static function acceptProduct($id)
+    {
+        $product    = Product::find($id);
+        $product->custom_created_at = Carbon::now('Asia/Dhaka');
+        $product->flag = 2;
+        $product->action = "Accepted";
+        $product->save();
+    }
+
+    public static function cancelProduct($id)
+    {
+        $product    = Product::find($id);
+        $product->custom_created_at = Carbon::now('Asia/Dhaka');
+        $product->flag = 3;
+        $product->action = "Canceled";
+        $product->save();
+    }
+    public static function deleteProduct($id)
+    {
+        self::$product = Product::find($id);
+        ProductImage::deleteImageFormFolder(self::$product->image);
+        self::$product->delete();
     }
 
     public static function updateProduct($request, $id)
@@ -57,12 +81,12 @@ class Product extends Model
         self::saveBasicInfo(self::$product, $request, self::$imageUrl);
     }
 
-    public static function deleteProduct($id)
-    {
-        self::$product = Product::find($id);
-        self::deleteImageFormFolder(self::$product->image);
-        self::$product->delete();
-    }
+//    public static function deleteProduct($id)
+//    {
+//        self::$product = Product::find($id);
+//        self::deleteImageFormFolder(self::$product->image);
+//        self::$product->delete();
+//    }
 
     private static function saveBasicInfo($product, $request, $imageUrl)
     {

@@ -175,19 +175,19 @@
             statusFormData.append('_token', token);
 
 
-            // Product Manager Name
-            var productManagerIdOldValue = '{{$product->product_manager_id}}';
-            var productManagerIdNewValue = document.getElementById('productManagerName').value;
-            if (productManagerIdOldValue !== productManagerIdNewValue) {
-                formData.append('field', 'product_manager_id');
-                formData.append('old_value', productManagerIdOldValue);
-                formData.append('new_value', productManagerIdNewValue);
-                var ProductId = '{{$product->id}}';
-                var ProductManagerId = document.getElementById('productManagerName').value;;
-                formData.append('product_id', ProductId);
-                formData.append('product_manager_id', ProductManagerId);
-                logProductChange(formData)
-            }
+            {{--// Product Manager Name--}}
+            {{--var productManagerIdOldValue = '{{$product->product_manager_id}}';--}}
+            {{--var productManagerIdNewValue = document.getElementById('productManagerName').value;--}}
+            {{--if (productManagerIdOldValue !== productManagerIdNewValue) {--}}
+            {{--    formData.append('field', 'product_manager_id');--}}
+            {{--    formData.append('old_value', productManagerIdOldValue);--}}
+            {{--    formData.append('new_value', productManagerIdNewValue);--}}
+            {{--    var ProductId = '{{$product->id}}';--}}
+            {{--    var ProductManagerId = document.getElementById('productManagerName').value;;--}}
+            {{--    formData.append('product_id', ProductId);--}}
+            {{--    formData.append('product_manager_id', ProductManagerId);--}}
+            {{--    logProductChange(formData)--}}
+            {{--}--}}
 
 
 
@@ -380,7 +380,7 @@
                 formData.append('old_value', ProductImageOldValue);
                 formData.append('new_value', ProductImageNewValue);
                 var ProductId = '{{$product->id}}';
-                var ProductManagerId = document.getElementById('productManagerName').value;;
+                var ProductManagerId = document.getElementById('productManagerName').value;
                 formData.append('product_id', ProductId);
                 formData.append('product_manager_id', ProductManagerId);
                 logProductChange(formData)
@@ -392,6 +392,8 @@
                 for (var i = 0; i < otherImageInput.length; i++) {
                     statusFormData.append('other_image[]', otherImageInput[i]);
                 }
+                var ProductManagerId = document.getElementById('productManagerName').value;
+                statusFormData.append('product_manager_id', ProductManagerId);
                 logProductChange(statusFormData)
             }
 
@@ -401,6 +403,11 @@
                 statusFormData.append('field', "status");
                 statusFormData.append('old_value', ProductPublicationStatusOldValue);
                 statusFormData.append('new_value', parseInt(ProductPublicationStatusNewValue.value).toString());
+                var ProductId = '{{$product->id}}';
+
+                var ProductManagerId = document.getElementById('productManagerName').value;;
+                statusFormData.append('product_id', ProductId);
+                statusFormData.append('product_manager_id', ProductManagerId);
                 logProductChange(statusFormData);
             }
 });
@@ -416,11 +423,17 @@
             processData: false, // Don't process data
             success: function(response) {
                 // Handle success
-                window.location.href = '/product/manage?mes=Brand%20info%20update%20request%20successfully';
+                window.location.href = '/product/newUpdatedRequest?mes=Product%20info%20update%20request%20successfully';
             },
             error: function(xhr, status, error) {
                 // Handle error
                 console.log(error);
+                if (xhr.responseText) {
+                    console.log('Response Text:', xhr.responseText);
+                }
+
+                // Log the status code
+                console.log('Status Code:', xhr.status);
             }
         });
     }
