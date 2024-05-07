@@ -18,6 +18,7 @@
                             <tr>
                                 <th class="wd-15p border-bottom-0">SL NO</th>
                                 <th class="wd-15p border-bottom-0">User_id</th>
+                                <th class="wd-15p border-bottom-0">Product_id</th>
                                 <th class="wd-15p border-bottom-0">Flag</th>
                                 <th class="wd-15p border-bottom-0">Field</th>
                                 <th class="wd-20p border-bottom-0">OldValue</th>
@@ -26,11 +27,18 @@
                                 <th class="wd-15p border-bottom-0">Action</th>
                             </tr>
                             </thead>
+                            @php
+                                $iterationCounter = 0;
+                            @endphp
                             <tbody>
                             @foreach($updateproducts as $category)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
+                                    @php
+                                        $iterationCounter++;
+                                    @endphp
+                                    <td>{{$iterationCounter}}</td>
                                     <td>{{$category->user_id}}</td>
+                                    <td>{{$category->product_id}}</td>
                                     <td>{{$category->flag}}</td>
                                     <td>{{$category->field}}</td>
                                     <td>
@@ -62,24 +70,28 @@
                             @foreach($updateimages as $productData)
                                 @foreach($productData as $userId => $imagess)
                                     <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{$imagess->first()->product_id}}</td>
+                                        @php
+                                            $iterationCounter++;
+                                        @endphp
+                                        <td>{{$iterationCounter}}</td>
                                         <td>{{$userId}}</td>
+                                        <td>{{$imagess->first()->product_id}}</td>
+                                        <td>{{$imagess->first()->flag}}</td>
                                         <td>Other image</td>
                                         <td>
-                                                                                @php
-                                                                                    $productImages = \App\Models\ProductImage::where('product_id',$imagess->first()->product_id)->get();
-                                                                                @endphp
-                                                                                @foreach($productImages as $productImage)
-                                                                                    <img src="{{asset($productImage->image)}}" alt="" height="50" width="60"/>
-                                                                                @endforeach
-                                                                            </td>
+                                            @php
+                                                $productImages = \App\Models\ProductImage::where('product_id',$imagess->first()->product_id)->get();
+                                            @endphp
+                                            @foreach($productImages as $productImage)
+                                                <img src="{{asset($productImage->image)}}" alt="" height="50" width="60"/>
+                                            @endforeach
+                                        </td>
                                         <td>
                                             @foreach($imagess as $image)
                                                 <img src="{{asset($image->image)}}" alt="" height="50" width="60"/>
                                             @endforeach
                                         </td>
-                                        <td>Requested</td>
+                                        <td>{{$imagess->first()->action}}</td>
                                         <td>
                                             @if($imagess->isNotEmpty())
                                             <a href="{{route('product.acceptbyadmin', ['id' => $imagess->first()->product_id])}}" class="btn site-btn btn-sm rounded-0 text-white">

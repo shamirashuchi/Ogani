@@ -68,4 +68,27 @@ class UpdateProductImage extends Model
             }
         }
     }
+
+
+    public static function updateImageFlag()
+    {
+        UpdateProductImage::where('product_manager_id', auth()->id())
+            ->where('flag', 0)
+            ->update([
+                'flag' => 1,
+                'action' => 'Seen'
+            ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }

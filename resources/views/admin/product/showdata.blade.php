@@ -18,6 +18,7 @@
                             <tr>
                                 <th class="wd-15p border-bottom-0">SL NO</th>
                                 <th class="wd-15p border-bottom-0">User_id</th>
+                                <th class="wd-15p border-bottom-0">Product_id</th>
                                 <th class="wd-15p border-bottom-0">Flag</th>
                                 <th class="wd-15p border-bottom-0">Field</th>
                                 <th class="wd-20p border-bottom-0">OldValue</th>
@@ -31,6 +32,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$category->user_id}}</td>
+                                    <td>{{$category->product_id}}</td>
                                     <td>{{$category->flag}}</td>
                                     <td>{{$category->field}}</td>
                                     <td>
@@ -58,8 +60,10 @@
                             @foreach($updateimages as $productId => $images)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
+                                        <td>{{$images->first()->user_id}}</td>
                                     <td>{{$productId}}</td>
-                                    <td>0</td>
+                                        <td>{{$images->first()->flag}}</td>
+
                                     <td>Other image</td>
                                     <td>
                                         @php
@@ -74,7 +78,7 @@
                                             <img src="{{asset($image->image)}}" alt="" height="50" width="60"/>
                                         @endforeach
                                     </td>
-                                    <td>Requested</td>
+                                    <td>{{$images->first()->action}}</td>
                                     <td>
                                         <a href="{{route('product.deleteimage', ['id' =>$productId])}}" class="btn bg-danger btn-sm rounded-0 text-white">
                                             Delete

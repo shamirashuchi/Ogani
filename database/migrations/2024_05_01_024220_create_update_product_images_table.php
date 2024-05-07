@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('update_product_images', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
+            $table->integer('product_manager_id');
+            $table->integer('user_id');
             $table->text('image');
+            $table->tinyInteger('flag')->default(0);
+            $table->string('action')->default('Requested');
             $table->datetime('custom_created_at')->nullable();
             $table->datetime('custom_updated_at')->nullable();
         });

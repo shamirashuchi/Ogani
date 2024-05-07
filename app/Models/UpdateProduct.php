@@ -41,7 +41,7 @@ class UpdateProduct extends Model
     }
     public static function updateProductflag()
     {
-        $updateproducts = UpdateProduct::where('flag', 0)->get();
+        $updateproducts = UpdateProduct::where('product_manager_id', auth()->id())->where('flag', 0)->get();
         foreach ($updateproducts as $product) {
             $product->action = "Seen";
             $product->flag = 1;
@@ -65,7 +65,16 @@ class UpdateProduct extends Model
             $productImage->product_id = $id;
             $productImage->image = $image->image;
             $productImage->save();
+            $image->flag =2;
+            $image->action ='Accepted';
+            $image->save();
         }
+        $lastImage = $updateimageinfo->last();
+        $updateinfo = Product::find($id);
+        $updateinfo->custom_updated_at = Carbon::now();
+        $updateinfo->product_manager_id = $lastImage->product_manager_id;
+        $updateinfo->user_id = $lastImage->user_id;
+        $updateinfo->save();
     }
 
     public static function deleteProductImage($id)

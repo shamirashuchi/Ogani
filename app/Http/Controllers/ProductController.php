@@ -133,9 +133,10 @@ class ProductController extends Controller
     public function updaterequest()
     {
         UpdateProduct::updateProductflag();
+        UpdateProductImage::updateImageflag();
         return view('admin.product.show', [
-            'updateproducts' => UpdateProduct::where('flag', 1)->get(),
-            'updateimages' => UpdateProductImage::where('product_manager_id', auth()->id())->get()->groupBy(['product_id', 'user_id'])
+            'updateproducts' => UpdateProduct::where('product_manager_id', auth()->id())->where('flag', 1)->get(),
+            'updateimages' => UpdateProductImage::where('product_manager_id', auth()->id())->where('flag', 1)->get()->groupBy(['product_id', 'user_id'])
         ]);
     }
 
