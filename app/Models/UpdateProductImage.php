@@ -63,7 +63,7 @@ class UpdateProductImage extends Model
         {
             if (file_exists($productImage->image))
             {
-                self::deleteImageFormFolder($productImage->image);
+//                self::deleteImageFormFolder($productImage->image);
                 $productImage->delete();
             }
         }

@@ -55,7 +55,21 @@ class UpdateProduct extends Model
             unlink($imageUrl);
         }
     }
-    public static function updateProductImage($images, $id)
+    public static function deleteProductImage($id)
+    {
+        $productImages = ProductImage::where('product_id', $id)->get();
+        foreach ($productImages as $productImage)
+        {
+            if (file_exists($productImage->image))
+            {
+                self::deleteImageFormFolder($productImage->image);
+                $productImage->delete();
+            }
+        }
+
+    }
+
+    public static function updateProductImage($id)
     {
         self::deleteProductImage($id);
         $updateimageinfo = UpdateProductImage::where('product_id', $id)->get();
@@ -77,19 +91,7 @@ class UpdateProduct extends Model
         $updateinfo->save();
     }
 
-    public static function deleteProductImage($id)
-    {
-        $productImages = ProductImage::where('product_id', $id)->get();
-        foreach ($productImages as $productImage)
-        {
-            if (file_exists($productImage->image))
-            {
-                self::deleteImageFormFolder($productImage->image);
-                $productImage->delete();
-            }
-        }
 
-}
     public static function acceptProduct($id)
     {
         $updateproductinfo = UpdateProduct::find($id);
@@ -152,8 +154,8 @@ class UpdateProduct extends Model
             $product->save();
         }
         else{
-                $images = ProductImage::find($id);
-                self::updateProductImage($images, $id);
+//                $images = ProductImage::find($id);
+                self::updateProductImage($id);
         }
 
 
