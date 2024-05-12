@@ -97,7 +97,8 @@
                                 <p class="text-gray mb-0"> 15 Minutes ago </p>
                             </div>
                         </a>
-                        <div class="dropdown-divider"></div>
+
+                <div class="dropdown-divider"></div>
                         <a class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
                                 <img src="{{asset('/')}}assets/images/faces/face3.jpg" alt="image" class="profile-pic">
@@ -111,6 +112,23 @@
                         <h6 class="p-3 mb-0 text-center">4 new messages</h6>
                     </div>
                 </li>
+{{--                <li class="dropdown">--}}
+{{--                    <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">--}}
+{{--                        <span class="glyphicon glyphicon-user">lalalalalala</span>--}}
+{{--                    </a>--}}
+{{--                    <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">--}}
+{{--                        <li class="dropdown-header">No notifications</li>--}}
+{{--                        <!-- Add notification items here -->--}}
+{{--                        <!-- Example: <li><a href="#">Notification 1</a></li> -->--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+                <ul id="notificationMenu">
+                    <li>lalalalalalalalalla</li>
+                    <li>A</li>
+                    <!-- Notification items will be dynamically inserted here -->
+                </ul>
+
+
                 <li class="nav-item dropdown">
                     <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                         <i class="mdi mdi-bell-outline position-relative ">
@@ -157,6 +175,11 @@
                         </a>
                         <div class="dropdown-divider"></div>
                         <h6 class="p-3 mb-0 text-center">See all notifications</h6>
+                        <ul id="notifications" class="dropdown-menu">
+
+                        </ul>
+
+
                     </div>
                 </li>
                 <li class="nav-item nav-logout d-none d-lg-block">
@@ -513,6 +536,48 @@
 <!-- Custom js for this page -->
 <script src="{{asset('/')}}assets/js/dashboard.js"></script>
 <script src="{{asset('/')}}assets/js/todolist.js"></script>
+<!-- jQuery -->
+{{--<script src="https://js.pusher.com/7.0/pusher.min.js"></script>--}}
+
+{{--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
+
+{{--<!-- Lodash -->--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>--}}
+
+{{--<!-- Bootstrap -->--}}
+{{--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">--}}
+{{--<!-- Include Echo library -->--}}
+{{--<!-- Include Echo library -->--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.11.3/echo.min.js"></script>--}}
+{{--<!-- Include Laravel Echo from CDN -->--}}
+{{--<script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.3/dist/echo.min.js"></script>--}}
+{{--<script src="https://js.pusher.com/7.0/pusher.min.js"></script>--}}
+<script>
+    var csrfToken = "{{ csrf_token() }}"; // Get the CSRF token from Laravel
+    // Use csrfToken in your AJAX requests
+    window.Laravel = {
+        userId: {{ auth()->check() ? auth()->user()->id : null }}
+    };
+</script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Lodash -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- Pusher -->
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+<!-- Echo -->
+<script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.2/dist/echo.iife.js"></script>
+{{--<script  src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.11.3/echo.min.js"></script>--}}
+{{--<script type="module" src="https://cdn.jsdelivr.net/npm/laravel-echo/dist/echo.js"></script>--}}
+
+
+<script  src="{{asset('/')}}assets/js/app.js"></script>
 {{--<script>--}}
 {{--    document.getElementById('add-brand-link').addEventListener('click', function(event) {--}}
 {{--        event.stopPropagation();--}}
@@ -561,7 +626,13 @@
     };
     @endif
     @endisset
+
+
+
 </script>
+
+
+
 
 
 

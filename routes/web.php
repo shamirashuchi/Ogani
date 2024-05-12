@@ -17,6 +17,11 @@ use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\CourierController;
 use App\Http\Controllers\CustomerController;
 
+//Route::group([ 'middleware' => 'auth' ], function () {
+//    // ...
+//
+//});
+
 Route::get('/',[OganiController::class,'index'])->name('home');
 Route::get('/product-category/{id}',[OganiController::class,'category'])->name('product-category');
 Route::get('/product-sub-category/{id}',[OganiController::class,'subCategory'])->name('product-sub-category');
@@ -67,7 +72,7 @@ Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.d
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+    Route::get('/notifications', [UserController::class,'notifications']);
 
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::get('/category/manage', [CategoryController::class, 'index'])->name('category.index');

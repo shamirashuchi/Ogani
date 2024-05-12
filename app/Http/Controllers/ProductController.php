@@ -12,6 +12,7 @@ use App\Models\UpdateProduct;
 use App\Models\UpdateProductImage;
 use App\Models\UpdateUnit;
 use App\Models\User;
+use App\Notifications\AdminNotification;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -45,10 +46,18 @@ class ProductController extends Controller
         return response()->json($this->subCategory);
     }
 
+
+
+
     public function store(Request $request)
     {
         $this->product = Product::newProduct($request);
         ProductImage::newProductImage($request->file('other_image'), $this->product->id);
+        $admin=$request->product_manager_id;
+        $user = User::find($admin);
+        $findfollower = auth()->user()->id;
+        $follower = User::find($findfollower);
+        $user->notify(new AdminNotification($follower));
         return back()->with('message', 'Product info save successfully.');
     }
     public function newrequest()
