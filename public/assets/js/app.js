@@ -45,7 +45,9 @@ function makeNotification(notification) {
     var notificationText = makeNotificationText(notification);
     console.log(notificationText);
     console.log('<li><a href="' + to + '">' + notificationText + '</a></li>');
-    return '<li><a href="' + to + '">' + notificationText + '</a></li>';
+    return '<li><a href="' + to + '">' + notificationText + '</a></li><hr>';
+
+    // '<li><a href="' + to + '">' + notificationText + '</a></li>'</hr>;
 }
 function showNotifications(notifications, target) {
     var notificationMenu = $(target + 'Menu');

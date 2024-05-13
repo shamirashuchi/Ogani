@@ -4,7 +4,7 @@
 @section('body')
     <div class="row">
         <div class="col-md-12">
-            <div class="card site-btn text-white">
+            <div style="background-color: #7fad39;" class="card site-btn text-white">
                 <div class="card-header border-bottom mx-auto">
                     <h3 class="card-title text-white fs-1">Add Product Form</h3>
                 </div>

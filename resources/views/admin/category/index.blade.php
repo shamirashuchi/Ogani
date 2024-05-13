@@ -6,7 +6,7 @@
     <!-- Row -->
     <div class="row row-sm">
         <div class="col-lg-10 mx-auto">
-            <div class="card  mt-5 site-btn">
+            <div style="background-color: #7fad39;" class="card  mt-5 site-btn">
                 <div class="card-header border-bottom mx-auto">
                     <h3 class="card-title text-white fs-1">All Category Information</h3>
                 </div>

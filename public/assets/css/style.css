@@ -14107,8 +14107,9 @@ dl li {
 /* Sidebar */
 
 .site-btn {
-    background: #7fad39;
+    background: #7fad39 !important;
 }
+
 .sidebar {
     min-height: calc(100vh - 70px);
     background: #ffffff;

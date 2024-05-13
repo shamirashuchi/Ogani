@@ -27,6 +27,8 @@ return Application::configure(basePath: dirname(__DIR__))
             '/pay-via-ajax',
         ]);
 })
+
+
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

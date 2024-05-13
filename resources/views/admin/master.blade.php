@@ -15,7 +15,15 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{asset('/')}}assets/css/style.css">
-
+  <style>
+      .site-btn{
+          background: #7fad39;
+      }
+      .dropdown-divider {
+          border-top: 10px solid red; /* Example divider styling */
+          margin: 5px 0; /* Adjust margin as needed */
+      }
+  </style>
     <!-- End layout styles -->
 
 
@@ -122,11 +130,11 @@
 {{--                        <!-- Example: <li><a href="#">Notification 1</a></li> -->--}}
 {{--                    </ul>--}}
 {{--                </li>--}}
-                <ul id="notificationMenu">
-                    <li>lalalalalalalalalla</li>
-                    <li>A</li>
-                    <!-- Notification items will be dynamically inserted here -->
-                </ul>
+{{--                <ul id="notificationMenu">--}}
+{{--                    <li>lalalalalalalalalla</li>--}}
+{{--                    <li>A</li>--}}
+{{--                    <!-- Notification items will be dynamically inserted here -->--}}
+{{--                </ul>--}}
 
 
                 <li class="nav-item dropdown">
@@ -138,17 +146,21 @@
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                         <h6 class="p-3 mb-0">Notifications</h6>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-success">
-                                    <i class="mdi mdi-calendar"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
-                                <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
-                            </div>
-                        </a>
+                        <hr>
+                        <ul id="notificationMenu">
+
+                        </ul>
+{{--                        <a class="dropdown-item preview-item">--}}
+{{--                            <div class="preview-thumbnail">--}}
+{{--                                <div class="preview-icon bg-success">--}}
+{{--                                    <i class="mdi mdi-calendar"></i>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">--}}
+{{--                                <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>--}}
+{{--                                <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
@@ -175,11 +187,6 @@
                         </a>
                         <div class="dropdown-divider"></div>
                         <h6 class="p-3 mb-0 text-center">See all notifications</h6>
-                        <ul id="notifications" class="dropdown-menu">
-
-                        </ul>
-
-
                     </div>
                 </li>
                 <li class="nav-item nav-logout d-none d-lg-block">
@@ -552,6 +559,7 @@
 {{--<!-- Include Laravel Echo from CDN -->--}}
 {{--<script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.3/dist/echo.min.js"></script>--}}
 {{--<script src="https://js.pusher.com/7.0/pusher.min.js"></script>--}}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script>
     var csrfToken = "{{ csrf_token() }}"; // Get the CSRF token from Laravel
     // Use csrfToken in your AJAX requests
@@ -566,7 +574,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 
 <!-- Pusher -->
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
