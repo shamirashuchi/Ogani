@@ -11,6 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -112,6 +113,12 @@ class User extends Authenticatable
         $user->profile_photo_path   = $imageUrl;
         return $user;
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
 
 
 }

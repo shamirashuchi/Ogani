@@ -61,8 +61,10 @@ class OganiController extends Controller
 
     public function product($id)
     {
+        $messages = \App\Models\Message::all();
         return view('front-end.product.index', [
-            'product' => Product::find($id)
+            'product' => Product::find($id),
+            'messages' => $messages
         ]);
     }
 

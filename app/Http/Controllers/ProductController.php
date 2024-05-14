@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Message;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\SubCategory;
@@ -88,8 +89,10 @@ class ProductController extends Controller
 
     public function detail($id)
     {
+        $messages = \App\Models\Message::all();
         return view('admin.product.detail', [
-            'product' => Product::find($id)
+            'product' => Product::find($id),
+            'messages' => $messages
 
         ]);
     }

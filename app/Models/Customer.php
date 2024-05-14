@@ -32,4 +32,9 @@ class Customer extends Model
         self::$customer->save();
         return self::$customer;
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

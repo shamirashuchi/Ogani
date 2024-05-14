@@ -516,6 +516,18 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic67" aria-expanded="false" aria-controls="ui-basic67">
+                        <span class="menu-title">Courier Module</span>
+                        <i class="menu-arrow"></i>
+                        <i class="mdi mdi-bus menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic67">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{route("chat")}}">Chatting</a></li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </nav>
         <!-- partial -->
@@ -634,6 +646,96 @@
     };
     @endif
     @endisset
+
+
+
+</script>
+<script>
+    const token = '{{ csrf_token() }}';
+    console.log('token',  token);
+    // // Attach the sendMessage function to the button's click event
+    // const myButton = document.getElementById('btn-chat');
+    //
+    // // Attach an event listener to the button
+    // myButton.addEventListener('click', function() {
+    //     // Execute this function when the button is clicked
+    //     console.log('Button clicked!');
+    //     // You can perform any actions you need here
+    // });
+    document.getElementById('btn-chat').addEventListener('click', sendMessage);
+
+    // Attach the sendMessage function to the input field's enter key event
+    document.getElementById('btn-input').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    window.Echo.private('chat')
+        .listen('MessageSent', (e) => {
+            this.messages.push({
+                message: e.message.message,
+                user: e.user
+            });
+        });
+
+    // Assuming you're using Echo for real-time broadcasting
+    // Echo.private('chat')
+    //     .listen('MessageSent', (e) => {
+    //         // Handle the event, e.g., by updating the messages list
+    //     });
+
+    {{--function sendMessage() {--}}
+    {{--    const input = document.getElementById('btn-input');--}}
+    {{--    const message = input.value;--}}
+    {{--    console.log(message);--}}
+    {{--    input.value = ''; // Clear the input field--}}
+
+    {{--    // Send the message using Laravel's HTTP client or another method--}}
+    {{--    axios.post('/send-message', {--}}
+    {{--        message: message,--}}
+    {{--        user: {!! json_encode(Auth::user()) !!}--}}
+    {{--    })--}}
+    {{--        .then(response => {--}}
+    {{--            // Handle the successful response--}}
+    {{--        })--}}
+    {{--        .catch(error => {--}}
+    {{--            // Handle any errors--}}
+    {{--        });--}}
+    {{--}--}}
+
+    function sendMessage() {
+        const input = document.getElementById('btn-input');
+        const message = input.value;
+        console.log(message);
+        // input.value = ''; // Clear the input field
+
+        // Prepare the data to be sent
+        const data = {
+            _token: token,
+            message: message,
+            {{--user: {!! json_encode(Auth::user()) !!}--}}
+        };
+
+        // Send the AJAX request
+        $.ajax({
+            url: '/send-messages',
+            type: 'POST',
+            data: data,
+            // contentType: 'application/json',
+            success: function(response) {
+                // Handle the successful response
+                var message = "{{ session('message') }}";
+                alert("Message sent succesfully");
+
+
+            },
+            error: function(xhr, status, error) {
+                // Handle any errors
+                console.log(error);
+            }
+        });
+    }
 
 
 

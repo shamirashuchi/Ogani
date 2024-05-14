@@ -76,9 +76,12 @@
     </section>
     <!-- Breadcrumb Section End -->
 
+
     <!-- Product Details Section Begin -->
     <section class="product-details spad">
+
         <div class="container">
+
             <form action="{{route('cart.add')}}" method="post">
                 @csrf
                 <input type="hidden" value="{{$product->id}}" name="id">
@@ -219,6 +222,81 @@
             </form>
         </div>
     </section>
+    <section>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">Chats</div>
+                <div class="card-body">
+                    @php
+                        // Get the customer ID from the session
+                        $customerId = session('customer_id');
+
+                        // Retrieve the customer by ID
+                        $customer = App\Models\Customer::find($customerId);
+
+                        // Check if the customer exists
+                        if($customer) {
+                            // Retrieve messages for the current customer (assuming there's a relationship)
+                            $messages = App\Models\Message::where('customer_id', $customerId)
+                                   ->orWhereNull('customer_id')
+                                   ->get();
+                        } else {
+                            $messages = collect(); // Create an empty collection if the customer does not exist
+                        }
+                    @endphp
+                    @if($messages->count() > 0)
+
+                        <ul>
+                            @foreach($messages as $message)
+                                @if($message->customer_id)
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-9"> <!-- Assuming a 12-column grid system, adjust column sizes as needed -->
+                                            <ul class="list-unstyled">
+                                                <li class="text-danger mt-2 w-full">{{ $message->message }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                @else
+                                    <div class="row">
+                                        <div class="col-md-3 offset-md-1"> <!-- Assuming a 12-column grid system, adjust column sizes as needed -->
+                                            <ul class="list-unstyled">
+                                                <li class="text-success mt-2 w-full">{{ $message->message }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </ul>
+                    @else
+                        <p>No messages available.</p>
+                    @endif
+                </div>
+                {{--            <div class="card-body">--}}
+                {{--                <chat-messages :messages="messages"></chat-messages>--}}
+                {{--            </div>--}}
+                <div class="card-footer">
+                    <form>
+                    @csrf <!-- Include CSRF token -->
+
+                        <div class="input-group">
+                            {{-- Input field --}}
+
+                            <input id="btn-input" type="text" name="message" class="form-control input-sm" placeholder="Type your message here..." v-model="newMessage" @keyup.enter="sendMessage" />
+
+                            {{-- Button --}}
+                            <span class="input-group-btn">
+        <button class="btn btn-primary btn-sm" id="btn-chat" >
+            Send
+        </button>
+    </span>
+                        </div>
+                    </form>
+                    {{--                <chat-form v-on:messagesent="addMessage" :user="{{ Auth::user() }}"></chat-form>--}}
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Product Details Section End -->
 
     <!-- Related Product Section Begin -->
@@ -298,3 +376,5 @@
     <!-- Related Product Section End -->
 
 @endsection
+
+

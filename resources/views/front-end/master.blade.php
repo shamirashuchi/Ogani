@@ -258,68 +258,55 @@
 <script src="{{asset('/')}}front-end-assets/js/mixitup.min.js"></script>
 <script src="{{asset('/')}}front-end-assets/js/owl.carousel.min.js"></script>
 <script src="{{asset('/')}}front-end-assets/js/main.js"></script>
-{{--js--}}
-{{--<script data-cfasync="false" src="{{asset('/')}}front-end-assets/../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>--}}
-{{--<script src="{{asset('/')}}front-end-assets/assets/js/bootstrap.min.js"></script>--}}
 <script src="{{asset('/')}}front-end-assets/assets/js/tiny-slider.js"></script>
 <script src="{{asset('/')}}front-end-assets/assets/js/glightbox.min.js"></script>
-{{--<script src="{{asset('/')}}front-end-assets/assets/js/main.js"></script>--}}
 <script src="https://kit.fontawesome.com/e1ea402ddb.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-{{--<script>--}}
-{{--    // Get the elements--}}
-{{--    const innerSubCategoryLink = document.querySelector('.inner-sub-category');--}}
-{{--    const dropdownLink = document.querySelector('.dropdown a');--}}
-{{--    dropdownLink.addEventListener('mouseover', () => {--}}
-{{--        dropdownLink.classList.add('hovered');--}}
-{{--    });--}}
-{{--    // Add event listener for hover on innerSubCategoryLink--}}
-{{--    innerSubCategoryLink.addEventListener('mouseover', () => {--}}
-{{--        dropdownLink.classList.add('hovered');--}}
-{{--    });--}}
-{{--// innerSubCategoryLink.addEventListener('click', event => {--}}
-{{--// event.preventDefault(); // Prevent the default link behavior--}}
-{{--// event.stopPropagation(); // Prevent the event from bubbling up to the parent elements--}}
 
-{{--// Optionally, you can add logic here to handle the click event--}}
-{{--});--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.2/dist/echo.iife.js"></script>
+<script>
+    const token = '{{ csrf_token() }}';
+    console.log('token',  token);
+    document.getElementById('btn-chat').addEventListener('click', sendMessage);
+    document.getElementById('btn-input').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    });
 
-{{--    // Add event listener for hover out on innerSubCategoryLink--}}
-{{--    innerSubCategoryLink.addEventListener('mouseout', () => {--}}
-{{--        dropdownLink.classList.remove('hovered');--}}
-{{--    });--}}
+    // window.Echo.private('chat')
+    //     .listen('MessageSent', (e) => {
+    //         this.messages.push({
+    //             message: e.message.message,
+    //             user: e.user
+    //         });
+    //     });
 
-{{--    dropdownLink.addEventListener('mouseout', () => {--}}
-{{--        dropdownLink.classList.remove('hovered');--}}
-{{--    });--}}
-{{--// </script>--}}
-{{--<script>--}}
-{{--    // Get the elements--}}
-{{--    const innerSubCategoryLinks = document.querySelectorAll('.inner-sub-category');--}}
-{{--    const dropdownLinks = document.querySelectorAll('.dropdown a');--}}
 
-{{--    // Add event listener for hover on innerSubCategoryLinks--}}
-{{--    innerSubCategoryLinks.forEach(innerSubCategoryLink => {--}}
-{{--        innerSubCategoryLink.addEventListener('mouseover', () => {--}}
-{{--                dropdownLink.classList.add('hovered');--}}
-{{--        });--}}
-
-{{--        // Add event listener for click on innerSubCategoryLinks--}}
-{{--        innerSubCategoryLink.addEventListener('click', event => {--}}
-{{--            event.preventDefault(); // Prevent the default link behavior--}}
-{{--            event.stopPropagation(); // Prevent the event from bubbling up to the parent elements--}}
-
-{{--            // Optionally, you can add logic here to handle the click event--}}
-{{--        });--}}
-{{--    });--}}
-
-{{--    // Add event listener for hover out on innerSubCategoryLinks--}}
-{{--    innerSubCategoryLinks.forEach(innerSubCategoryLink => {--}}
-{{--        innerSubCategoryLink.addEventListener('mouseout', () => {--}}
-{{--                dropdownLink.classList.remove('hovered');--}}
-{{--            });--}}
-{{--    });--}}
-{{--</script>--}}
+    function sendMessage() {
+        const input = document.getElementById('btn-input');
+        const message = input.value;
+        console.log(message);
+        const data = {
+            _token: token,
+            message: message,
+        };
+        $.ajax({
+            url: '/send-messages',
+            type: 'POST',
+            data: data,
+            success: function(response) {
+                alert("Message sent succesfully");
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
 
 </body>
 

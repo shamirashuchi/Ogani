@@ -16,7 +16,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\CourierController;
 use App\Http\Controllers\CustomerController;
-
+use App\Http\Controllers\ChatsController;
 //Route::group([ 'middleware' => 'auth' ], function () {
 //    // ...
 //
@@ -60,6 +60,11 @@ Route::middleware(['customer'])->group(function (){
     Route::post('/cart/add',[CartController::class,'addCart'])->name('cart.add');
     Route::post('/cart/update/{row_id}',[CartController::class,'update'])->name('cart.update');
     Route::get('/cart/delete/{row_id}',[CartController::class,'delete'])->name('cart.delete');
+    Route::get('/chat', [ChatsController::class,'index'])->name('chat');
+    Route::get('message', [ChatsController::class,'fetchMessages']);
+    Route::post('/send-messages', [ChatsController::class,'sendMessage']);
+
+
 });
 
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
@@ -148,7 +153,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
 
 
-
+    Route::get('/chat', [ChatsController::class,'index'])->name('chat');
+//    Route::post('/send-messages', [ChatsController::class,'sendMessage']);
     Route::get('/get-sub-category-by-category-id', [ProductController::class, 'getSubCategoryByCategory'])->name('get-sub-category-by-category-id');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
     Route::get('/product/manage', [ProductController::class, 'index'])->name('product.index');
