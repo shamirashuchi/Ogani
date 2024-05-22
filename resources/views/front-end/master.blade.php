@@ -270,6 +270,7 @@
 <script>
     const token = '{{ csrf_token() }}';
     console.log('token',  token);
+    console.log(productId);
     document.getElementById('btn-chat').addEventListener('click', sendMessage);
     document.getElementById('btn-input').addEventListener('keyup', function(event) {
         if (event.key === 'Enter') {
@@ -293,6 +294,7 @@
         const data = {
             _token: token,
             message: message,
+            Product_id:productId,
         };
         $.ajax({
             url: '/send-messages',

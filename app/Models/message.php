@@ -11,7 +11,7 @@ class Message extends Model
     public $timestamps = false;
 
     public $updated_at = null;
-    protected $fillable = ['message', 'user_id'];
+    protected $fillable = ['message', 'user_id','product_id'];
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -516,18 +516,25 @@
                         </ul>
                     </div>
                 </li>
+                @isset(Auth::user()->role)
+                    @if(Auth::user()->role == "Employee")
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic67" aria-expanded="false" aria-controls="ui-basic67">
-                        <span class="menu-title">Courier Module</span>
+                        <span class="menu-title">Message Module</span>
                         <i class="menu-arrow"></i>
                         <i class="mdi mdi-bus menu-icon"></i>
                     </a>
                     <div class="collapse" id="ui-basic67">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="{{route("chat")}}">Chatting</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{route("chataccept")}}">Messages</a></li>
                         </ul>
                     </div>
                 </li>
+                @endif
+                @else
+                    <span></span>
+                @endisset
             </ul>
         </nav>
         <!-- partial -->
@@ -598,6 +605,7 @@
 
 
 <script  src="{{asset('/')}}assets/js/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {{--<script>--}}
 {{--    document.getElementById('add-brand-link').addEventListener('click', function(event) {--}}
 {{--        event.stopPropagation();--}}

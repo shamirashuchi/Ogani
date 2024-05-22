@@ -14,6 +14,25 @@ class ChatsController extends Controller
     {
 //        $this->middleware('auth');
     }
+    public function chataccept()
+    {
+//        $messages = \App\Models\Message::all(); // Example: Retrieve all messages
+        $messages = \App\Models\Message::
+        select('id', 'customer_id', 'message')
+            ->whereIn('id', function($query) {
+                $query->selectRaw('MIN(id)')
+                    ->from('messages')
+                    ->whereNull('user_id')
+                    ->groupBy('customer_id');
+            })
+            ->orderBy('customer_id')
+            ->get()
+            ->groupBy('customer_id');
+
+
+        // Pass the data to the view
+        return view('admin.Chat.chat', ['messages' => $messages]);
+    }
 
     public function index()
     {
@@ -34,17 +53,19 @@ class ChatsController extends Controller
         if($userid) {
             $customer = Customer::find($userid);
             $message = $customer->messages()->create([
-                'message' => $request->input('message')
+                'message' => $request->input('message'),
+                'product_id' => $request->input('Product_id'),
+//                Product_id:productId,
             ]);
-            broadcast(new MessageSent(null,$customer, $message));
+            broadcast(new MessageSent(null,$customer, $message,$product_id));
         }
         else{
-            $user=Auth::user();
-//            $user = User::find($userid);
-            $message = $user->messages()->create([
-                'message' => $request->input('message')
-            ]);
-            broadcast(new MessageSent($user,null, $message));
+//            $user=Auth::user();
+////            $user = User::find($userid);
+//            $message = $user->messages()->create([
+//                'message' => $request->input('message')
+//            ]);
+//            broadcast(new MessageSent($user,null, $message));
         }
         return back()->with('message', 'Message sent successfully');
 

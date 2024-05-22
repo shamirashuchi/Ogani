@@ -153,7 +153,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
 
 
-    Route::get('/chat', [ChatsController::class,'index'])->name('chat');
+//    Route::get('/chat', [ChatsController::class,'index'])->name('chat');
+    Route::get('/chataccept', [ChatsController::class,'chataccept'])->name('chataccept');
 //    Route::post('/send-messages', [ChatsController::class,'sendMessage']);
     Route::get('/get-sub-category-by-category-id', [ProductController::class, 'getSubCategoryByCategory'])->name('get-sub-category-by-category-id');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');

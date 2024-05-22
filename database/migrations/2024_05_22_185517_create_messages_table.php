@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('customer_id')->unsigned()->nullable();
+            $table->integer('product_id')->unsigned()->nullable();
             $table->text('message');
             $table->tinyInteger('flag')->default(0);
             $table->string('action')->default('Requested');
