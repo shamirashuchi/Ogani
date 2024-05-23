@@ -120,6 +120,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
                         <h3>{{$product->name}}</h3>
+                        <h3>{{$product->id}}</h3>
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -221,50 +222,47 @@
             </div>
             </form>
         </div>
-    </section>
-    <section>
+{{--    </section>--}}
+{{--    <section>--}}
         <div class="container">
             <div class="card">
                 <div class="card-header">Chats</div>
                 <div class="card-body">
                     @php
-                        // Get the customer ID from the session
-                        $customerId = session('customer_id');
+                            $customerId = session('customer_id');
+                             $url = url()->current();
+    $path = parse_url($url, PHP_URL_PATH);
+    $segments = explode('/', $path);
+    $id = end($segments); // Get the last segment (which is the ID)
+    // Now you can use the $id variable in your logic
+                            $productId = $id;
 
-                        // Retrieve the customer by ID
-                        $customer = App\Models\Customer::find($customerId);
-
-                        // Check if the customer exists
-                        if($customer) {
-                            // Retrieve messages for the current customer (assuming there's a relationship)
-                            $messages = App\Models\Message::where('customer_id', $customerId)
-                                   ->orWhereNull('customer_id')
-                                   ->get();
-                        } else {
-                            $messages = collect(); // Create an empty collection if the customer does not exist
-                        }
+                           // Retrieve the customer by ID
+    $customer = \App\Models\Customer::find($customerId);
+    if($customer){
+        $messages = App\Models\Message::where('customer_id', $customerId)->where('product_id', $id)->get();
+    } else {
+        $messages = collect(); // Create an empty collection if the customer does not exist
+    }
                     @endphp
+
                     @if($messages->count() > 0)
 
                         <ul>
                             @foreach($messages as $message)
-                                @if($message->customer_id)
-                                    <div class="row">
-                                        <div class="col-md-6 offset-md-9"> <!-- Assuming a 12-column grid system, adjust column sizes as needed -->
-                                            <ul class="list-unstyled">
-                                                <li class="text-danger mt-2 w-full">{{ $message->message }}</li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                @if($message->flag === 1)
+                                    <ul>
+                                                <li class="p-2 mb-2 rounded bg-danger text-white float-left"  style="width: 200px; word-wrap: break-word;">{{ $message->message }}</li><br><br><br><br>
+                                    </ul>
 
                                 @else
-                                    <div class="row">
-                                        <div class="col-md-3 offset-md-1"> <!-- Assuming a 12-column grid system, adjust column sizes as needed -->
-                                            <ul class="list-unstyled">
-                                                <li class="text-success mt-2 w-full">{{ $message->message }}</li>
+
+                                            <ul>
+
+                                                    <li class="bg-primary p-2 mb-2 rounded  text-white float-right"  style="width: 200px; word-wrap: break-word;">{{ $message->message }}</li><br><br><br>
+
                                             </ul>
-                                        </div>
-                                    </div>
+
                                 @endif
                             @endforeach
                         </ul>
@@ -296,6 +294,7 @@
                 </div>
             </div>
         </div>
+
     </section>
     <!-- Product Details Section End -->
 

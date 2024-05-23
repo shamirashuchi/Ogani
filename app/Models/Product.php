@@ -137,4 +137,8 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

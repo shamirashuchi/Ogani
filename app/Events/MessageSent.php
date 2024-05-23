@@ -27,17 +27,18 @@ class MessageSent implements ShouldBroadcast
      */
     public function __construct(?User $user, ?Customer $customer, Message $message,Message $product_id)
     {
-        if($user) {
 
-            $this->user = $user;
+
+            $this->user = $user?$user;
             $this->message = $message;
             $this->product_id = $product_id;
-        }else {
-
-            $this->customer = $customer;
-            $this->message = $message;
-            $this->product_id = $product_id;
-        }
+            $this->customer = $customer?$customer;
+//        }else {
+//
+//            $this->customer = $customer;
+//            $this->message = $message;
+//            $this->product_id = $product_id;
+//        }
     }
 
     /**

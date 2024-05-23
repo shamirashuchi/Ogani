@@ -526,7 +526,7 @@
                     </a>
                     <div class="collapse" id="ui-basic67">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{route("chat")}}">Chatting</a></li>
+{{--                            <li class="nav-item"> <a class="nav-link" href="{{route("chat")}}">Chatting</a></li>--}}
                             <li class="nav-item"> <a class="nav-link" href="{{route("chataccept")}}">Messages</a></li>
                         </ul>
                     </div>
