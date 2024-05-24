@@ -732,14 +732,13 @@
             data: data,
             // contentType: 'application/json',
             success: function(response) {
-                // Handle the successful response
-                var message = "{{ session('message') }}";
-                alert("Message sent succesfully");
+                console.log('AJAX request completed')
 
 
             },
             error: function(xhr, status, error) {
                 // Handle any errors
+                console.log('AJAX error occurred')
                 console.log(error);
             }
         });

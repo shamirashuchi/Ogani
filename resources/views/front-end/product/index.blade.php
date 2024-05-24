@@ -380,3 +380,4 @@
     const productId = {{$product->id}};
     console.log(productId);
 </script>
+

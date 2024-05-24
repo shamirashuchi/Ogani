@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Customer;
+use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -22,10 +23,11 @@ class MessageSent implements ShouldBroadcast
     public $message;
     public $user;
     public $product_id;
+    public $custom_created_at;
     /**
      * Create a new event instance.
      */
-    public function __construct(?User $user, ?Customer $customer, Message $message,Message $product_id)
+    public function __construct(?User $user, ?Customer $customer, Message $message,Message $product_id,Message $custom_created_at)
     {
 
 
@@ -33,6 +35,7 @@ class MessageSent implements ShouldBroadcast
             $this->message = $message;
             $this->product_id = $product_id;
             $this->customer = $customer?$customer;
+        $this->custom_created_at = $custom_created_at;
 //        }else {
 //
 //            $this->customer = $customer;

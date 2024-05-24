@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Events\MessageSent;
 use App\Message;
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -155,183 +156,68 @@ class ChatsController extends Controller
     public function sendMessage(Request $request)
     {
         $userid = Session::get('customer_id');
+        date_default_timezone_set('Asia/Dhaka');
+        $current_timestamp = time();
         if($userid) {
             $customer = Customer::find($userid);
             $message = $customer->messages()->create([
                 'message' => $request->input('message'),
                 'product_id' => $request->input('Product_id'),
-//                Product_id:productId,
+                 'custom_created_at' =>date('Y-m-d H:i:s', $current_timestamp)
             ]);
-            broadcast(new MessageSent(null,$customer, $message,$product_id));
-        }
-        else{
-//            $user=Auth::user();
-////            $user = User::find($userid);
-//            $message = $user->messages()->create([
-//                'message' => $request->input('message')
-//            ]);
-//            broadcast(new MessageSent($user,null, $message));
+            broadcast(new MessageSent(null,$customer, $message,$product_id,$custom_created_at));
         }
         return back()->with('message', 'Message sent successfully');
-
-
     }
 
 
 
-
 //    public function sendMessage(Request $request)
 //    {
-//        $customerid = Session::get('customer_id');
-//        if ($customerid) {
-//            $customer = Customer::find($customerid);
-//            $product_id = $request->input('Product_id');
+//            $customerid = Session::get('customer_id');
+//            date_default_timezone_set('Asia/Dhaka');
+//            $current_timestamp = time();
 //
-//            // Find the most recent message from the same customer for the same product
-//            $mostRecentMessage = Message::where('customer_id', $customer->id)
-//                ->where('product_id', $product_id)
-//                ->latest()
-//                ->first();
+//            if ($customerid) {
+//                $customer = Customer::find($customerid);
+//                $productId = $request->input('Product_id');
 //
-//            // Find the first message from the same customer for the same product within the last two hours
-//            $firstMessageWithinTwoHours = Message::where('customer_id', $customer->id)
-//                ->where('product_id', $product_id)
-//                ->where('created_at', '>=', now()->subHours(2))
-//                ->oldest()
-//                ->first();
-//
-//            if ($firstMessageWithinTwoHours) {
-//                // If the first message within two hours exists, update the user ID of the most recent message
-//                if ($mostRecentMessage) {
-////                    $mostRecentMessage->update(['user_id' => $firstMessageWithinTwoHours->user_id]);
-////                    $message = $mostRecentMessage;
-////                } else {
-////                    // Create a new message with the customer's user ID if there are no recent messages
-////                    $message = $customer->messages()->create([
-////                        'message' => $request->input('message'),
-////                        'product_id' => $product_id,
-////                        'user_id' => $firstMessageWithinTwoHours->user_id,
-////                    ]);
-//                    $userid = $firstMessageWithinTwoHours->user_id;
-//                    $mostRecentMessage = $customer->messages()->create([
-//                        'message' => $request->input('message'),
-//                        'product_id' => $product_id,
-//                        'user_id' => $customer->$firstMessageWithinTwoHours->user_id,
-//                    ]);
-//                }
-//                broadcast(new MessageSent(userid, $customer, $mostRecentMessage, $product_id));
-//            } else {
-//                // If no message from the same customer for the same product within the last two hours exists,
-//                // create a new message with the customer's user ID
-//                $message = $customer->messages()->create([
-//                    'message' => $request->input('message'),
-//                    'product_id' => $product_id,
-//                    'user_id' => $customer->user_id,
-//                ]);
-//            }
-//
-//            broadcast(new MessageSent(null, $customer, $message, $product_id));
-//        } else {
-//            // Handle messages from authenticated users (if needed)
-//        }
-//
-//        return back()->with('message', 'Message sent successfully');
-//    }
-
-//    public function sendMessage(Request $request)
-//    {
-//        $customerid = Session::get('customer_id');
-//        if ($customerid) {
-//            $customer = Customer::find($customerid);
-//            $product_id = $request->input('Product_id');
-//
-//            // Find the most recent message from the same customer for the same product
-//            $mostRecentMessage = \App\Models\Message::where('customer_id', $customer->id)
-//                ->where('product_id', $product_id)
-//                ->latest()
-//                ->first();
-//
-//            // Find the first message from the same customer for the same product within the last two hours
-//            $firstMessageWithinTwoHours = \App\Models\Message::where('customer_id', $customer->id)
-//                ->where('product_id', $product_id)
-//                ->where('created_at', '>=', now()->subHours(2))
-//                ->oldest()
-//                ->first();
-//
-//            if ($firstMessageWithinTwoHours) {
-//                // If the first message within two hours exists, update the user ID of the most recent message
-//                if ($mostRecentMessage) {
-//                    $userid = $mostRecentMessage->user_id;
-//                    $mostRecentMessage = $customer->messages()->create([
-//                        'message' => $request->input('message'),
-//                        'product_id' => $product_id,
-//                        'customer_id' => $customer->user_id,
-//                        'user_id' => $firstMessageWithinTwoHours->user_id;]);
-//                }
-//                broadcast(new MessageSent($userid, $customer, $mostRecentMessage, $product_id));
+//                // Find the first message from the same customer for the same product within the last two hours
+//                $firstMessageWithinTwoHours = \App\Models\Message::where('customer_id', $customer->id)
+//                    ->where('product_id', $productId)
+//                    ->where('custom_created_at', '>=', now()->subHours(2))
+//                    ->oldest()
+//                    ->first();
+//return $firstMessageWithinTwoHours;
+//                if ($firstMessageWithinTwoHours) {
+//                    if ($firstMessageWithinTwoHours->user_id) {
+//                        $user = User::find($firstMessageWithinTwoHours->user_id);
+//                        $message = $customer->messages()->create([
+//                            'message' => $request->input('message'),
+//                            'product_id' => $request->input('Product_id'),
+//                            'custom_created_at' => date('Y-m-d H:i:s', $current_timestamp),
+//                            'user_id' => $firstMessageWithinTwoHours->user_id,
+//                        ]);
+//                        broadcast(new MessageSent($user, $customer, $message, $product_id, $custom_created_at));
+//                    } else {
+//                        $message = $customer->messages()->create([
+//                            'message' => $request->input('message'),
+//                            'product_id' => $request->input('Product_id'),
+//                            'custom_created_at' => date('Y-m-d H:i:s', $current_timestamp),
+//                        ]);
+//                        broadcast(new MessageSent(null, $customer, $message, $product_id, $custom_created_at));
+//                    }
 //                } else {
-//                    // Create a new message with the customer's user ID if there are no recent messages
-//                    $mostRecentMessage = $customer->messages()->create([
+//                    $message = $customer->messages()->create([
 //                        'message' => $request->input('message'),
-//                        'product_id' => $product_id,
-//                        'customer_id' => $customer->user_id,
+//                        'product_id' => $request->input('Product_id'),
+//                        'custom_created_at' => date('Y-m-d H:i:s', $current_timestamp),
 //                    ]);
+//                    broadcast(new MessageSent(null, $customer, $message, $product_id, $custom_created_at));
 //                }
 //            }
-//            broadcast(new MessageSent($userid, $customer, $mostRecentMessage, $product_id)); // Broadcast after creating or updating the message
 //
-//
-//        return back()->with('message', 'Message sent successfully');
+//            return view('frontend.master')->with('message', 'Message sent successfully');
 //    }
-
-//    public function sendMessage(Request $request)
-//    {
-//        $customerid = Session::get('customer_id');
-//        if ($customerid) {
-//            $customer = Customer::find($customerid);
-//            $product_id = $request->input('product_id');
-//
-//            // Find the most recent message from the same customer for the same product
-//            $mostRecentMessage = \App\Models\Message::where('customer_id', $customer->id)
-//                ->where('product_id', $product_id)
-//                ->latest()
-//                ->first();
-//
-//            // Find the first message from the same customer for the same product within the last two hours
-//            $firstMessageWithinTwoHours = \App\Models\Message::where('customer_id', $customer->id)
-//                ->where('product_id', $product_id)
-//                ->where('created_at', '>=', now()->subHours(2))
-//                ->oldest()
-//                ->first();
-//
-//            if ($firstMessageWithinTwoHours) {
-//                // If the first message within two hours exists, update the user ID of the most recent message
-//                if ($mostRecentMessage) {
-//                    $userid = $firstMessageWithinTwoHours->user_id;
-//                    $newMessage = $customer->messages()->create([
-//                        'message' => $request->input('message'),
-//                        'product_id' => $product_id,
-//                        'customer_id' => $customer->id, // Corrected customer_id field
-//                        'user_id' => $userid, // Corrected user_id field
-//                    ]);
-//                }
-//            } else {
-//                // Create a new message with the customer's user ID if there are no recent messages
-//                $newMessage = $customer->messages()->create([
-//                    'message' => $request->input('message'),
-//                    'product_id' => $product_id,
-//                    'customer_id' => $customer->id, // Corrected customer_id field
-//                    'user_id' => null, // Assuming a new message does not have an associated user yet
-//                ]);
-//            }
-//
-//            broadcast(new MessageSent($newMessage->user_id ?? null, $customer, $newMessage, $product_id));
-//
-//            return back()->with('message', 'Message sent successfully');
-//        }
-//
-//        return back()->with('error', 'Customer not found');
-//    }
-//
 
 }

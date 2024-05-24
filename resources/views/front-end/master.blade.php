@@ -301,10 +301,10 @@
             type: 'POST',
             data: data,
             success: function(response) {
-                alert("Message sent succesfully");
+                // console.log("Message sent succesfully");
             },
             error: function(xhr, status, error) {
-                console.log(error);
+                // console.log(error);
             }
         });
     }
