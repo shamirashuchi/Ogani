@@ -130,11 +130,11 @@
 {{--                        <!-- Example: <li><a href="#">Notification 1</a></li> -->--}}
 {{--                    </ul>--}}
 {{--                </li>--}}
-{{--                <ul id="notificationMenu">--}}
-{{--                    <li>lalalalalalalalalla</li>--}}
-{{--                    <li>A</li>--}}
-{{--                    <!-- Notification items will be dynamically inserted here -->--}}
-{{--                </ul>--}}
+                <ul id="notificationMenu">
+                    <li>lalalalalalalalalla</li>
+                    <li>A</li>
+                    <!-- Notification items will be dynamically inserted here -->
+                </ul>
 
 
                 <li class="nav-item dropdown">
@@ -722,7 +722,7 @@
         const data = {
             _token: token,
             message: message,
-            {{--user: {!! json_encode(Auth::user()) !!}--}}
+            user: {!! json_encode(Auth::user()) !!}
         };
 
         // Send the AJAX request

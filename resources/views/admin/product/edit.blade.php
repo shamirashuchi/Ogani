@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body text-white">
                     <p class="text-muted">{{session('message')}}</p>
-                    <div class="form-horizontal"  enctype="multipart/form-data">
+                    <div class="form-horizontal"  method="GET" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <label for="firstName" class="col-md-3 form-label">Product Manager Name</label>
@@ -168,16 +168,18 @@
         document.getElementById('updateProductButton').addEventListener('click', function() {
             console.log("clicked");
 
+
             var formData = new FormData();
             var statusFormData = new FormData();
-            var token = '{{ csrf_token() }}';
+            var token = '{{csrf_token()}}';
             formData.append('_token', token);
             statusFormData.append('_token', token);
 
 
-            {{--// Product Manager Name--}}
-            {{--var productManagerIdOldValue = '{{$product->product_manager_id}}';--}}
-            {{--var productManagerIdNewValue = document.getElementById('productManagerName').value;--}}
+
+            // Product Manager Name
+            var productManagerIdOldValue = '{{$product->product_manager_id}}';
+            var productManagerIdNewValue = document.getElementById('productManagerName').value;
             {{--if (productManagerIdOldValue !== productManagerIdNewValue) {--}}
             {{--    formData.append('field', 'product_manager_id');--}}
             {{--    formData.append('old_value', productManagerIdOldValue);--}}
@@ -394,6 +396,7 @@
                 }
                 var ProductManagerId = document.getElementById('productManagerName').value;
                 statusFormData.append('product_manager_id', ProductManagerId);
+                console.log(statusFormData);
                 logProductChange(statusFormData)
             }
 
@@ -413,12 +416,12 @@
 });
     });
 
-    function logProductChange(formData) {
+    function logProductChange(Data) {
         // Send AJAX request
         $.ajax({
             url: '{{ route('product.update', ['id' => $product->id]) }}',
             method: 'POST',
-            data: formData,
+            data: Data,
             contentType: false, // Don't set contentType
             processData: false, // Don't process data
             success: function(response) {

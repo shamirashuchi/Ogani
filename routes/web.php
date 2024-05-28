@@ -67,12 +67,7 @@ Route::middleware(['customer'])->group(function (){
 
 });
 
-Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
-Route::get('/user/manage', [UserController::class, 'index'])->name('user.index');
-Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
-Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-Route::post('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
-Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
@@ -150,6 +145,16 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/unit/acceptbyadmin/{id}', [UnitController::class, 'acceptbyadmin'])->name('unit.acceptbyadmin');
     Route::get('/unit/cancelbyadmin/{id}', [UnitController::class, 'cancelbyadmin'])->name('unit.cancelbyadmin');
     Route::get('/unit/deletebyuser/{id}', [UnitController::class, 'deletebyuser'])->name('unit.deletebyuser');
+
+
+
+    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+Route::get('/user/manage', [UserController::class, 'index'])->name('user.index');
+Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+Route::post('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+
 
     Route::get('/pick/{user_id}/{customer_id}/{product_id}', [ChatsController::class, 'index'])->name('chat');
 

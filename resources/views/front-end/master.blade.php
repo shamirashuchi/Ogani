@@ -296,15 +296,17 @@
             message: message,
             Product_id:productId,
         };
+        const url = `http://127.0.0.1:8000/product-detail/${productId}?_token=${token}&message=${encodeURIComponent(message)}`
         $.ajax({
             url: '/send-messages',
             type: 'POST',
             data: data,
             success: function(response) {
-                // console.log("Message sent succesfully");
+                window.location.href = url;
+             console.log(response);
             },
             error: function(xhr, status, error) {
-                // console.log(error);
+                console.log(error);
             }
         });
     }

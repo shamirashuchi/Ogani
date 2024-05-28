@@ -120,7 +120,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
                         <h3>{{$product->name}}</h3>
-                        <h3>{{$product->id}}</h3>
+{{--                        <h3>{{$product->id}}</h3>--}}
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -226,8 +226,10 @@
 {{--    <section>--}}
         <div class="container">
             <div class="card">
-                <div class="card-header">Chats</div>
-                <div class="card-body">
+
+                <div class="card-header">{{$messages->first()->user->name}}</div>
+
+                <div class="card-body" style="background-image: url('{{asset('/')}}front-end-assets/assets/images/background/3d-rendering-geometric-shapes.jpg'); background-size: cover; ">
                     @php
                             $customerId = session('customer_id');
                              $url = url()->current();
@@ -252,14 +254,14 @@
                             @foreach($messages as $message)
                                 @if($message->flag === 1)
                                     <ul>
-                                                <li class="p-2 mb-2 rounded bg-danger text-white float-left"  style="width: 200px; word-wrap: break-word;">{{ $message->message }}</li><br><br><br><br>
+                                                <li class="py-3 px-2 mb-2 rounded bg-white text-success float-left font-weight-bold"  style="width: 200px; word-wrap: break-word;">{{ $message->message }}</li><br><br><br><br>
                                     </ul>
 
                                 @else
 
                                             <ul>
 
-                                                    <li class="bg-primary p-2 mb-2 rounded  text-white float-right"  style="width: 200px; word-wrap: break-word;">{{ $message->message }}</li><br><br><br>
+                                                    <li class="bg-white py-3 px-2 mb-2 rounded  text-success float-right font-weight-bold"  style="width: 200px; word-wrap: break-word;">{{ $message->message }}</li><br><br><br>
 
                                             </ul>
 
@@ -280,11 +282,11 @@
                         <div class="input-group">
                             {{-- Input field --}}
 
-                            <input id="btn-input" type="text" name="message" class="form-control input-sm" placeholder="Type your message here..." v-model="newMessage" @keyup.enter="sendMessage" />
+                            <input  id="btn-input" type="text" name="message" class="form-control input-sm rounded-lg" placeholder="Type your message here..." v-model="newMessage" @keyup.enter="sendMessage" />
 
                             {{-- Button --}}
                             <span class="input-group-btn">
-        <button class="btn btn-primary btn-sm" id="btn-chat" >
+        <button class="btn btn-primary btn-sm site-btn ml-2" id="btn-chat" >
             Send
         </button>
     </span>
@@ -379,5 +381,7 @@
 <script>
     const productId = {{$product->id}};
     console.log(productId);
+    // alert((message) ? "This won't" : "work");
+
 </script>
 

@@ -334,8 +334,8 @@
                                                                         </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="{{route('product-detail', ['id' => $product->id])}}">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
+                                    <h6><a href="{{route('product-detail', ['id' => $product->id])}}">{{$product->name}}</a></h6>
+                                    <h5>{{$product->selling_price}}</h5>
                             </div>
                                 </div>
                             </div>

@@ -59,7 +59,7 @@
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="{{asset('/')}}front-end-assets/img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -90,6 +90,7 @@
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
+                                <th>Action</th>
                                 <th>Total</th>
                                 <th></th>
                             </tr>
@@ -111,12 +112,15 @@
                                     @csrf
                                     <td class="shoping__cart__item">
                                     <div class="quantity row">
-                                        <div class="pro-qty col-lg-12">
+                                        <div class="mx-auto pro-qty col-lg-10">
                                                 <input  type="number" name="qty" value="{{$cart_product->qty}}">
-                                                <button type="submit" class="primary-btn cart-btn cart-btn-right">Update</button>
                                         </div>
+
                                     </div>
                                 </td>
+                                    <td>
+                                        <button type="submit" class="primary-btn cart-btn cart-btn-right text-white border-0" style="background-color: #7fad39">Update</button>
+                                    </td>
                                 </form>
                                 <td class="shoping__cart__total">
                                     {{round($cart_product->subtotal)}}

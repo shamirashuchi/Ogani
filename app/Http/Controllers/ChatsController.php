@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use Session;
 class ChatsController extends Controller
@@ -167,28 +168,52 @@ class ChatsController extends Controller
             ]);
             broadcast(new MessageSent(null,$customer, $message,$product_id,$custom_created_at));
         }
-        return back()->with('message', 'Message sent successfully');
+//        return back()->with('message', 'Message sent successfully');
+
+        return response()->json(['success' => true, 'message' => 'Message sent successfully']);
+
     }
 
 
 
 //    public function sendMessage(Request $request)
 //    {
-//            $customerid = Session::get('customer_id');
-//            date_default_timezone_set('Asia/Dhaka');
-//            $current_timestamp = time();
 //
-//            if ($customerid) {
-//                $customer = Customer::find($customerid);
-//                $productId = $request->input('Product_id');
+//        $customerid = Session::get('customer_id');
+//        date_default_timezone_set('Asia/Dhaka');
+//        $current_timestamp = time();
 //
+//        if ($customerid) {
+//            $customer = Customer::find($customerid);
+//            $productId = $request->input('Product_id');
+////            $message = $customer->messages()->create([
+////                'message' => $request->input('message'),
+////                'product_id' => $request->input('Product_id'),
+////                'custom_created_at' => date('Y-m-d H:i:s', $current_timestamp),
+////            ]);
+////            broadcast(new MessageSent(null, $customer, $message, $product_id, $custom_created_at));
 //                // Find the first message from the same customer for the same product within the last two hours
 //                $firstMessageWithinTwoHours = \App\Models\Message::where('customer_id', $customer->id)
 //                    ->where('product_id', $productId)
 //                    ->where('custom_created_at', '>=', now()->subHours(2))
-//                    ->oldest()
-//                    ->first();
-//return $firstMessageWithinTwoHours;
+////                    ->oldest()
+//                    ->first()
+//                    ->get();
+//            foreach ($messagesWithinTwoHours as $message) {
+//                // Access properties of each model
+//                $id = $message->user_id;
+//
+////            if ($firstMessageWithinTwoHours->user_id  == 8){
+//                if($id){
+//                $message = $customer->messages()->create([
+//                    'message' => $request->input('message'),
+//                    'product_id' => $request->input('Product_id'),
+//                    'custom_created_at' => date('Y-m-d H:i:s', $current_timestamp),
+//                ]);
+//                broadcast(new MessageSent(null, $customer, $message, $product_id, $custom_created_at));
+////                return view('frontend.home.home',['message' =>'Message sent successfully']);
+//            }
+//
 //                if ($firstMessageWithinTwoHours) {
 //                    if ($firstMessageWithinTwoHours->user_id) {
 //                        $user = User::find($firstMessageWithinTwoHours->user_id);
@@ -199,6 +224,7 @@ class ChatsController extends Controller
 //                            'user_id' => $firstMessageWithinTwoHours->user_id,
 //                        ]);
 //                        broadcast(new MessageSent($user, $customer, $message, $product_id, $custom_created_at));
+//                        return view('frontend.home.home',['message' =>'Message sent successfully']);
 //                    } else {
 //                        $message = $customer->messages()->create([
 //                            'message' => $request->input('message'),
@@ -206,18 +232,11 @@ class ChatsController extends Controller
 //                            'custom_created_at' => date('Y-m-d H:i:s', $current_timestamp),
 //                        ]);
 //                        broadcast(new MessageSent(null, $customer, $message, $product_id, $custom_created_at));
+//                        return view('frontend.home.home',['message' =>'Message sent successfully']);
 //                    }
-//                } else {
-//                    $message = $customer->messages()->create([
-//                        'message' => $request->input('message'),
-//                        'product_id' => $request->input('Product_id'),
-//                        'custom_created_at' => date('Y-m-d H:i:s', $current_timestamp),
-//                    ]);
-//                    broadcast(new MessageSent(null, $customer, $message, $product_id, $custom_created_at));
 //                }
 //            }
-//
-//            return view('frontend.master')->with('message', 'Message sent successfully');
-//    }
+//            return view('frontend.home.home',['message' =>'Message sent successfully']);
+//}
 
 }

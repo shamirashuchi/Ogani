@@ -38,13 +38,16 @@
                 <h4>Billing Details</h4>
                 <form action="#">
                     <div class="row">
-                        <div class="col-lg-8 col-md-6">
-                            <div class="row">
-                                <div class="col-lg-6">
+                        <div class="col-lg-8 col-md text-white" style="background-image: url('{{asset('/')}}front-end-assets/assets/images/background/th.jpeg'); background-size: cover; background-position: center;">
+                            <!-- Your content here -->
+
+
+                        <div class="row">
+                                <div class="col-lg-12">
                                     <div class="checkout__input">
                                         <p>Full Name<span>*</span></p>
                                         @if(isset($customer->name))
-                                            <input type="text" value="{{$customer->name}}" readonly name="name" placeholder="Full Name"/>
+                                            <input  class="w-full" type="text" value="{{$customer->name}}" readonly name="name" placeholder="Full Name"/>
                                         @else
                                             <input type="text" name="name" required placeholder="Full Name"/>
                                         @endif
@@ -55,13 +58,18 @@
                                 <p>Country<span>*</span></p>
                                 <input type="text">
                             </div>
+
                             <div class="checkout__input">
                                 <p>Delivery Address<span>*</span></p>
+                                <div class="row">
+                                    <div class="col-lg-12">
                                 @if(isset($customer->delivery_address))
-                                    <textarea class="pt-2" name="delivery_address" placeholder="Delivery Address">{{$customer->address}}</textarea>
+                                    <textarea class="pt-2 w-100"  name="delivery_address" placeholder="Delivery Address">{{$customer->address}}</textarea>
                                 @else
-                                    <textarea class="pt-2" name="delivery_address" placeholder="Delivery Address"> </textarea>
+                                    <textarea class="pt-2 w-100" name="delivery_address" placeholder="Delivery Address"> </textarea>
                                 @endif
+                            </div>
+                                </div>
                             </div>
                             <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
@@ -97,8 +105,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc">
+                            <div class="checkout__input__checkbox text-white">
+                                <label for="acc" class="text-white">
                                     Create an account?
                                     <input type="checkbox" id="acc">
                                     <span class="checkmark"></span>
@@ -111,7 +119,7 @@
                                 <input type="text">
                             </div>
                             <div class="checkout__input__checkbox">
-                                <label for="diff-acc">
+                                <label for="diff-acc" class="text-white">
                                     Ship to a different address?
                                     <input type="checkbox" id="diff-acc">
                                     <span class="checkmark"></span>
